@@ -1,0 +1,2 @@
+// Validations for press
+export {};

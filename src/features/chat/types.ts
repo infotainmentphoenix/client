@@ -1,0 +1,2 @@
+// Types for chat
+export {};

@@ -1,0 +1,2 @@
+// Types for team
+export {};
