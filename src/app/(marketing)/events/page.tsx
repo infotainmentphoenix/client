@@ -163,8 +163,8 @@ export default function EventsPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filtered.map(event => {
-              const typeColor = eventTypeColors[event.eventType] || 'bg-gray-600';
-              const typeLabel = eventTypeLabels[event.eventType] || event.eventType || 'Event';
+              const typeColor = event.eventType ? eventTypeColors[event.eventType] || 'bg-gray-600' : 'bg-gray-600';
+              const typeLabel = event.eventType ? eventTypeLabels[event.eventType] || event.eventType : 'Event';
               return (
                 <Link
                   key={event.id}
