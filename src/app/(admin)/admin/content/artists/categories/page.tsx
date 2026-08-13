@@ -1,9 +1,15 @@
-'use client';
+import React from 'react';
+import { ArtistCategoryList } from '@/features/artists/components/ArtistCategoryList';
 
-export default function AdminContentArtistsCategoriesPage() {
+export default function AdminArtistCategoriesPage() {
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold">AdminContentArtistsCategories Page</h1>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-black tracking-tight">Artist Categories</h1>
+        <p className="text-gray-500">Manage genres and types of artists.</p>
+      </div>
+
+      <ArtistCategoryList />
     </div>
   );
 }
