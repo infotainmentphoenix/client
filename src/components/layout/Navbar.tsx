@@ -103,9 +103,9 @@ export function Navbar() {
                       <Link 
                         key={service.id} 
                         href={`/services/${service.slug}`}
-                        className="block px-3 py-2 rounded-xl text-xs font-semibold hover:bg-orange-50 dark:hover:bg-white/5 text-gray-800 dark:text-gray-200 hover:text-orange-600 transition-colors"
+                        className="block px-3 py-2 rounded-xl text-xs font-bold hover:bg-orange-50 dark:hover:bg-white/5 text-gray-800 dark:text-gray-200 hover:text-orange-600 transition-colors"
                       >
-                        {service.icon ? `${service.icon} ` : '🛠️ '} {service.name}
+                        {service.name}
                       </Link>
                     ))
                   )}
@@ -147,17 +147,17 @@ export function Navbar() {
             {activeDropdown === 'company' && (
               <div className="absolute top-full left-0 pt-1 w-52 z-50">
                 <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-white/10 rounded-2xl p-3 shadow-2xl animate-fadeIn space-y-1">
-                  <Link href="/about" className="block px-3 py-2 rounded-xl text-xs font-semibold hover:bg-orange-50 dark:hover:bg-white/5 text-gray-800 dark:text-gray-200 hover:text-orange-600">
-                    ℹ️ About Us
+                  <Link href="/about" className="block px-3 py-2 rounded-xl text-xs font-bold hover:bg-orange-50 dark:hover:bg-white/5 text-gray-800 dark:text-gray-200 hover:text-orange-600">
+                    About Us
                   </Link>
-                  <Link href="/team" className="block px-3 py-2 rounded-xl text-xs font-semibold hover:bg-orange-50 dark:hover:bg-white/5 text-gray-800 dark:text-gray-200 hover:text-orange-600">
-                    👥 Our Leadership Team
+                  <Link href="/team" className="block px-3 py-2 rounded-xl text-xs font-bold hover:bg-orange-50 dark:hover:bg-white/5 text-gray-800 dark:text-gray-200 hover:text-orange-600">
+                    Our Leadership Team
                   </Link>
-                  <Link href="/testimonials" className="block px-3 py-2 rounded-xl text-xs font-semibold hover:bg-orange-50 dark:hover:bg-white/5 text-gray-800 dark:text-gray-200 hover:text-orange-600">
-                    ⭐ Client Reviews & Stories
+                  <Link href="/testimonials" className="block px-3 py-2 rounded-xl text-xs font-bold hover:bg-orange-50 dark:hover:bg-white/5 text-gray-800 dark:text-gray-200 hover:text-orange-600">
+                    Client Reviews & Stories
                   </Link>
-                  <Link href="/faqs" className="block px-3 py-2 rounded-xl text-xs font-semibold hover:bg-orange-50 dark:hover:bg-white/5 text-gray-800 dark:text-gray-200 hover:text-orange-600">
-                    ❓ FAQs
+                  <Link href="/faqs" className="block px-3 py-2 rounded-xl text-xs font-bold hover:bg-orange-50 dark:hover:bg-white/5 text-gray-800 dark:text-gray-200 hover:text-orange-600">
+                    FAQs
                   </Link>
                 </div>
               </div>

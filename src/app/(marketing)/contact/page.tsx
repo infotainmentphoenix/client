@@ -6,6 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import { api } from '@/lib/api/client';
 import { serviceApi } from '@/features/services/api';
 import { Service } from '@/features/services/types';
+import { DatePicker } from '@/components/ui/DatePicker';
 
 // Icons
 const MailIcon = ({ className }: { className?: string }) => (
@@ -74,6 +75,80 @@ function ContactForm() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+
+  // Client-side field-level validation rules
+  const validateField = (fieldName: string, value: string) => {
+    let errorMsg = '';
+    switch (fieldName) {
+      case 'name': {
+        const trimmed = value.trim();
+        if (!trimmed) errorMsg = 'Name is required';
+        else if (trimmed.length < 3) errorMsg = 'Name must be at least 3 characters';
+        else if (trimmed.length > 50) errorMsg = 'Name must be at most 50 characters';
+        else if (!/^[a-zA-Z\s]+$/.test(trimmed)) errorMsg = 'Name can only contain letters and spaces';
+        break;
+      }
+      case 'email': {
+        const trimmed = value.trim();
+        if (!trimmed) errorMsg = 'Email is required';
+        else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(trimmed)) errorMsg = 'Invalid email address format';
+        break;
+      }
+      case 'phone': {
+        const trimmed = value.trim();
+        if (trimmed && !/^\d{10}$/.test(trimmed)) errorMsg = 'Phone number must be exactly 10 digits';
+        break;
+      }
+      case 'guestCount': {
+        if (value !== '') {
+          const num = Number(value);
+          if (isNaN(num) || !Number.isInteger(num)) errorMsg = 'Guest count must be an integer';
+          else if (num <= 0) errorMsg = 'Guest count must be a positive number';
+        }
+        break;
+      }
+      case 'city': {
+        if (value && value.trim().length > 100) errorMsg = 'City name must be at most 100 characters';
+        break;
+      }
+      case 'message': {
+        if (value && value.trim().length > 1000) errorMsg = 'Message must be at most 1000 characters';
+        break;
+      }
+      default: break;
+    }
+    return errorMsg;
+  };
+
+  const handleFieldChange = (field: string, value: string) => {
+    if (field === 'name') setName(value);
+    if (field === 'email') setEmail(value);
+    if (field === 'phone') setPhone(value);
+    if (field === 'eventDate') setEventDate(value);
+    if (field === 'guestCount') setGuestCount(value);
+    if (field === 'city') setCity(value);
+    if (field === 'message') setMessage(value);
+
+    if (touched[field]) {
+      const err = validateField(field, value);
+      setValidationErrors(prev => {
+        const next = { ...prev };
+        if (err) next[field] = err; else delete next[field];
+        return next;
+      });
+    }
+  };
+
+  const handleBlur = (field: string, value: string) => {
+    setTouched(prev => ({ ...prev, [field]: true }));
+    const err = validateField(field, value);
+    setValidationErrors(prev => {
+      const next = { ...prev };
+      if (err) next[field] = err; else delete next[field];
+      return next;
+    });
+  };
 
   // Fetch Services & Auto-select route params
   useEffect(() => {
@@ -82,122 +157,84 @@ function ContactForm() {
         const fetched = await serviceApi.getServices();
         const active = fetched.filter(s => s.isActive);
         setServices(active);
-
-        // Pre-fill service selection from query param
         const serviceSlug = searchParams.get('service');
         if (serviceSlug) {
           const matching = active.find(s => s.slug === serviceSlug);
-          if (matching) {
-            setServiceId(String(matching.id));
-          }
+          if (matching) setServiceId(String(matching.id));
         }
-      } catch (err) {
-        console.error('Failed to load services:', err);
-      } finally {
-        setIsLoadingServices(false);
-      }
+      } catch (err) { console.error('Failed to load services:', err); }
+      finally { setIsLoadingServices(false); }
     };
     fetchServices();
 
-    // Pre-fill Event Type from query param
     const eventTypeParam = searchParams.get('eventType');
     if (eventTypeParam) {
       const match = EVENT_TYPES.find(t => t.value === eventTypeParam.toUpperCase());
-      if (match) {
-        setEventType(match.value);
-      }
+      if (match) setEventType(match.value);
     }
 
-    // Pre-fill Message from Artist booking query param
     const artistName = searchParams.get('artist');
     const packageName = searchParams.get('package');
-    if (artistName) {
-      setMessage(`Hello, I would like to inquire about booking the artist: ${artistName} for my upcoming event.`);
-    } else if (packageName) {
-      setMessage(`Hello, I am interested in inquiring about the package "${packageName}".`);
-    }
+    if (artistName) setMessage(`Hello, I would like to inquire about booking the artist: ${artistName} for my upcoming event.`);
+    else if (packageName) setMessage(`Hello, I am interested in inquiring about the package "${packageName}".`);
   }, [searchParams]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const allFields = { name, email, phone, guestCount, city, message };
+    const nextTouched: Record<string, boolean> = {};
+    const fieldErrors: Record<string, string> = {};
+
+    Object.entries(allFields).forEach(([field, value]) => {
+      nextTouched[field] = true;
+      const err = validateField(field, value);
+      if (err) fieldErrors[field] = err;
+    });
+
+    setTouched(nextTouched);
+    setValidationErrors(fieldErrors);
+
+    if (Object.keys(fieldErrors).length > 0) {
+      setError('Please correct the validation errors in the form.');
+      return;
+    }
+
     setIsLoading(true);
     setError(null);
-    setValidationErrors({});
 
     try {
-      // Find budget min and max
       let budgetMin: number | null = null;
       let budgetMax: number | null = null;
       if (budgetIndex !== '') {
         const selected = BUDGET_RANGES[Number(budgetIndex)];
-        if (selected) {
-          budgetMin = selected.min;
-          budgetMax = selected.max;
-        }
+        if (selected) { budgetMin = selected.min; budgetMax = selected.max; }
       }
 
-      // Pre-fill requirements if package/artist query existed
       let requirements = '';
       const artist = searchParams.get('artist');
       const pkg = searchParams.get('package');
-      if (artist) {
-        requirements = `Artist Inquiry: ${artist}`;
-      } else if (pkg) {
-        requirements = `Package Inquiry: ${pkg}`;
-      }
+      if (artist) requirements = `Artist Inquiry: ${artist}`;
+      else if (pkg) requirements = `Package Inquiry: ${pkg}`;
 
-      // Submit actual data to inquiry backend route
-      const payload = {
-        name,
-        email,
-        phone: phone || null,
-        serviceId: serviceId ? Number(serviceId) : null,
-        eventType: eventType || null,
-        eventDate: eventDate || null,
-        guestCount: guestCount ? Number(guestCount) : null,
-        city: city || null,
-        budgetMin,
-        budgetMax,
-        message: message || null,
-        requirements: requirements || null,
-        source: 'WEBSITE_FORM',
-      };
+      const payload = { name, email, phone: phone || null, serviceId: serviceId ? Number(serviceId) : null, eventType: eventType || null, eventDate: eventDate || null, guestCount: guestCount ? Number(guestCount) : null, city: city || null, budgetMin, budgetMax, message: message || null, requirements: requirements || null, source: 'WEBSITE_FORM' };
 
       await api.post('/api/inquiries', payload);
       setIsSuccess(true);
     } catch (err: any) {
       console.error('Error submitting inquiry:', err);
       setError(err.message || 'An error occurred while submitting your message.');
-      
-      // Parse validation errors from backend
       if (err.errors) {
-        const fieldErrors: Record<string, string> = {};
+        const backendErrors: Record<string, string> = {};
         Object.keys(err.errors).forEach((key) => {
-          if (err.errors[key]?._errors?.[0]) {
-            fieldErrors[key] = err.errors[key]._errors[0];
-          }
+          if (err.errors[key]?._errors?.[0]) backendErrors[key] = err.errors[key]._errors[0];
         });
-        setValidationErrors(fieldErrors);
+        setValidationErrors(backendErrors);
       }
-    } finally {
-      setIsLoading(false);
-    }
+    } finally { setIsLoading(false); }
   };
 
   const handleReset = () => {
-    setIsSuccess(false);
-    setName('');
-    setEmail('');
-    setPhone('');
-    setServiceId('');
-    setEventType('');
-    setEventDate('');
-    setGuestCount('');
-    setCity('');
-    setBudgetIndex('');
-    setMessage('');
-    setError(null);
-    setValidationErrors({});
+    setIsSuccess(false); setName(''); setEmail(''); setPhone(''); setServiceId(''); setEventType(''); setEventDate(''); setGuestCount(''); setCity(''); setBudgetIndex(''); setMessage(''); setError(null); setValidationErrors({}); setTouched({});
   };
 
   return (
@@ -212,10 +249,7 @@ function ContactForm() {
           <p className="text-gray-500 dark:text-gray-400 mb-6 max-w-sm mx-auto">
             Thank you for reaching out. An event coordinator from our team will get in touch with you shortly.
           </p>
-          <button 
-            onClick={handleReset} 
-            className="text-blue-600 dark:text-blue-400 text-sm font-semibold hover:underline"
-          >
+          <button onClick={handleReset} className="text-blue-600 dark:text-blue-400 text-sm font-semibold hover:underline">
             Send another message
           </button>
         </div>
@@ -223,40 +257,20 @@ function ContactForm() {
         <form onSubmit={handleSubmit} className="space-y-6">
           {error && (
             <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl text-red-500 flex items-start gap-3 shadow-inner">
-              <svg className="w-5 h-5 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-              </svg>
-              <div>
-                <h4 className="font-bold text-sm">Submission Failed</h4>
-                <p className="text-xs opacity-90 mt-0.5">{error}</p>
-              </div>
+              <svg className="w-5 h-5 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+              <div><h4 className="font-bold text-sm">Submission Failed</h4><p className="text-xs opacity-90 mt-0.5">{error}</p></div>
             </div>
           )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div className="space-y-1.5">
               <label className="text-xs font-bold uppercase tracking-wider text-gray-500">Name *</label>
-              <input 
-                type="text" 
-                required 
-                value={name} 
-                onChange={e => setName(e.target.value)} 
-                placeholder="Your full name" 
-                className={`w-full px-4 py-3 bg-gray-50 dark:bg-black/20 border ${validationErrors.name ? 'border-red-500' : 'border-gray-200 dark:border-white/10'} rounded-xl outline-none focus:border-blue-500 transition-all text-gray-900 dark:text-white placeholder:text-gray-400 text-sm`} 
-              />
+              <input type="text" required value={name} onChange={e => handleFieldChange('name', e.target.value)} onBlur={e => handleBlur('name', e.target.value)} placeholder="Your full name" className={`w-full px-4 py-3 bg-gray-50 dark:bg-black/20 border ${validationErrors.name ? 'border-red-500 focus:border-red-500' : 'border-gray-200 dark:border-white/10 focus:border-blue-500'} rounded-xl outline-none transition-all text-gray-900 dark:text-white placeholder:text-gray-400 text-sm`} />
               {validationErrors.name && <p className="text-red-500 text-xs mt-0.5">{validationErrors.name}</p>}
             </div>
-
             <div className="space-y-1.5">
               <label className="text-xs font-bold uppercase tracking-wider text-gray-500">Email *</label>
-              <input 
-                type="email" 
-                required 
-                value={email} 
-                onChange={e => setEmail(e.target.value)} 
-                placeholder="you@example.com" 
-                className={`w-full px-4 py-3 bg-gray-50 dark:bg-black/20 border ${validationErrors.email ? 'border-red-500' : 'border-gray-200 dark:border-white/10'} rounded-xl outline-none focus:border-blue-500 transition-all text-gray-900 dark:text-white placeholder:text-gray-400 text-sm`} 
-              />
+              <input type="email" required value={email} onChange={e => handleFieldChange('email', e.target.value)} onBlur={e => handleBlur('email', e.target.value)} placeholder="you@example.com" className={`w-full px-4 py-3 bg-gray-50 dark:bg-black/20 border ${validationErrors.email ? 'border-red-500 focus:border-red-500' : 'border-gray-200 dark:border-white/10 focus:border-blue-500'} rounded-xl outline-none transition-all text-gray-900 dark:text-white placeholder:text-gray-400 text-sm`} />
               {validationErrors.email && <p className="text-red-500 text-xs mt-0.5">{validationErrors.email}</p>}
             </div>
           </div>
@@ -264,28 +278,14 @@ function ContactForm() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div className="space-y-1.5">
               <label className="text-xs font-bold uppercase tracking-wider text-gray-500">Phone</label>
-              <input 
-                type="tel" 
-                value={phone} 
-                onChange={e => setPhone(e.target.value)} 
-                placeholder="+91 98765 43210" 
-                className="w-full px-4 py-3 bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl outline-none focus:border-blue-500 transition-all text-gray-900 dark:text-white placeholder:text-gray-400 text-sm" 
-              />
+              <input type="tel" value={phone} onChange={e => handleFieldChange('phone', e.target.value)} onBlur={e => handleBlur('phone', e.target.value)} placeholder="+91 98765 43210" className={`w-full px-4 py-3 bg-gray-50 dark:bg-black/20 border ${validationErrors.phone ? 'border-red-500 focus:border-red-500' : 'border-gray-200 dark:border-white/10 focus:border-blue-500'} rounded-xl outline-none transition-all text-gray-900 dark:text-white placeholder:text-gray-400 text-sm`} />
+              {validationErrors.phone && <p className="text-red-500 text-xs mt-0.5">{validationErrors.phone}</p>}
             </div>
-
             <div className="space-y-1.5">
               <label className="text-xs font-bold uppercase tracking-wider text-gray-500">Service Interested In</label>
-              <select 
-                value={serviceId} 
-                onChange={e => setServiceId(e.target.value)} 
-                className="w-full px-4 py-3 bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl outline-none focus:border-blue-500 transition-all text-gray-900 dark:text-white text-sm"
-              >
+              <select value={serviceId} onChange={e => setServiceId(e.target.value)} className="w-full px-4 py-3 bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl outline-none focus:border-blue-500 transition-all text-gray-900 dark:text-white text-sm">
                 <option value="">Select service (Optional)</option>
-                {isLoadingServices ? (
-                  <option disabled>Loading services...</option>
-                ) : (
-                  services.map(s => <option key={s.id} value={String(s.id)}>{s.name}</option>)
-                )}
+                {isLoadingServices ? <option disabled>Loading services...</option> : services.map(s => <option key={s.id} value={String(s.id)}>{s.name}</option>)}
               </select>
             </div>
           </div>
@@ -293,79 +293,52 @@ function ContactForm() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div className="space-y-1.5">
               <label className="text-xs font-bold uppercase tracking-wider text-gray-500">Event Type</label>
-              <select 
-                value={eventType} 
-                onChange={e => setEventType(e.target.value)} 
-                className="w-full px-4 py-3 bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl outline-none focus:border-blue-500 transition-all text-gray-900 dark:text-white text-sm"
-              >
+              <select value={eventType} onChange={e => setEventType(e.target.value)} className="w-full px-4 py-3 bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl outline-none focus:border-blue-500 transition-all text-gray-900 dark:text-white text-sm">
                 <option value="">Select event type (Optional)</option>
                 {EVENT_TYPES.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
               </select>
             </div>
-
             <div className="space-y-1.5">
               <label className="text-xs font-bold uppercase tracking-wider text-gray-500">Event Date</label>
-              <input 
-                type="date" 
+              <DatePicker 
                 value={eventDate} 
-                onChange={e => setEventDate(e.target.value)} 
-                className="w-full px-4 py-3 bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl outline-none focus:border-blue-500 transition-all text-gray-900 dark:text-white text-sm" 
+                onChange={date => handleFieldChange('eventDate', date)} 
+                onBlur={() => handleBlur('eventDate', eventDate)}
+                placeholder="Select event date" 
+                error={validationErrors.eventDate}
               />
+              {validationErrors.eventDate && <p className="text-red-500 text-xs mt-0.5">{validationErrors.eventDate}</p>}
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             <div className="space-y-1.5 md:col-span-2">
               <label className="text-xs font-bold uppercase tracking-wider text-gray-500">Budget Range</label>
-              <select 
-                value={budgetIndex} 
-                onChange={e => setBudgetIndex(e.target.value)} 
-                className="w-full px-4 py-3 bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl outline-none focus:border-blue-500 transition-all text-gray-900 dark:text-white text-sm"
-              >
+              <select value={budgetIndex} onChange={e => setBudgetIndex(e.target.value)} className="w-full px-4 py-3 bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl outline-none focus:border-blue-500 transition-all text-gray-900 dark:text-white text-sm">
                 <option value="">Select budget range (Optional)</option>
                 {BUDGET_RANGES.map((b, idx) => <option key={idx} value={String(idx)}>{b.label}</option>)}
               </select>
             </div>
-
             <div className="space-y-1.5">
               <label className="text-xs font-bold uppercase tracking-wider text-gray-500">Expected Guests</label>
-              <input 
-                type="number" 
-                value={guestCount} 
-                onChange={e => setGuestCount(e.target.value)} 
-                placeholder="e.g. 500" 
-                className="w-full px-4 py-3 bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl outline-none focus:border-blue-500 transition-all text-gray-900 dark:text-white placeholder:text-gray-400 text-sm" 
-              />
+              <input type="number" value={guestCount} onChange={e => handleFieldChange('guestCount', e.target.value)} onBlur={e => handleBlur('guestCount', e.target.value)} placeholder="e.g. 500" className={`w-full px-4 py-3 bg-gray-50 dark:bg-black/20 border ${validationErrors.guestCount ? 'border-red-500 focus:border-red-500' : 'border-gray-200 dark:border-white/10 focus:border-blue-500'} rounded-xl outline-none transition-all text-gray-900 dark:text-white placeholder:text-gray-400 text-sm`} />
+              {validationErrors.guestCount && <p className="text-red-500 text-xs mt-0.5">{validationErrors.guestCount}</p>}
             </div>
           </div>
 
           <div className="space-y-1.5">
             <label className="text-xs font-bold uppercase tracking-wider text-gray-500">City / Venue Location</label>
-            <input 
-              type="text" 
-              value={city} 
-              onChange={e => setCity(e.target.value)} 
-              placeholder="e.g. Pune, Maharashtra" 
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl outline-none focus:border-blue-500 transition-all text-gray-900 dark:text-white placeholder:text-gray-400 text-sm" 
-            />
+            <input type="text" value={city} onChange={e => handleFieldChange('city', e.target.value)} onBlur={e => handleBlur('city', e.target.value)} placeholder="e.g. Pune, Maharashtra" className={`w-full px-4 py-3 bg-gray-50 dark:bg-black/20 border ${validationErrors.city ? 'border-red-500 focus:border-red-500' : 'border-gray-200 dark:border-white/10 focus:border-blue-500'} rounded-xl outline-none transition-all text-gray-900 dark:text-white placeholder:text-gray-400 text-sm`} />
+            {validationErrors.city && <p className="text-red-500 text-xs mt-0.5">{validationErrors.city}</p>}
           </div>
 
           <div className="space-y-1.5">
             <label className="text-xs font-bold uppercase tracking-wider text-gray-500">Your Message / Requirements</label>
-            <textarea 
-              rows={4} 
-              value={message} 
-              onChange={e => setMessage(e.target.value)} 
-              placeholder="Share details about your vision, artists you want, technical specifications..." 
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl outline-none focus:border-blue-500 transition-all text-gray-900 dark:text-white placeholder:text-gray-400 text-sm resize-none" 
-            />
+            <textarea rows={4} value={message} onChange={e => handleFieldChange('message', e.target.value)} onBlur={e => handleBlur('message', e.target.value)} placeholder="Share details about your vision, artists you want, technical specifications..." className={`w-full px-4 py-3 bg-gray-50 dark:bg-black/20 border ${validationErrors.message ? 'border-red-500 focus:border-red-500' : 'border-gray-200 dark:border-white/10 focus:border-blue-500'} rounded-xl outline-none transition-all text-gray-900 dark:text-white placeholder:text-gray-400 text-sm resize-none`} />
+            {validationErrors.message && <p className="text-red-500 text-xs mt-0.5">{validationErrors.message}</p>}
           </div>
 
-          <button 
-            type="submit" 
-            disabled={isLoading} 
-            className="relative w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-blue-500/25 transition-all active:scale-[0.98] disabled:opacity-70 overflow-hidden group cursor-pointer"
-          >
+          <button type="submit" disabled={isLoading} className="relative w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-blue-500/25 transition-all active:scale-[0.98] disabled:opacity-70 overflow-hidden group cursor-pointer">
             <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" />
             <div className="relative flex items-center justify-center gap-2">
               {isLoading ? <><LoaderIcon className="w-5 h-5 animate-spin" /><span>Submitting Inquiry...</span></> : <><SendIcon className="w-4 h-4" /><span>Submit Inquiry</span></>}
