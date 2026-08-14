@@ -131,36 +131,14 @@ export const galleryApi = {
     return items.find(i => i.id.toString() === id.toString()) || null;
   },
 
-  createItem: async (data: Partial<GalleryMediaItem>): Promise<GalleryMediaItem> => {
-    try {
-      const payload = {
-        title: data.title,
-        subtitle: data.description,
-        imageUrl: data.imageUrl,
-        linkUrl: data.videoUrl,
-      };
-      const response = await api.post<ApiResponse<any>>('/api/carousels', payload);
-      return response.data?.data || (data as GalleryMediaItem);
-    } catch (error) {
-      console.error('Error creating gallery carousel item:', error);
-      throw error;
-    }
+  createItem: async (data: FormData | Partial<GalleryMediaItem>): Promise<GalleryMediaItem> => {
+    const response = await api.post<ApiResponse<any>>('/api/carousels', data);
+    return response.data?.data || (data as GalleryMediaItem);
   },
 
-  updateItem: async (id: string | number, data: Partial<GalleryMediaItem>): Promise<GalleryMediaItem | null> => {
-    try {
-      const payload = {
-        title: data.title,
-        subtitle: data.description,
-        imageUrl: data.imageUrl,
-        linkUrl: data.videoUrl,
-      };
-      const response = await api.patch<ApiResponse<any>>(`/api/carousels/${id}`, payload);
-      return response.data?.data || null;
-    } catch (error) {
-      console.error(`Error updating gallery item ${id}:`, error);
-      return null;
-    }
+  updateItem: async (id: string | number, data: FormData | Partial<GalleryMediaItem>): Promise<GalleryMediaItem | null> => {
+    const response = await api.patch<ApiResponse<any>>(`/api/carousels/${id}`, data);
+    return response.data?.data || null;
   },
 
   deleteItem: async (id: string | number): Promise<boolean> => {

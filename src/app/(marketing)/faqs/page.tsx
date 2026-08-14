@@ -216,10 +216,10 @@ export default function FaqsPage() {
               Contact Support Team <ArrowRightIcon className="w-4 h-4" />
             </Link>
             <Link
-              href="/book-consultation"
-              className="px-8 py-3.5 bg-gradient-to-r from-orange-500 to-rose-600 text-white font-bold rounded-xl hover:opacity-95 transition-all"
+              href="/contact"
+              className="px-8 py-3.5 bg-gradient-to-r from-orange-500 to-rose-600 text-white font-bold rounded-xl hover:opacity-95 transition-all hover:scale-105 active:scale-95"
             >
-              Book a Free Consultation
+              Contact Us
             </Link>
           </div>
         </div>

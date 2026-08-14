@@ -46,9 +46,16 @@ export function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-6 tracking-wide">Support</h4>
             <ul className="flex flex-col gap-4 text-sm font-medium text-gray-600 dark:text-gray-400">
-              {['Contact Us', 'FAQs', 'Terms of Service', 'Privacy Policy'].map((link) => (
-                <li key={link}><Link href={`/${link.toLowerCase().replace(' ', '-')}`} className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors inline-block hover:translate-x-1 duration-300">{link}</Link></li>
-              ))}
+              {['Contact Us', 'FAQs', 'Terms of Service', 'Privacy Policy'].map((link) => {
+                const href = link === 'Contact Us' ? '/contact' : `/${link.toLowerCase().replace(/ /g, '-')}`;
+                return (
+                  <li key={link}>
+                    <Link href={href} className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors inline-block hover:translate-x-1 duration-300">
+                      {link}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 

@@ -164,7 +164,7 @@ export default function ServiceDetailPage() {
                       </div>
 
                       <Link
-                        href={`/book-consultation?service=${service.slug}&package=${encodeURIComponent(pkg.name)}`}
+                        href={`/contact?service=${service.slug}&package=${encodeURIComponent(pkg.name)}`}
                         className={`w-full text-center py-3 rounded-xl font-bold text-sm transition-all ${
                           pkg.isPopular
                             ? 'bg-gradient-to-r from-orange-500 to-rose-600 text-white hover:opacity-95 shadow-lg'
@@ -211,58 +211,21 @@ export default function ServiceDetailPage() {
             )}
           </div>
 
-          {/* Right Sidebar Form */}
+          {/* Right Sidebar CTA Card */}
           <div className="space-y-8">
-            <div className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-6 md:p-8 shadow-xl sticky top-28">
-              <h3 className="text-xl font-black mb-2">Request Service Consultation</h3>
-              <p className="text-gray-500 text-xs mb-6">Get custom quote & artist availability within 24 hours.</p>
+            <div className="bg-gradient-to-br from-orange-500/10 via-rose-500/5 to-purple-600/10 dark:from-orange-500/20 dark:via-rose-500/10 dark:to-purple-600/20 border border-orange-500/20 dark:border-white/10 rounded-3xl p-6 md:p-8 shadow-xl sticky top-28 text-center">
+              <span className="w-12 h-12 rounded-2xl bg-orange-500/10 text-orange-500 flex items-center justify-center text-2xl mx-auto mb-4">✨</span>
+              <h3 className="text-xl font-black mb-2 text-gray-900 dark:text-white">Request Consultation</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-xs mb-6 leading-relaxed">
+                Want to book {service.name} or get a custom quote? Send us your requirements and we will respond within 24 hours.
+              </p>
 
-              <form onSubmit={(e) => { e.preventDefault(); alert(`Consultation request submitted for ${service.name}! Our team will call you back.`); }} className="space-y-4">
-                <div>
-                  <label className="block text-xs font-bold uppercase text-gray-500 mb-1">Your Full Name</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="Enter your name"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold uppercase text-gray-500 mb-1">Phone Number</label>
-                  <input
-                    type="tel"
-                    required
-                    placeholder="+91 98765 43210"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold uppercase text-gray-500 mb-1">Expected Event Date</label>
-                  <input
-                    type="date"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold uppercase text-gray-500 mb-1">Estimated Budget</label>
-                  <select className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
-                    <option>₹1 Lakh - ₹5 Lakhs</option>
-                    <option>₹5 Lakhs - ₹15 Lakhs</option>
-                    <option>₹15 Lakhs - ₹50 Lakhs</option>
-                    <option>₹50 Lakhs+</option>
-                  </select>
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full py-4 bg-gradient-to-r from-orange-500 to-rose-600 text-white font-bold rounded-xl shadow-lg hover:opacity-95 transition-all text-sm mt-4"
-                >
-                  Submit Inquiry Now
-                </button>
-              </form>
+              <Link
+                href={`/contact?service=${service.slug}`}
+                className="block w-full py-4 bg-gradient-to-r from-orange-500 to-rose-600 hover:from-orange-600 hover:to-rose-700 text-white font-bold rounded-xl shadow-lg shadow-orange-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all text-sm cursor-pointer"
+              >
+                Inquire About Service
+              </Link>
             </div>
           </div>
         </div>

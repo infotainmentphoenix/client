@@ -262,10 +262,10 @@ export default function EventsPage() {
             Partner with Phoenix Infotainment for stadium staging, celebrity artist lineups, and world-class audiovisual production.
           </p>
           <Link
-            href="/book-consultation"
+            href="/contact"
             className="inline-flex items-center gap-2 px-8 py-4 bg-white text-orange-600 font-bold text-base rounded-full hover:bg-gray-100 transition-all shadow-2xl hover:scale-105 active:scale-95"
           >
-            Book Free Consultation &rarr;
+            Contact Us &rarr;
           </Link>
         </div>
       </section>

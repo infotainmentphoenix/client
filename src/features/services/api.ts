@@ -236,24 +236,14 @@ export const serviceApi = {
     return services.find(s => s.id.toString() === id.toString() || s.slug === id) || null;
   },
 
-  createService: async (data: Partial<Service>): Promise<Service> => {
-    try {
-      const response = await api.post<ApiResponse<Service>>('/api/services', data);
-      return response.data?.data || (data as Service);
-    } catch (error) {
-      console.error('Error creating service:', error);
-      throw error;
-    }
+  createService: async (data: FormData | Partial<Service>): Promise<Service> => {
+    const response = await api.post<ApiResponse<Service>>('/api/services', data);
+    return response.data?.data || (data as Service);
   },
 
-  updateService: async (id: string | number, data: Partial<Service>): Promise<Service | null> => {
-    try {
-      const response = await api.patch<ApiResponse<Service>>(`/api/services/${id}`, data);
-      return response.data?.data || null;
-    } catch (error) {
-      console.error(`Error updating service ${id}:`, error);
-      return null;
-    }
+  updateService: async (id: string | number, data: FormData | Partial<Service>): Promise<Service | null> => {
+    const response = await api.patch<ApiResponse<Service>>(`/api/services/${id}`, data);
+    return response.data?.data || null;
   },
 
   deleteService: async (id: string | number): Promise<boolean> => {

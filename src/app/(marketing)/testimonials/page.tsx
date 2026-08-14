@@ -222,10 +222,10 @@ export default function TestimonialsPage() {
             Join hundreds of satisfied corporate partners and families who trust us for their mega event executions.
           </p>
           <Link
-            href="/book-consultation"
-            className="inline-block px-8 py-4 bg-white text-orange-600 font-bold rounded-2xl hover:bg-gray-100 transition-all shadow-xl"
+            href="/contact"
+            className="inline-block px-8 py-4 bg-white text-orange-600 font-bold rounded-2xl hover:bg-gray-100 transition-all shadow-xl hover:scale-105 active:scale-95"
           >
-            Book Your Free Event Consultation
+            Contact Us
           </Link>
         </div>
       </section>

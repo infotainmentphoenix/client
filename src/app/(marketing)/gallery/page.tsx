@@ -237,10 +237,10 @@ export default function GalleryPage() {
             From stage architecture to celebrity bookings, let us create an unforgettable spectacle for your brand or celebration.
           </p>
           <Link
-            href="/book-consultation"
-            className="inline-block px-8 py-4 bg-white text-orange-600 font-bold rounded-2xl hover:bg-gray-100 transition-all shadow-xl"
+            href="/contact"
+            className="inline-block px-8 py-4 bg-white text-orange-600 font-bold rounded-2xl hover:bg-gray-100 transition-all shadow-xl hover:scale-105 active:scale-95"
           >
-            Schedule a Free Consultation
+            Contact Us
           </Link>
         </div>
       </section>

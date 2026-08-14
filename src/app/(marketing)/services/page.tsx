@@ -55,10 +55,10 @@ export default function ServicesPage() {
 
           <div className="flex justify-center gap-4">
             <Link
-              href="/book-consultation"
+              href="/contact"
               className="px-8 py-4 bg-gradient-to-r from-orange-500 to-rose-600 text-white font-bold rounded-2xl hover:opacity-95 transition-all shadow-xl flex items-center gap-2"
             >
-              Book a Free Consultation <ArrowRightIcon className="w-4 h-4" />
+              Contact Us <ArrowRightIcon className="w-4 h-4" />
             </Link>
           </div>
         </div>
@@ -138,10 +138,10 @@ export default function ServicesPage() {
                     View Details
                   </Link>
                   <Link
-                    href="/book-consultation"
+                    href={`/contact?service=${service.slug}`}
                     className="px-4 py-3 bg-orange-100 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 font-bold text-sm rounded-xl hover:bg-orange-200 dark:hover:bg-orange-500/20 transition-colors"
                   >
-                    Book
+                    Inquire
                   </Link>
                 </div>
               </div>
@@ -186,10 +186,10 @@ export default function ServicesPage() {
             Tell us about your event vision and our lead event director will structure a customized proposal.
           </p>
           <Link
-            href="/book-consultation"
-            className="inline-block px-8 py-4 bg-white text-orange-600 font-bold rounded-2xl hover:bg-gray-100 transition-all shadow-xl"
+            href="/contact"
+            className="inline-block px-8 py-4 bg-white text-orange-600 font-bold rounded-2xl hover:bg-gray-100 transition-all shadow-xl hover:scale-105 active:scale-95"
           >
-            Start Free Consultation
+            Contact Us
           </Link>
         </div>
       </section>

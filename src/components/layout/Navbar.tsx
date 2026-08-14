@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import { serviceApi } from '@/features/services/api';
+import { Service } from '@/features/services/types';
 
 const ChevronDownIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m6 9 6 6 6-6"/></svg>
@@ -18,11 +20,27 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [services, setServices] = useState<Service[]>([]);
+  const [isLoadingServices, setIsLoadingServices] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const fetched = await serviceApi.getServices();
+        setServices(fetched.filter(s => s.isActive));
+      } catch (err) {
+        console.error('Failed to load navbar services:', err);
+      } finally {
+        setIsLoadingServices(false);
+      }
+    };
+    fetchServices();
   }, []);
 
   return (
@@ -70,21 +88,27 @@ export function Navbar() {
             {activeDropdown === 'services' && (
               <div className="absolute top-full left-0 pt-1 w-64 z-50">
                 <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-white/10 rounded-2xl p-3 shadow-2xl animate-fadeIn space-y-1">
-                  <Link href="/services/artist-management" className="block px-3 py-2 rounded-xl text-xs font-semibold hover:bg-orange-50 dark:hover:bg-white/5 text-gray-800 dark:text-gray-200 hover:text-orange-600">
-                    🎤 Artist & Celebrity Booking
-                  </Link>
-                  <Link href="/services/corporate-events" className="block px-3 py-2 rounded-xl text-xs font-semibold hover:bg-orange-50 dark:hover:bg-white/5 text-gray-800 dark:text-gray-200 hover:text-orange-600">
-                    🏢 Corporate Galas & Summits
-                  </Link>
-                  <Link href="/services/live-concerts" className="block px-3 py-2 rounded-xl text-xs font-semibold hover:bg-orange-50 dark:hover:bg-white/5 text-gray-800 dark:text-gray-200 hover:text-orange-600">
-                    🎸 Live Concerts & Festivals
-                  </Link>
-                  <Link href="/services/luxury-weddings" className="block px-3 py-2 rounded-xl text-xs font-semibold hover:bg-orange-50 dark:hover:bg-white/5 text-gray-800 dark:text-gray-200 hover:text-orange-600">
-                    💍 Royal Destination Weddings
-                  </Link>
-                  <Link href="/services/sound-stage-production" className="block px-3 py-2 rounded-xl text-xs font-semibold hover:bg-orange-50 dark:hover:bg-white/5 text-gray-800 dark:text-gray-200 hover:text-orange-600">
-                    🔊 Sound, Stage & AV Production
-                  </Link>
+                  {isLoadingServices ? (
+                    <div className="px-3 py-2 text-xs text-gray-500 flex items-center gap-2">
+                      <svg className="animate-spin h-3.5 w-3.5 text-orange-500" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                      </svg>
+                      Loading services...
+                    </div>
+                  ) : services.length === 0 ? (
+                    <div className="px-3 py-2 text-xs text-gray-500 italic">No services available</div>
+                  ) : (
+                    services.map(service => (
+                      <Link 
+                        key={service.id} 
+                        href={`/services/${service.slug}`}
+                        className="block px-3 py-2 rounded-xl text-xs font-semibold hover:bg-orange-50 dark:hover:bg-white/5 text-gray-800 dark:text-gray-200 hover:text-orange-600 transition-colors"
+                      >
+                        {service.icon ? `${service.icon} ` : '🛠️ '} {service.name}
+                      </Link>
+                    ))
+                  )}
                 </div>
               </div>
             )}
@@ -104,6 +128,10 @@ export function Navbar() {
 
           <Link href="/press" className="px-4 py-2 rounded-full text-xs font-bold text-gray-700 dark:text-gray-200 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
             Press
+          </Link>
+
+          <Link href="/contact" className="px-4 py-2 rounded-full text-xs font-bold text-gray-700 dark:text-gray-200 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+            Contact Us
           </Link>
 
           {/* Company Dropdown */}

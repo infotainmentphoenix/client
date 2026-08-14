@@ -196,7 +196,7 @@ export default function EventDetailPage() {
               {event.clientName && (
                 <div><p className="text-xs text-gray-400 mb-0.5">Client</p><p className="font-medium text-gray-900 dark:text-white">{event.clientName}</p></div>
               )}
-              <Link href="/book-consultation" className="block w-full text-center py-3.5 bg-gradient-to-r from-orange-500 to-rose-600 hover:from-orange-600 hover:to-rose-700 text-white font-semibold rounded-xl shadow-lg shadow-orange-500/25 transition-all active:scale-[0.98]">
+              <Link href={`/contact?eventType=${event.eventType}`} className="block w-full text-center py-3.5 bg-gradient-to-r from-orange-500 to-rose-600 hover:from-orange-600 hover:to-rose-700 text-white font-semibold rounded-xl shadow-lg shadow-orange-500/25 transition-all active:scale-[0.98]">
                 Plan a Similar Event
               </Link>
             </div>

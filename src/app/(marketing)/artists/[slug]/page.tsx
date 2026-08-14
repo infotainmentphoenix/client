@@ -223,7 +223,7 @@ export default function ArtistDetailPage() {
               )}
 
               <Link
-                href="/book-consultation"
+                href={`/contact?artist=${encodeURIComponent(artist.name)}`}
                 className="block w-full text-center py-3.5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-xl shadow-lg shadow-purple-500/25 transition-all active:scale-[0.98]"
               >
                 Book This Artist
