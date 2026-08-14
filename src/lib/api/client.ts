@@ -32,7 +32,10 @@ const handleResponse = async <T>(response: Response): Promise<{ data: T }> => {
       }
     }
     const errorMessage = json?.message || json?.error || `HTTP error! status: ${response.status}`;
-    throw new Error(errorMessage);
+    const error = new Error(errorMessage) as any;
+    error.errors = json?.errors;
+    error.statusCode = response.status;
+    throw error;
   }
 
   return { data: json };

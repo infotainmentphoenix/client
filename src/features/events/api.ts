@@ -30,24 +30,14 @@ export const eventApi = {
     }
   },
 
-  createEvent: async (data: Partial<Event>): Promise<Event | null> => {
-    try {
-      const response = await api.post<any>('/api/event/create', data);
-      return response.data?.data || null;
-    } catch (error) {
-      console.error('Error creating event:', error);
-      return null;
-    }
+  createEvent: async (data: FormData | Partial<Event>): Promise<Event> => {
+    const response = await api.post<any>('/api/event/create', data);
+    return response.data?.data;
   },
 
-  updateEvent: async (id: string | number, data: Partial<Event>): Promise<Event | null> => {
-    try {
-      const response = await api.put<any>(`/api/event/update/${id}`, data);
-      return response.data?.data || null;
-    } catch (error) {
-      console.error(`Error updating event ${id}:`, error);
-      return null;
-    }
+  updateEvent: async (id: string | number, data: FormData | Partial<Event>): Promise<Event> => {
+    const response = await api.put<any>(`/api/event/update/${id}`, data);
+    return response.data?.data;
   },
 
   deleteEvent: async (id: string | number): Promise<boolean> => {

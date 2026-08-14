@@ -47,6 +47,7 @@ export interface Event {
   location?: string;
   gallery?: string[];
   isActive?: boolean;
+  serviceId?: number | null;
   createdAt: string;
   updatedAt: string;
   images?: EventImage[];
