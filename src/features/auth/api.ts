@@ -1,4 +1,4 @@
-import { api } from '@/lib/api/client';
+import { api, BASE_URL } from '@/lib/api/client';
 import { LoginInput, RegisterInput, AuthResponse } from './types';
 
 // Standard delays for our mock API responses
@@ -103,22 +103,20 @@ export const authApi = {
     });
   },
 
-  googleLogin: async (googleToken: string): Promise<AuthResponse> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          user: {
-            id: 999,
-            name: "Google User",
-            email: "user@gmail.com",
-            role: "ADMIN",
-            isActive: true,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
-          },
-          accessToken: "mock_google_access_token_123"
-        });
-      }, MOCK_DELAY);
-    });
-  }
+  // --- GOOGLE OAUTH (Passport.js, real backend) ---
+
+  // Backend redirects the browser through Google's consent screen and back
+  // to GOOGLE_CALLBACK_URL; navigate the whole page here, don't fetch it.
+  getGoogleLoginUrl: (): string => `${BASE_URL}/api/auth/google`,
+
+  // Called by the /google/callback page once the backend redirects back with
+  // our own access token in the URL fragment. Persists the session the same
+  // way a normal email/password login does, then fetches the profile.
+  completeGoogleLogin: async (accessToken: string): Promise<AuthResponse['user'] | null> => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('token', accessToken);
+    }
+    return authApi.getMe();
+  },
 };
