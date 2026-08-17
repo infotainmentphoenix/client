@@ -57,6 +57,26 @@ export function AdminAuthGuard({ children }: { children: React.ReactNode }) {
     };
   }, [router]);
 
+  // The access token lives for 15 minutes (ACCESS_TOKEN_EXPIRES_IN on the
+  // backend). Proactively swap it for a fresh one every 12 minutes using the
+  // 7-day refresh-token cookie so an open admin tab never hits the 15-minute
+  // wall in the middle of a session. The 401-triggered refresh in
+  // lib/api/client.ts remains as a fallback for tabs that were idle/backgrounded
+  // past this interval.
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
+    const REFRESH_INTERVAL_MS = 12 * 60 * 1000;
+    const interval = setInterval(async () => {
+      const newToken = await authApi.refresh();
+      if (!newToken) {
+        router.push('/login?session=expired');
+      }
+    }, REFRESH_INTERVAL_MS);
+
+    return () => clearInterval(interval);
+  }, [isAuthenticated, router]);
+
   if (isAuthenticated === null) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-[#050505] text-gray-500">

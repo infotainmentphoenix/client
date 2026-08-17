@@ -53,6 +53,23 @@ export const authApi = {
     return res.data?.data || res.data;
   },
 
+  // Exchanges the httpOnly refresh-token cookie (7d TTL) for a new 15m
+  // access token. Returns the new token, or null if the refresh token is
+  // missing/expired/revoked (caller should treat that as "must log in again").
+  refresh: async (): Promise<string | null> => {
+    try {
+      const res = await api.post<any>('/api/auth/refresh', {});
+      const newToken = res.data?.data?.accessToken || res.data?.accessToken || null;
+      if (typeof window !== 'undefined' && newToken) {
+        localStorage.setItem('accessToken', newToken);
+        localStorage.setItem('token', newToken);
+      }
+      return newToken;
+    } catch (error) {
+      return null;
+    }
+  },
+
   logout: async (): Promise<void> => {
     try {
       await api.post<any>('/api/auth/logout', {});

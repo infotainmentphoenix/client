@@ -153,12 +153,6 @@ export function Navbar() {
                   <Link href="/our-vision" className="block px-3 py-2 rounded-xl text-xs font-bold hover:bg-orange-50 dark:hover:bg-white/5 text-gray-800 dark:text-gray-200 hover:text-orange-600">
                     Our Vision
                   </Link>
-                  <Link href="/team" className="block px-3 py-2 rounded-xl text-xs font-bold hover:bg-orange-50 dark:hover:bg-white/5 text-gray-800 dark:text-gray-200 hover:text-orange-600">
-                    Our Leadership Team
-                  </Link>
-                  <Link href="/testimonials" className="block px-3 py-2 rounded-xl text-xs font-bold hover:bg-orange-50 dark:hover:bg-white/5 text-gray-800 dark:text-gray-200 hover:text-orange-600">
-                    Client Reviews & Stories
-                  </Link>
                   <Link href="/faqs" className="block px-3 py-2 rounded-xl text-xs font-bold hover:bg-orange-50 dark:hover:bg-white/5 text-gray-800 dark:text-gray-200 hover:text-orange-600">
                     FAQs
                   </Link>
@@ -209,8 +203,6 @@ export function Navbar() {
                 <Link onClick={() => setIsMobileMenuOpen(false)} href="/press" className="p-3 bg-gray-100 dark:bg-white/5 rounded-2xl font-bold text-sm">📰 Press</Link>
                 <Link onClick={() => setIsMobileMenuOpen(false)} href="/about" className="p-3 bg-gray-100 dark:bg-white/5 rounded-2xl font-bold text-sm">ℹ️ About Us</Link>
                 <Link onClick={() => setIsMobileMenuOpen(false)} href="/our-vision" className="p-3 bg-gray-100 dark:bg-white/5 rounded-2xl font-bold text-sm">✨ Our Vision</Link>
-                <Link onClick={() => setIsMobileMenuOpen(false)} href="/team" className="p-3 bg-gray-100 dark:bg-white/5 rounded-2xl font-bold text-sm">👥 Team</Link>
-                <Link onClick={() => setIsMobileMenuOpen(false)} href="/testimonials" className="p-3 bg-gray-100 dark:bg-white/5 rounded-2xl font-bold text-sm">⭐ Reviews</Link>
                 <Link onClick={() => setIsMobileMenuOpen(false)} href="/faqs" className="p-3 bg-gray-100 dark:bg-white/5 rounded-2xl font-bold text-sm">❓ FAQs</Link>
               </div>
             </div>

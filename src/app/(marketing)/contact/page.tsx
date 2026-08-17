@@ -284,8 +284,16 @@ function ContactForm() {
             <div className="space-y-1.5">
               <label className="text-xs font-bold uppercase tracking-wider text-gray-500">Service Interested In</label>
               <select value={serviceId} onChange={e => setServiceId(e.target.value)} className="w-full px-4 py-3 bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl outline-none focus:border-blue-500 transition-all text-gray-900 dark:text-white text-sm">
-                <option value="">Select service (Optional)</option>
-                {isLoadingServices ? <option disabled>Loading services...</option> : services.map(s => <option key={s.id} value={String(s.id)}>{s.name}</option>)}
+                <option value="" className="bg-white dark:bg-[#121212] text-gray-900 dark:text-white">Select service (Optional)</option>
+                {isLoadingServices ? (
+                  <option disabled className="bg-white dark:bg-[#121212] text-gray-900 dark:text-white">Loading services...</option>
+                ) : (
+                  services.map(s => (
+                    <option key={s.id} value={String(s.id)} className="bg-white dark:bg-[#121212] text-gray-900 dark:text-white">
+                      {s.name}
+                    </option>
+                  ))
+                )}
               </select>
             </div>
           </div>
@@ -294,8 +302,12 @@ function ContactForm() {
             <div className="space-y-1.5">
               <label className="text-xs font-bold uppercase tracking-wider text-gray-500">Event Type</label>
               <select value={eventType} onChange={e => setEventType(e.target.value)} className="w-full px-4 py-3 bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl outline-none focus:border-blue-500 transition-all text-gray-900 dark:text-white text-sm">
-                <option value="">Select event type (Optional)</option>
-                {EVENT_TYPES.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
+                <option value="" className="bg-white dark:bg-[#121212] text-gray-900 dark:text-white">Select event type (Optional)</option>
+                {EVENT_TYPES.map(t => (
+                  <option key={t.value} value={t.value} className="bg-white dark:bg-[#121212] text-gray-900 dark:text-white">
+                    {t.label}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="space-y-1.5">
@@ -315,8 +327,12 @@ function ContactForm() {
             <div className="space-y-1.5 md:col-span-2">
               <label className="text-xs font-bold uppercase tracking-wider text-gray-500">Budget Range</label>
               <select value={budgetIndex} onChange={e => setBudgetIndex(e.target.value)} className="w-full px-4 py-3 bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl outline-none focus:border-blue-500 transition-all text-gray-900 dark:text-white text-sm">
-                <option value="">Select budget range (Optional)</option>
-                {BUDGET_RANGES.map((b, idx) => <option key={idx} value={String(idx)}>{b.label}</option>)}
+                <option value="" className="bg-white dark:bg-[#121212] text-gray-900 dark:text-white">Select budget range (Optional)</option>
+                {BUDGET_RANGES.map((b, idx) => (
+                  <option key={idx} value={String(idx)} className="bg-white dark:bg-[#121212] text-gray-900 dark:text-white">
+                    {b.label}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="space-y-1.5">

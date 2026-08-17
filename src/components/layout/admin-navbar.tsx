@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { authApi } from '@/features/auth/api';
+import { useTheme } from '@/components/providers/ThemeProvider';
 
 
 const SearchIcon = () => (
@@ -33,17 +34,11 @@ const MoonIcon = () => (
 export function AdminNavbar() {
   const pathname = usePathname();
   const router = useRouter();
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { theme, toggleTheme } = useTheme();
   const [userName, setUserName] = useState('Admin');
 
-  
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const isDark = document.documentElement.classList.contains('dark') || 
-                     localStorage.getItem('theme') === 'dark';
-      setIsDarkMode(isDark);
-      if (isDark) document.documentElement.classList.add('dark');
-
       const userStr = localStorage.getItem('user');
       if (userStr) {
         try {
@@ -54,19 +49,6 @@ export function AdminNavbar() {
       }
     }
   }, []);
-
-  const toggleTheme = () => {
-    const root = document.documentElement;
-    if (isDarkMode) {
-      root.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-      setIsDarkMode(false);
-    } else {
-      root.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-      setIsDarkMode(true);
-    }
-  };
 
   const handleLogout = async () => {
     await authApi.logout();
@@ -110,7 +92,7 @@ export function AdminNavbar() {
             className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 text-gray-600 dark:text-gray-300 transition-all active:scale-95"
             aria-label="Toggle Theme"
           >
-            {isDarkMode ? <SunIcon /> : <MoonIcon />}
+            {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
           </button>
 
           {}

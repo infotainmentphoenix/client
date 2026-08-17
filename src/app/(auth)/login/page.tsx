@@ -76,11 +76,6 @@ export default function LoginPage() {
     }
   };
 
-  const fillDemoAdmin = () => {
-    setEmail('admin@phoenixinfotainment.com');
-    setPassword('Admin@12345');
-    setError(null);
-  };
 
   return (
     <div className="w-full">
@@ -208,18 +203,6 @@ export default function LoginPage() {
         </div>
 
         {}
-        <div className="mt-6 pt-5 border-t border-gray-200/60 dark:border-white/10">
-          <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mb-2">
-            <span>Development Quick Access</span>
-            <button
-              type="button"
-              onClick={fillDemoAdmin}
-              className="text-blue-600 dark:text-blue-400 hover:underline font-medium cursor-pointer"
-            >
-              Autofill Admin Credentials
-            </button>
-          </div>
-        </div>
 
         <div className="mt-6 text-center text-xs text-gray-500 dark:text-gray-400">
           Role-Based Access Control Enabled &bull; Secure Connection
