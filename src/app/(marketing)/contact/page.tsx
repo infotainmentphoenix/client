@@ -8,7 +8,7 @@ import { serviceApi } from '@/features/services/api';
 import { Service } from '@/features/services/types';
 import { DatePicker } from '@/components/ui/DatePicker';
 
-// Icons
+
 const MailIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
 );
@@ -54,11 +54,11 @@ const BUDGET_RANGES = [
 function ContactForm() {
   const searchParams = useSearchParams();
 
-  // Services State
+  
   const [services, setServices] = useState<Service[]>([]);
   const [isLoadingServices, setIsLoadingServices] = useState(true);
 
-  // Form Fields
+  
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -150,7 +150,7 @@ function ContactForm() {
     });
   };
 
-  // Fetch Services & Auto-select route params
+  
   useEffect(() => {
     const fetchServices = async () => {
       try {
@@ -353,7 +353,7 @@ function ContactForm() {
 export default function ContactPage() {
   return (
     <>
-      {/* Hero */}
+      {}
       <section className="relative overflow-hidden bg-gradient-to-b from-gray-50 to-white dark:from-black dark:to-[#0a0a0a] pt-32 pb-16">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
@@ -373,7 +373,7 @@ export default function ContactPage() {
 
       <section className="container mx-auto px-4 md:px-8 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-          {/* Contact Info */}
+          {}
           <div className="lg:col-span-2 space-y-8">
             <div>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Contact Information</h2>
@@ -423,7 +423,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Contact Form Wrapper with Suspense */}
+          {}
           <div className="lg:col-span-3">
             <Suspense fallback={
               <div className="bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-3xl p-8 flex flex-col items-center justify-center min-h-[400px]">

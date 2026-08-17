@@ -12,7 +12,7 @@ export function PhoenixMarquee() {
 
   return (
     <div className="w-full py-4 bg-gray-900/90 dark:bg-black/90 text-white border-y border-white/10 overflow-hidden flex whitespace-nowrap relative z-10 my-8 shadow-2xl backdrop-blur-xl">
-      {/* Edge Fades */}
+      {}
       <div className="absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-r from-gray-900 dark:from-[#050505] to-transparent z-10 pointer-events-none" />
       <div className="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-l from-gray-900 dark:from-[#050505] to-transparent z-10 pointer-events-none" />
       

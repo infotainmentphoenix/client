@@ -35,7 +35,7 @@ export default function PortalDashboardPage() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-10">
-      {/* Welcome Banner */}
+      {}
       <div className="relative overflow-hidden bg-gradient-to-r from-gray-900 via-black to-gray-900 border border-white/10 rounded-3xl p-8 md:p-10 text-white shadow-2xl">
         <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-orange-500/20 to-rose-500/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -71,7 +71,7 @@ export default function PortalDashboardPage() {
         </div>
       </div>
 
-      {/* Metric Cards Grid */}
+      {}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <div className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-6 shadow-sm hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between mb-4">
@@ -118,7 +118,7 @@ export default function PortalDashboardPage() {
         </div>
       </div>
 
-      {/* Live Project Execution Tracker */}
+      {}
       <div className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-6 md:p-8 space-y-6 shadow-sm">
         <div className="flex items-center justify-between pb-4 border-b border-gray-100 dark:border-white/5">
           <div>
@@ -171,7 +171,7 @@ export default function PortalDashboardPage() {
                 </span>
               </div>
 
-              {/* Progress Bar */}
+              {}
               <div className="w-full bg-gray-200 dark:bg-white/10 h-2.5 rounded-full overflow-hidden">
                 <div className={`h-full bg-gradient-to-r ${project.color} rounded-full transition-all duration-1000`} style={{ width: `${project.progress}%` }} />
               </div>
@@ -184,9 +184,9 @@ export default function PortalDashboardPage() {
         </div>
       </div>
 
-      {/* Upcoming Event Schedule & Quick Actions */}
+      {}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Upcoming Events Column */}
+        {}
         <div className="lg:col-span-2 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-6 md:p-8 space-y-6 shadow-sm">
           <div className="flex items-center justify-between pb-4 border-b border-gray-100 dark:border-white/5">
             <h2 className="text-xl font-black">Upcoming Event Schedule</h2>
@@ -235,7 +235,7 @@ export default function PortalDashboardPage() {
           </div>
         </div>
 
-        {/* Quick Resource Vault */}
+        {}
         <div className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-6 md:p-8 space-y-6 shadow-sm">
           <h2 className="text-xl font-black pb-4 border-b border-gray-100 dark:border-white/5">Client Resource Vault</h2>
 

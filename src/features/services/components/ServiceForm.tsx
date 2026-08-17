@@ -19,7 +19,7 @@ export function ServiceForm({ serviceId }: ServiceFormProps) {
   const [error, setError] = useState<string | null>(null);
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
 
-  // Core service fields
+  
   const [formData, setFormData] = useState({
     name: '',
     slug: '',
@@ -100,7 +100,7 @@ export function ServiceForm({ serviceId }: ServiceFormProps) {
     } else {
       setFormData(prev => {
         const newData = { ...prev, [name]: value };
-        // Auto-generate URL slug from name if we are creating a new service
+        
         if (name === 'name' && !isEditing) {
           newData.slug = value
             .trim()
@@ -227,18 +227,18 @@ export function ServiceForm({ serviceId }: ServiceFormProps) {
       payload.append('featured', String(formData.featured));
       payload.append('isActive', String(formData.isActive));
 
-      // Append cover image file
+      
       if (coverImageFile) {
         payload.append('serviceCoverImage', coverImageFile);
       } else if (!coverImagePreview && existingCoverImage) {
-        payload.append('coverImage', 'null'); // clear indicator
+        payload.append('coverImage', 'null'); 
       }
 
-      // Append OG image file
+      
       if (ogImageFile) {
         payload.append('serviceOgImage', ogImageFile);
       } else if (!ogImagePreview && existingOgImage) {
-        payload.append('ogImage', 'null'); // clear indicator
+        payload.append('ogImage', 'null'); 
       }
 
       let result;
@@ -296,7 +296,7 @@ export function ServiceForm({ serviceId }: ServiceFormProps) {
         </div>
       )}
 
-      {/* Basic Information */}
+      {}
       <div className="bg-card rounded-2xl border border-border shadow-sm p-6 space-y-6">
         <div className="flex items-center gap-3 border-b border-border pb-4">
           <div className="w-8 h-8 rounded-lg bg-blue-600/10 text-blue-600 flex items-center justify-center font-bold text-sm">1</div>
@@ -384,7 +384,7 @@ export function ServiceForm({ serviceId }: ServiceFormProps) {
         </div>
       </div>
 
-      {/* Media & SEO */}
+      {}
       <div className="bg-card rounded-2xl border border-border shadow-sm p-6 space-y-6">
         <div className="flex items-center gap-3 border-b border-border pb-4">
           <div className="w-8 h-8 rounded-lg bg-purple-600/10 text-purple-600 flex items-center justify-center font-bold text-sm">2</div>
@@ -392,7 +392,7 @@ export function ServiceForm({ serviceId }: ServiceFormProps) {
         </div>
         
         <div className="space-y-6">
-          {/* Cover Image Upload UI */}
+          {}
           <div>
             <label className="block text-sm font-semibold text-foreground mb-2">Cover Image</label>
             
@@ -451,7 +451,7 @@ export function ServiceForm({ serviceId }: ServiceFormProps) {
             )}
           </div>
 
-          {/* OG Image Upload UI */}
+          {}
           <div className="pt-4 border-t border-border">
             <label className="block text-sm font-semibold text-foreground mb-2">OG Image (For Social Media Previews)</label>
             
@@ -546,7 +546,7 @@ export function ServiceForm({ serviceId }: ServiceFormProps) {
         </div>
       </div>
 
-      {/* Display Settings */}
+      {}
       <div className="bg-card rounded-2xl border border-border shadow-sm p-6 space-y-6">
         <div className="flex items-center gap-3 border-b border-border pb-4">
           <div className="w-8 h-8 rounded-lg bg-orange-600/10 text-orange-600 flex items-center justify-center font-bold text-sm">3</div>
@@ -601,7 +601,7 @@ export function ServiceForm({ serviceId }: ServiceFormProps) {
         </div>
       </div>
 
-      {/* Sticky Action Footer */}
+      {}
       <div className="flex justify-end gap-4 sticky bottom-4 bg-background/80 backdrop-blur-md p-4 rounded-xl border border-border shadow-lg z-10">
         <button 
           type="button" 

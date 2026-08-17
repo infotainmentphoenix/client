@@ -67,7 +67,7 @@ export function PhoenixBentoGrid() {
       </ScrollReveal>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-        {/* Card 1 */}
+        {}
         <ScrollReveal delay={0}>
           <GlowCard href="/about" className="h-[500px] bg-white dark:bg-gray-900 flex flex-col justify-end p-8 md:p-10 w-full">
             <div 
@@ -85,7 +85,7 @@ export function PhoenixBentoGrid() {
           </GlowCard>
         </ScrollReveal>
 
-        {/* Card 2 */}
+        {}
         <ScrollReveal delay={150}>
           <GlowCard className="h-[500px] bg-gray-50 dark:bg-[#0c0c0c] p-8 md:p-10 flex flex-col w-full">
             <div className="absolute -right-20 -top-20 w-64 h-64 bg-blue-500/10 dark:bg-blue-500/10 blur-[80px] dark:blur-[100px] rounded-full group-hover:bg-blue-500/20 transition-colors duration-500"></div>
@@ -103,7 +103,7 @@ export function PhoenixBentoGrid() {
           </GlowCard>
         </ScrollReveal>
 
-        {/* Card 3 */}
+        {}
         <ScrollReveal delay={300}>
           <GlowCard className="h-[500px] bg-gradient-to-br from-gray-100 to-gray-200 dark:from-[#111] dark:to-[#0a0a0a] p-8 md:p-10 flex flex-col justify-between w-full">
             <div className="relative z-10">

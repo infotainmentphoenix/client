@@ -12,13 +12,13 @@ export default function AuthLayout({
 }) {
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-background relative overflow-hidden">
-      {/* Premium Background Effects */}
+      {}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-blue-600/20 blur-[120px]" />
         <div className="absolute top-[60%] -right-[10%] w-[40%] h-[60%] rounded-full bg-purple-600/20 blur-[120px]" />
       </div>
       
-      {/* Content wrapper */}
+      {}
       <div className="relative z-10 w-full max-w-md px-4">
         {children}
       </div>

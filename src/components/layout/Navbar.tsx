@@ -53,7 +53,7 @@ export function Navbar() {
           }
         `}
       >
-        {/* Left: Logo & Brand */}
+        {}
         <Link href="/" className="flex items-center gap-3 group shrink-0">
           <div className="w-10 h-10 bg-gradient-to-tr from-orange-500 via-rose-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
             <span className="text-white font-black text-xl italic tracking-tighter">P</span>
@@ -68,11 +68,11 @@ export function Navbar() {
           </div>
         </Link>
 
-        {/* Center: Desktop Navigation Links */}
+        {}
         <nav className={`hidden lg:flex items-center gap-1 p-1 rounded-full transition-all duration-500
           ${isScrolled ? 'bg-gray-100/60 dark:bg-white/5' : 'bg-white/60 dark:bg-black/40 backdrop-blur-xl border border-gray-200/50 dark:border-white/10'}
         `}>
-          {/* Services with Dropdown */}
+          {}
           <div 
             className="relative"
             onMouseEnter={() => setActiveDropdown('services')}
@@ -134,7 +134,7 @@ export function Navbar() {
             Contact Us
           </Link>
 
-          {/* Company Dropdown */}
+          {}
           <div 
             className="relative"
             onMouseEnter={() => setActiveDropdown('company')}
@@ -149,6 +149,9 @@ export function Navbar() {
                 <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-white/10 rounded-2xl p-3 shadow-2xl animate-fadeIn space-y-1">
                   <Link href="/about" className="block px-3 py-2 rounded-xl text-xs font-bold hover:bg-orange-50 dark:hover:bg-white/5 text-gray-800 dark:text-gray-200 hover:text-orange-600">
                     About Us
+                  </Link>
+                  <Link href="/our-vision" className="block px-3 py-2 rounded-xl text-xs font-bold hover:bg-orange-50 dark:hover:bg-white/5 text-gray-800 dark:text-gray-200 hover:text-orange-600">
+                    Our Vision
                   </Link>
                   <Link href="/team" className="block px-3 py-2 rounded-xl text-xs font-bold hover:bg-orange-50 dark:hover:bg-white/5 text-gray-800 dark:text-gray-200 hover:text-orange-600">
                     Our Leadership Team
@@ -165,7 +168,7 @@ export function Navbar() {
           </div>
         </nav>
 
-        {/* Right Section: Action Buttons */}
+        {}
         <div className="flex items-center gap-2.5">
           <ThemeToggle />
 
@@ -192,7 +195,7 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Slide-out Menu Drawer */}
+      {}
       {isMobileMenuOpen && (
         <div className="pointer-events-auto fixed inset-0 top-20 z-40 bg-white/95 dark:bg-black/95 backdrop-blur-2xl p-6 flex flex-col justify-between animate-fadeIn lg:hidden overflow-y-auto">
           <div className="space-y-6 pt-4">
@@ -205,6 +208,7 @@ export function Navbar() {
                 <Link onClick={() => setIsMobileMenuOpen(false)} href="/gallery" className="p-3 bg-gray-100 dark:bg-white/5 rounded-2xl font-bold text-sm">🖼️ Gallery</Link>
                 <Link onClick={() => setIsMobileMenuOpen(false)} href="/press" className="p-3 bg-gray-100 dark:bg-white/5 rounded-2xl font-bold text-sm">📰 Press</Link>
                 <Link onClick={() => setIsMobileMenuOpen(false)} href="/about" className="p-3 bg-gray-100 dark:bg-white/5 rounded-2xl font-bold text-sm">ℹ️ About Us</Link>
+                <Link onClick={() => setIsMobileMenuOpen(false)} href="/our-vision" className="p-3 bg-gray-100 dark:bg-white/5 rounded-2xl font-bold text-sm">✨ Our Vision</Link>
                 <Link onClick={() => setIsMobileMenuOpen(false)} href="/team" className="p-3 bg-gray-100 dark:bg-white/5 rounded-2xl font-bold text-sm">👥 Team</Link>
                 <Link onClick={() => setIsMobileMenuOpen(false)} href="/testimonials" className="p-3 bg-gray-100 dark:bg-white/5 rounded-2xl font-bold text-sm">⭐ Reviews</Link>
                 <Link onClick={() => setIsMobileMenuOpen(false)} href="/faqs" className="p-3 bg-gray-100 dark:bg-white/5 rounded-2xl font-bold text-sm">❓ FAQs</Link>

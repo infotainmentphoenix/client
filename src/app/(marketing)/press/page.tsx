@@ -40,7 +40,7 @@ export default function PressPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-black text-gray-900 dark:text-white transition-colors duration-300">
-      {/* Hero Section */}
+      {}
       <section className="relative overflow-hidden bg-gradient-to-b from-blue-50/50 via-white to-gray-50 dark:from-blue-950/20 dark:via-black dark:to-black pt-32 pb-16">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[500px] h-[250px] bg-gradient-to-tr from-blue-500/10 to-indigo-500/10 rounded-full blur-3xl" />
@@ -79,7 +79,7 @@ export default function PressPage() {
         </div>
       </section>
 
-      {/* Featured Press Publications Grid */}
+      {}
       <section className="container mx-auto px-4 md:px-8 py-16 max-w-6xl">
         <div className="flex items-center justify-between mb-10">
           <div>
@@ -102,7 +102,7 @@ export default function PressPage() {
                 className="group bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  {/* Image Cover */}
+                  {}
                   {story.featuredImage && (
                     <div className="relative h-56 overflow-hidden bg-gray-900">
                       <img
@@ -154,7 +154,7 @@ export default function PressPage() {
         )}
       </section>
 
-      {/* Media Partners Section */}
+      {}
       <section className="bg-white dark:bg-white/5 border-y border-gray-200 dark:border-white/5 py-16">
         <div className="container mx-auto px-4 md:px-8 text-center max-w-5xl">
           <h2 className="text-xl font-bold uppercase tracking-wider text-gray-400 mb-8">
@@ -184,7 +184,7 @@ export default function PressPage() {
         </div>
       </section>
 
-      {/* Press Kit Modal */}
+      {}
       {showKitModal && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
           <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-white/10 rounded-3xl p-8 max-w-lg w-full text-center relative shadow-2xl">
@@ -223,7 +223,7 @@ export default function PressPage() {
         </div>
       )}
 
-      {/* Bottom CTA */}
+      {}
       <section className="container mx-auto px-4 md:px-8 py-20">
         <div className="bg-gradient-to-r from-blue-600 to-purple-700 rounded-3xl p-8 md:p-12 text-center text-white shadow-2xl">
           <h2 className="text-3xl md:text-4xl font-black mb-4">Planning a Story or Interview?</h2>

@@ -25,7 +25,7 @@ export default function SettingsLayout({ children }: { children: React.ReactNode
 
       <div className="flex flex-col md:flex-row gap-8 items-start">
         
-        {/* Sidebar Navigation */}
+        {}
         <div className="w-full md:w-64 shrink-0 bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-2xl p-2 shadow-sm">
           <nav className="space-y-1">
             {navItems.map((item) => {
@@ -50,7 +50,7 @@ export default function SettingsLayout({ children }: { children: React.ReactNode
           </nav>
         </div>
 
-        {/* Content Area */}
+        {}
         <div className="flex-1 w-full">
           {children}
         </div>

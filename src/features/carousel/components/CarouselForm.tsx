@@ -128,7 +128,7 @@ export function CarouselForm({ id }: { id?: string | number }) {
       )}
 
       <form onSubmit={handleSubmit} className="bg-white dark:bg-[#0a0a0c] border border-gray-200/80 dark:border-white/10 p-6 md:p-8 rounded-2xl shadow-sm space-y-6">
-        {/* Slide Image Upload */}
+        {}
         <div className="space-y-2">
           <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200">
             Slide Banner Image {isEditing ? '(Leave blank to keep existing image)' : '*'}

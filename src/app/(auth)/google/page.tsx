@@ -13,8 +13,8 @@ const LoaderIcon = ({ className }: { className?: string }) => (
 
 export default function GoogleAuthRedirectPage() {
   useEffect(() => {
-    // OAuth requires a real browser navigation to Google's consent screen,
-    // not a fetch call, so the whole page is handed off to the backend.
+    
+    
     window.location.href = authApi.getGoogleLoginUrl();
   }, []);
 

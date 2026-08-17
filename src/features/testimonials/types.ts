@@ -10,6 +10,6 @@ export interface Testimonial {
   category: 'Corporate' | 'Weddings' | 'Concerts' | 'Celebrities';
   avatarUrl?: string;
   coverImage?: string;
-  videoUrl?: string; // Optional YouTube review video
+  videoUrl?: string; 
   createdAt?: string;
 }

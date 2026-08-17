@@ -25,7 +25,7 @@ export default function PortalAccountPage() {
   const [activeTab, setActiveTab] = useState<'PROFILE' | 'SECURITY' | 'BILLING' | 'NOTIFICATIONS'>('PROFILE');
   const [saveStatus, setSaveStatus] = useState<string | null>(null);
 
-  // Form State
+  
   const [profileData, setProfileData] = useState({
     name: 'Client User',
     email: 'client@phoenixinfotainment.com',
@@ -66,7 +66,7 @@ export default function PortalAccountPage() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-8">
-      {/* Header Banner */}
+      {}
       <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-gray-200 dark:border-white/10">
         <div>
           <h1 className="text-3xl font-black tracking-tight">Account & Profile Settings</h1>
@@ -81,7 +81,7 @@ export default function PortalAccountPage() {
         )}
       </div>
 
-      {/* Tabs Bar */}
+      {}
       <div className="flex gap-2 border-b border-gray-200 dark:border-white/10 overflow-x-auto no-scrollbar pb-px">
         {[
           { id: 'PROFILE', label: 'Personal Profile', icon: UserIcon },
@@ -107,13 +107,13 @@ export default function PortalAccountPage() {
         })}
       </div>
 
-      {/* TAB 1: PROFILE */}
+      {}
       {activeTab === 'PROFILE' && (
         <form onSubmit={handleSave} className="space-y-8 animate-fadeIn">
           <div className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-6 md:p-8 space-y-6 shadow-sm">
             <h2 className="text-xl font-bold">Profile Details</h2>
 
-            {/* Avatar Section */}
+            {}
             <div className="flex items-center gap-6 pb-6 border-b border-gray-100 dark:border-white/5">
               <div className="relative">
                 <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-orange-500 to-purple-600 text-white font-bold flex items-center justify-center text-2xl shadow-xl">
@@ -136,7 +136,7 @@ export default function PortalAccountPage() {
               </div>
             </div>
 
-            {/* Input Grid */}
+            {}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">Full Name</label>
@@ -211,10 +211,10 @@ export default function PortalAccountPage() {
         </form>
       )}
 
-      {/* TAB 2: SECURITY */}
+      {}
       {activeTab === 'SECURITY' && (
         <div className="space-y-8 animate-fadeIn">
-          {/* Change Password */}
+          {}
           <form onSubmit={handleSave} className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-6 md:p-8 space-y-6 shadow-sm">
             <h2 className="text-xl font-bold">Change Password</h2>
 
@@ -261,7 +261,7 @@ export default function PortalAccountPage() {
             </button>
           </form>
 
-          {/* Two Factor Auth */}
+          {}
           <div className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-6 md:p-8 flex items-center justify-between shadow-sm">
             <div>
               <h3 className="text-base font-bold">Two-Factor Authentication (2FA)</h3>
@@ -281,7 +281,7 @@ export default function PortalAccountPage() {
         </div>
       )}
 
-      {/* TAB 3: BILLING */}
+      {}
       {activeTab === 'BILLING' && (
         <form onSubmit={handleSave} className="space-y-8 animate-fadeIn">
           <div className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-6 md:p-8 space-y-6 shadow-sm">
@@ -354,7 +354,7 @@ export default function PortalAccountPage() {
         </form>
       )}
 
-      {/* TAB 4: NOTIFICATIONS */}
+      {}
       {activeTab === 'NOTIFICATIONS' && (
         <form onSubmit={handleSave} className="space-y-8 animate-fadeIn">
           <div className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-6 md:p-8 space-y-6 shadow-sm">

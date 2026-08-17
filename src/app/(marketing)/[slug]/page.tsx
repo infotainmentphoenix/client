@@ -11,7 +11,7 @@ export default function CmsPageDetailPage() {
   const params = useParams();
   const slug = params?.slug as string;
 
-  // Format slug into a human-readable title (e.g., "about-us" -> "About Us")
+  
   const title = slug
     ? slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
     : 'Page';

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-// Custom SVG Icons matching the theme
+
 const CheckIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}>
     <polyline points="20 6 9 17 4 12"></polyline>
@@ -20,9 +20,9 @@ export default function AboutUsPage() {
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans transition-colors duration-300">
       
-      {/* 1. Top Section — About Phoenix Infotainment */}
+      {}
       <section className="relative w-full min-h-[55vh] flex items-center justify-center pt-36 pb-20 overflow-hidden">
-        {/* Subtle Ambient Background Glows */}
+        {}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-orange-600/10 rounded-full blur-[100px] animate-blob" />
           <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[100px] animate-blob animation-delay-2000" />
@@ -52,15 +52,15 @@ export default function AboutUsPage() {
         </div>
       </section>
 
-      {/* 2. Middle Section — Founder & Creative Director */}
+      {}
       <section className="container mx-auto px-6 md:px-12 py-20 border-t border-white/5 relative z-10">
         <div className="max-w-5xl mx-auto bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 backdrop-blur-sm relative overflow-hidden">
-          {/* Subtle design gradient accent inside card */}
+          {}
           <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-full blur-3xl pointer-events-none" />
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             
-            {/* Founder Image */}
+            {}
             <div className="lg:col-span-5 flex justify-center">
               <div className="relative w-full max-w-[360px] aspect-[4/5] rounded-2xl overflow-hidden border border-white/15 shadow-2xl group">
                 <img 
@@ -72,7 +72,7 @@ export default function AboutUsPage() {
               </div>
             </div>
 
-            {/* Founder Details & Highlights */}
+            {}
             <div className="lg:col-span-7 space-y-6">
               <div>
                 <span className="text-xs font-bold uppercase tracking-widest text-orange-400">Leadership Profile</span>
@@ -86,7 +86,7 @@ export default function AboutUsPage() {
                 With professional experience in the Indian television and entertainment industry, Preeti brings creative direction, artist relationships, and industry expertise to every project. Her deep connections within the entertainment ecosystem enable Phoenix Infotainment to work directly with artists and performers — ensuring authentic talent, transparent pricing, and premium execution.
               </p>
 
-              {/* Highlights Grid */}
+              {}
               <div className="pt-4 border-t border-white/10 grid grid-cols-2 gap-4">
                 {[
                   'TV Industry Exp.',
@@ -109,7 +109,7 @@ export default function AboutUsPage() {
         </div>
       </section>
 
-      {/* 3. The Powerhouse — Our Departments */}
+      {}
       <section className="container mx-auto px-6 md:px-12 py-20 border-t border-white/5 relative z-10">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="text-xs font-bold uppercase tracking-widest text-orange-400 block mb-2">Our Operations</span>
@@ -119,7 +119,7 @@ export default function AboutUsPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
-          {/* Social Media & Digital */}
+          {}
           <div className="p-8 bg-white/5 border border-white/10 rounded-2xl flex flex-col justify-between hover:border-orange-500/50 transition-all duration-300 relative group">
             <div className="space-y-6">
               <div className="w-12 h-12 rounded-xl bg-orange-500/10 text-orange-400 flex items-center justify-center">
@@ -149,7 +149,7 @@ export default function AboutUsPage() {
             </div>
           </div>
 
-          {/* Marketing & Strategy */}
+          {}
           <div className="p-8 bg-white/5 border border-white/10 rounded-2xl flex flex-col justify-between hover:border-rose-500/50 transition-all duration-300 relative group">
             <div className="space-y-6">
               <div className="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center">
@@ -179,7 +179,7 @@ export default function AboutUsPage() {
             </div>
           </div>
 
-          {/* Production & Operations */}
+          {}
           <div className="p-8 bg-white/5 border border-white/10 rounded-2xl flex flex-col justify-between hover:border-purple-500/50 transition-all duration-300 relative group">
             <div className="space-y-6">
               <div className="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center">
@@ -212,7 +212,7 @@ export default function AboutUsPage() {
         </div>
       </section>
 
-      {/* 4. Final Section — Together, We Deliver Excellence */}
+      {}
       <section className="container mx-auto px-6 md:px-12 py-20 border-t border-white/5 relative z-10 text-center">
         <div className="relative bg-gradient-to-r from-orange-500 via-rose-500 to-purple-600 rounded-3xl p-8 md:p-16 shadow-2xl overflow-hidden group max-w-4xl mx-auto">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent opacity-50" />

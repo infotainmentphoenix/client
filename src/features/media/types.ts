@@ -4,8 +4,8 @@ export interface MediaFile {
   id: number;
   name: string;
   type: MediaType;
-  size: string; // e.g., '2.4 MB'
+  size: string; 
   sizeInBytes: number;
-  date: string; // e.g., '2024-03-15'
+  date: string; 
   url: string;
 }

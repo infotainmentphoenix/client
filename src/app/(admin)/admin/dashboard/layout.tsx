@@ -13,10 +13,10 @@ export default function DashboardLayout({
 }) {
   return (
     <div className="space-y-6">
-      {/* Main Dashboard Header & Quick Actions */}
+      {}
       {children}
       
-      {/* Parallel Routes Grid */}
+      {}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-3">
           {analytics}

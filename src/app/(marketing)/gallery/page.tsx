@@ -48,7 +48,7 @@ export default function GalleryPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-black text-gray-900 dark:text-white transition-colors duration-300">
-      {/* Hero Header */}
+      {}
       <section className="relative overflow-hidden bg-gradient-to-b from-rose-50/50 via-white to-gray-50 dark:from-rose-950/20 dark:via-black dark:to-black pt-32 pb-16">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute -top-20 right-10 w-96 h-96 bg-gradient-to-br from-orange-500/10 to-rose-500/10 rounded-full blur-3xl" />
@@ -73,7 +73,7 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      {/* Filter Bar */}
+      {}
       <section className="sticky top-0 z-20 bg-white/80 dark:bg-black/80 backdrop-blur-md border-y border-gray-200 dark:border-white/5">
         <div className="container mx-auto px-4 md:px-8 py-3 flex gap-2 overflow-x-auto no-scrollbar">
           {[
@@ -99,7 +99,7 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      {/* Gallery Grid */}
+      {}
       <section className="container mx-auto px-4 md:px-8 py-16">
         {isLoading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -125,17 +125,17 @@ export default function GalleryPage() {
                 onClick={() => setActiveMediaModal(item)}
                 className="group relative h-80 rounded-2xl overflow-hidden cursor-pointer bg-gray-900 border border-gray-200 dark:border-white/10 shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300"
               >
-                {/* Media Thumbnail */}
+                {}
                 <img
                   src={item.imageUrl}
                   alt={item.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                 />
 
-                {/* Gradient Overlay */}
+                {}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
 
-                {/* Media Type Badge */}
+                {}
                 <div className="absolute top-3 left-3 flex items-center gap-1.5">
                   {item.type === 'VIDEO' ? (
                     <span className="px-3 py-1 bg-red-600 text-white text-xs font-bold rounded-full flex items-center gap-1 shadow-md">
@@ -151,12 +151,12 @@ export default function GalleryPage() {
                   </span>
                 </div>
 
-                {/* Quick Action Button */}
+                {}
                 <div className="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/10 backdrop-blur flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
                   {item.type === 'VIDEO' ? <PlayIcon className="w-4 h-4 ml-0.5" /> : <MaximizeIcon className="w-4 h-4" />}
                 </div>
 
-                {/* Details Footer */}
+                {}
                 <div className="absolute bottom-0 inset-x-0 p-5 text-white">
                   <h3 className="text-base font-bold line-clamp-1 group-hover:text-orange-400 transition-colors">
                     {item.title}
@@ -176,11 +176,11 @@ export default function GalleryPage() {
         )}
       </section>
 
-      {/* Lightbox / Video Modal */}
+      {}
       {activeMediaModal && (
         <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center p-4 md:p-8 animate-fadeIn">
           <div className="relative w-full max-w-4xl bg-gray-900 border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
-            {/* Close Button */}
+            {}
             <button
               onClick={() => setActiveMediaModal(null)}
               className="absolute top-4 right-4 z-20 p-2.5 rounded-full bg-black/60 text-white hover:bg-white hover:text-black transition-colors"
@@ -188,7 +188,7 @@ export default function GalleryPage() {
               <XIcon className="w-6 h-6" />
             </button>
 
-            {/* Content Display */}
+            {}
             {activeMediaModal.type === 'VIDEO' ? (
               <div className="relative aspect-video w-full bg-black">
                 <iframe
@@ -209,7 +209,7 @@ export default function GalleryPage() {
               </div>
             )}
 
-            {/* Modal Info Footer */}
+            {}
             <div className="p-6 bg-gray-900 border-t border-white/10 text-white">
               <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                 <h3 className="text-xl font-bold">{activeMediaModal.title}</h3>
@@ -229,7 +229,7 @@ export default function GalleryPage() {
         </div>
       )}
 
-      {/* CTA Section */}
+      {}
       <section className="bg-gradient-to-r from-orange-600 via-rose-600 to-purple-600 py-16 text-white text-center">
         <div className="container mx-auto px-4 md:px-8 max-w-3xl">
           <h2 className="text-3xl md:text-4xl font-black mb-4">Want Your Event Featured Here?</h2>

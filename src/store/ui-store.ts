@@ -1,2 +1,2 @@
-// UI Zustand store
+
 export {};

@@ -45,12 +45,12 @@ export default function EventDetailPage() {
     if (!slug) return;
     const load = async () => {
       setIsLoading(true);
-      // Backend getEventById takes numeric ID, not slug. Fetch all and match by slug.
+      
       const allEvents = await eventApi.getEvents({ limit: 100 });
       const found = allEvents.find(e => e.slug === slug);
 
       if (found) {
-        // Fetch full details with images
+        
         const full = await eventApi.getEvent(found.id);
         setEvent(full);
       }
@@ -83,7 +83,7 @@ export default function EventDetailPage() {
 
   return (
     <>
-      {/* Cover Image */}
+      {}
       <section className="relative h-[45vh] md:h-[55vh] bg-gradient-to-br from-orange-900 via-rose-900 to-black overflow-hidden">
         {event.coverImage ? (
           <img src={event.coverImage} alt={event.title} className="absolute inset-0 w-full h-full object-cover opacity-60" />
@@ -114,7 +114,7 @@ export default function EventDetailPage() {
         </div>
       </section>
 
-      {/* Breadcrumb */}
+      {}
       <div className="bg-white dark:bg-[#0a0a0a] border-b border-gray-100 dark:border-white/5">
         <div className="container mx-auto px-4 md:px-8 py-3">
           <nav className="flex items-center gap-2 text-sm text-gray-500">
@@ -125,11 +125,11 @@ export default function EventDetailPage() {
         </div>
       </div>
 
-      {/* Content */}
+      {}
       <section className="container mx-auto px-4 md:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-10">
-            {/* Brief */}
+            {}
             {event.brief && (
               <div className="p-6 bg-orange-50 dark:bg-orange-500/5 rounded-2xl border border-orange-100 dark:border-orange-500/10">
                 <h2 className="text-sm font-bold text-orange-700 dark:text-orange-400 uppercase tracking-wider mb-2">The Brief</h2>
@@ -137,7 +137,7 @@ export default function EventDetailPage() {
               </div>
             )}
 
-            {/* Description */}
+            {}
             {event.description && (
               <div>
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">About This Event</h2>
@@ -145,7 +145,7 @@ export default function EventDetailPage() {
               </div>
             )}
 
-            {/* Outcome */}
+            {}
             {event.outcome && (
               <div className="p-6 bg-green-50 dark:bg-green-500/5 rounded-2xl border border-green-100 dark:border-green-500/10">
                 <h2 className="text-sm font-bold text-green-700 dark:text-green-400 uppercase tracking-wider mb-2">The Outcome</h2>
@@ -153,7 +153,7 @@ export default function EventDetailPage() {
               </div>
             )}
 
-            {/* Gallery */}
+            {}
             {event.images && event.images.length > 0 && (
               <div>
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Gallery</h2>
@@ -168,7 +168,7 @@ export default function EventDetailPage() {
               </div>
             )}
 
-            {/* Video */}
+            {}
             {event.videoUrl && (
               <div>
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Event Video</h2>
@@ -179,9 +179,9 @@ export default function EventDetailPage() {
             )}
           </div>
 
-          {/* Sidebar */}
+          {}
           <div className="space-y-6">
-            {/* Event Info Card */}
+            {}
             <div className="bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-2xl p-6 space-y-4">
               <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Event Details</h3>
               {event.eventDate && (
@@ -201,7 +201,7 @@ export default function EventDetailPage() {
               </Link>
             </div>
 
-            {/* Client Quote */}
+            {}
             {event.clientQuote && (
               <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-white/5 dark:to-white/[0.02] border border-gray-100 dark:border-white/10 rounded-2xl p-6">
                 <QuoteIcon className="w-8 h-8 text-orange-300 dark:text-orange-500/50 mb-3" />
@@ -213,7 +213,7 @@ export default function EventDetailPage() {
         </div>
       </section>
 
-      {/* Lightbox */}
+      {}
       {selectedImage && (
         <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4" onClick={() => setSelectedImage(null)}>
           <img src={selectedImage} alt="" className="max-w-full max-h-[85vh] object-contain rounded-lg" />

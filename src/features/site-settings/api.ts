@@ -2,7 +2,7 @@ import { api } from '@/lib/api/client';
 import { SiteSetting, ClientLogo, SocialLink } from './types';
 
 export const siteSettingsApi = {
-  // Site Settings
+  
   getSiteSettings: async (): Promise<Record<string, string>> => {
     const res = await api.get<any>('/api/site-settings');
     return res.data.data || {};
@@ -13,7 +13,7 @@ export const siteSettingsApi = {
     return res.data.data;
   },
 
-  // Client Logos
+  
   getClientLogos: async (): Promise<ClientLogo[]> => {
     const res = await api.get<any>('/api/client-logos');
     return res.data.data || [];
@@ -28,10 +28,10 @@ export const siteSettingsApi = {
     await api.delete(`/api/client-logos/${id}`);
   },
 
-  // Social Links
+  
   getSocialLinks: async (): Promise<{ data: SocialLink[], meta: any }> => {
     const res = await api.get<any>('/api/social-links/getAllSocialLinks');
-    // res.data is { success, data: { items, pagination }, ... }
+    
     const items = res.data?.data?.items || [];
     const pagination = res.data?.data?.pagination || {};
     return { data: items, meta: pagination };

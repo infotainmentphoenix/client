@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { inquiryApi } from '@/features/inquiries/api';
 import { Inquiry, InquiryStatus } from '@/features/inquiries/types';
 
-// Inline SVGs
+
 const SearchIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
 );
@@ -60,7 +60,7 @@ export default function CRMPage() {
         </Link>
       </div>
 
-      {/* Stats Cards */}
+      {}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <div className="bg-white dark:bg-black/40 p-6 rounded-2xl border border-gray-200/50 dark:border-white/10 shadow-sm flex flex-col justify-center">
           <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Total Leads</p>

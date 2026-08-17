@@ -1,2 +1,2 @@
-// Validations for chat
+
 export {};

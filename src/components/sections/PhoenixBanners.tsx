@@ -14,7 +14,7 @@ function ArrowUpRightIcon({ className }: { className?: string }) {
 export function PhoenixBanners() {
   return (
     <section className="container mx-auto px-4 md:px-8 py-16 flex flex-col gap-8 relative z-10">
-      {/* Banner 1 */}
+      {}
       <ScrollReveal delay={0}>
         <Link href="/events/online" className="group relative w-full h-56 md:h-72 rounded-[2rem] overflow-hidden flex items-center bg-gray-100 dark:bg-gray-900 border border-black/10 dark:border-white/10 hover:border-blue-500/50 transition-all duration-500 shadow-[0_10px_40px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
           <div 
@@ -34,12 +34,12 @@ export function PhoenixBanners() {
         </Link>
       </ScrollReveal>
 
-      {/* Banner 2 */}
+      {}
       <ScrollReveal delay={200}>
         <Link href="/artists" className="group relative w-full h-48 md:h-64 rounded-[2rem] overflow-hidden flex items-center justify-center bg-gray-50 dark:bg-[#0a0a0a] border border-black/5 dark:border-white/10 hover:border-purple-500/50 transition-all duration-500 shadow-[0_10px_40px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-200/50 dark:from-purple-900/30 via-transparent to-transparent opacity-80 dark:opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"></div>
           
-          {/* Animated noise/texture overlay simulated with CSS pattern */}
+          {}
           <div className="absolute inset-0 opacity-[0.05] dark:opacity-[0.03] mix-blend-overlay" style={{backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")'}}></div>
 
           <div className="relative z-10 flex flex-col items-center text-center px-4">

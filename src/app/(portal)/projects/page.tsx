@@ -47,7 +47,7 @@ export default function PortalProjectsPage() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-8">
-      {/* Header Banner */}
+      {}
       <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-gray-200 dark:border-white/10">
         <div>
           <h1 className="text-3xl font-black tracking-tight">Client Event Projects</h1>
@@ -57,7 +57,7 @@ export default function PortalProjectsPage() {
         </div>
       </div>
 
-      {/* Filter Tabs */}
+      {}
       <div className="flex gap-2 overflow-x-auto no-scrollbar">
         {[
           { id: 'ALL', label: `All Projects (${projects.length})` },
@@ -78,7 +78,7 @@ export default function PortalProjectsPage() {
         ))}
       </div>
 
-      {/* Projects Grid */}
+      {}
       {isLoading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {[...Array(4)].map((_, i) => (
@@ -99,7 +99,7 @@ export default function PortalProjectsPage() {
               className="group bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between"
             >
               <div>
-                {/* Cover Header */}
+                {}
                 <div className="relative h-48 bg-gray-900 overflow-hidden">
                   <img
                     src={project.coverImage || 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80'}
@@ -124,7 +124,7 @@ export default function PortalProjectsPage() {
                   </div>
                 </div>
 
-                {/* Details Body */}
+                {}
                 <div className="p-6 space-y-4">
                   <div className="flex items-center justify-between text-xs text-gray-500">
                     <span className="flex items-center gap-1"><CalendarIcon className="w-3.5 h-3.5 text-orange-500" /> {project.eventDate}</span>
@@ -132,7 +132,7 @@ export default function PortalProjectsPage() {
                     <span className="font-bold text-gray-900 dark:text-white">{formatCurrency(project.budget)}</span>
                   </div>
 
-                  {/* Progress Bar */}
+                  {}
                   <div className="space-y-1.5 pt-2">
                     <div className="flex items-center justify-between text-xs font-bold">
                       <span className="text-gray-500 uppercase">Execution Progress</span>
@@ -154,7 +154,7 @@ export default function PortalProjectsPage() {
                 </div>
               </div>
 
-              {/* Card Footer Actions */}
+              {}
               <div className="p-6 pt-0 flex items-center justify-between gap-3 border-t border-gray-100 dark:border-white/5 mt-auto">
                 <Link
                   href={`/projects/${project.id}`}

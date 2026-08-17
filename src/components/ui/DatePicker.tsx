@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 
-// Calendar Icon
+
 const CalendarIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
     <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect>
@@ -45,14 +45,14 @@ export function DatePicker({
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  // Calendar Year and Month states
+  
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
 
-  // Parse current value
+  
   const selectedDate = value ? new Date(value) : null;
 
-  // Sync calendar views to selectedDate when selectedDate changes
+  
   useEffect(() => {
     if (selectedDate) {
       setCurrentYear(selectedDate.getFullYear());
@@ -60,7 +60,7 @@ export function DatePicker({
     }
   }, [value]);
 
-  // Click outside listener to close calendar
+  
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
@@ -74,7 +74,7 @@ export function DatePicker({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen, onBlur]);
 
-  // Format selected date for display
+  
   const getFormattedDisplay = () => {
     if (!selectedDate || isNaN(selectedDate.getTime())) return '';
     return selectedDate.toLocaleDateString('en-US', {
@@ -84,14 +84,14 @@ export function DatePicker({
     });
   };
 
-  // Calendar math
+  
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
   const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
   const prevMonthDays = new Date(currentYear, currentMonth, 0).getDate();
 
   const calendarCells = [];
 
-  // Previous month trailing padding
+  
   for (let i = firstDayIndex - 1; i >= 0; i--) {
     const d = prevMonthDays - i;
     const cellYear = currentMonth === 0 ? currentYear - 1 : currentYear;
@@ -104,7 +104,7 @@ export function DatePicker({
     });
   }
 
-  // Current month
+  
   for (let d = 1; d <= daysInMonth; d++) {
     calendarCells.push({
       day: d,
@@ -114,7 +114,7 @@ export function DatePicker({
     });
   }
 
-  // Next month leading padding
+  
   const remaining = 42 - calendarCells.length;
   for (let d = 1; d <= remaining; d++) {
     const cellYear = currentMonth === 11 ? currentYear + 1 : currentYear;
@@ -150,19 +150,19 @@ export function DatePicker({
     setIsOpen(false);
   };
 
-  // Check if a cell date is in the past
+  
   const isPastDate = (dateObj: Date) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     return dateObj < today;
   };
 
-  // Check if a cell date is currently selected
+  
   const isSelected = (dateString: string) => {
     return value === dateString;
   };
 
-  // Check if a cell date is today
+  
   const isToday = (dateObj: Date) => {
     const today = new Date();
     return (
@@ -174,7 +174,7 @@ export function DatePicker({
 
   return (
     <div ref={wrapperRef} className="relative w-full">
-      {/* Input Field Button Trigger */}
+      {}
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
@@ -188,11 +188,11 @@ export function DatePicker({
         <CalendarIcon className="text-gray-400 dark:text-gray-500 shrink-0 ml-2" />
       </button>
 
-      {/* Modern Popover Calendar Dropdown */}
+      {}
       {isOpen && (
         <div className="absolute left-0 mt-2 z-30 w-full max-w-[340px] bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-white/10 rounded-2xl shadow-2xl p-4 animate-fadeIn">
           
-          {/* Header Month/Year Selectors */}
+          {}
           <div className="flex items-center justify-between mb-4">
             <button
               type="button"
@@ -213,7 +213,7 @@ export function DatePicker({
             </button>
           </div>
 
-          {/* Days of Week Header */}
+          {}
           <div className="grid grid-cols-7 gap-1 text-center mb-2">
             {DAYS_OF_WEEK.map((day, idx) => (
               <span key={idx} className="text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
@@ -222,7 +222,7 @@ export function DatePicker({
             ))}
           </div>
 
-          {/* Grid of Days */}
+          {}
           <div className="grid grid-cols-7 gap-1">
             {calendarCells.map((cell, idx) => {
               const disabled = isPastDate(cell.dateObj);

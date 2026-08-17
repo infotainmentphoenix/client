@@ -2,7 +2,7 @@ import { api } from '@/lib/api/client';
 import { Artist, ArtistCategory } from './types';
 
 export const artistApi = {
-  // Get all artists (paginated response: { items, pagination })
+  
   getArtists: async (params?: { categoryId?: number; featured?: boolean; search?: string; limit?: number }): Promise<Artist[]> => {
     try {
       let url = '/api/artist?limit=100';
@@ -19,7 +19,7 @@ export const artistApi = {
     }
   },
 
-  // Get single artist by ID (success response: data is the artist object directly)
+  
   getArtist: async (id: string | number): Promise<Artist | null> => {
     try {
       const response = await api.get<any>(`/api/artist/${id}`);
@@ -30,7 +30,7 @@ export const artistApi = {
     }
   },
 
-  // Delete artist
+  
   deleteArtist: async (id: string | number): Promise<boolean> => {
     try {
       await api.delete(`/api/artist/${id}`);
@@ -41,7 +41,7 @@ export const artistApi = {
     }
   },
   
-  // Toggle status
+  
   toggleStatus: async (id: string | number, isActive: boolean): Promise<boolean> => {
     try {
       await api.patch(`/api/artist/${id}`, { isActive });
@@ -52,7 +52,7 @@ export const artistApi = {
     }
   },
 
-  // Create artist
+  
   createArtist: async (data: Partial<Artist> | FormData): Promise<Artist | null> => {
     try {
       const response = await api.post<any>('/api/artist', data);
@@ -63,7 +63,7 @@ export const artistApi = {
     }
   },
 
-  // Update artist
+  
   updateArtist: async (id: string | number, data: Partial<Artist> | FormData): Promise<Artist | null> => {
     try {
       const response = await api.patch<any>(`/api/artist/${id}`, data);
@@ -74,7 +74,7 @@ export const artistApi = {
     }
   },
 
-  // CATEGORIES
+  
   getCategories: async (): Promise<ArtistCategory[]> => {
     try {
       const response = await api.get<any>('/api/artist/category');

@@ -46,5 +46,5 @@ export interface Artist {
 }
 
 export interface ArtistFormData extends Omit<Artist, 'id' | 'createdAt' | 'updatedAt' | 'category' | 'slug'> {
-  // Add specific frontend form fields if needed
+  
 }

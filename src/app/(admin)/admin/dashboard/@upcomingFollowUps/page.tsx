@@ -17,14 +17,14 @@ export default function UpcomingFollowUpsSlot() {
     setIsLoading(true);
     const data = await inquiryApi.getInquiries();
     
-    // Filter for active leads that are high priority or urgent
-    // In a real application, you might filter by 'nextFollowUp' date
+    
+    
     const followUps = data.filter(inq => 
       (inq.priority === 'HIGH' || inq.priority === 'URGENT') && 
       inq.status !== 'WON' && 
       inq.status !== 'LOST' && 
       inq.status !== 'ARCHIVED'
-    ).slice(0, 5); // Take top 5
+    ).slice(0, 5); 
     
     setInquiries(followUps);
     setIsLoading(false);

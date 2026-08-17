@@ -125,7 +125,7 @@ export function CarouselList() {
                     <ImageIcon />
                   </div>
                 )}
-                {/* Status Badge */}
+                {}
                 <div className="absolute top-3 right-3 flex items-center gap-2">
                   <span
                     className={`px-2.5 py-1 rounded-full text-xs font-semibold backdrop-blur-md ${
@@ -143,7 +143,7 @@ export function CarouselList() {
                 </div>
               </div>
 
-              {/* Details */}
+              {}
               <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                 <div>
                   <h3 className="font-bold text-base text-gray-900 dark:text-white line-clamp-1">
@@ -163,7 +163,7 @@ export function CarouselList() {
                   )}
                 </div>
 
-                {/* Actions */}
+                {}
                 <div className="pt-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-end gap-2">
                   <Link
                     href={`/admin/content/carousels/${item.id}`}

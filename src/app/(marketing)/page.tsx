@@ -18,25 +18,25 @@ function ArrowUpRightIcon({ className }: { className?: string }) {
 export default function Home() {
   return (
     <main className="min-h-screen overflow-x-hidden">
-      {/* Hero Section */}
+      {}
       <PhoenixHero />
 
-      {/* High-Energy Marquee Section */}
+      {}
       <PhoenixMarquee />
 
-      {/* Live Events Showcase Section */}
+      {}
       <LiveEventsSection />
 
-      {/* Stats Section */}
+      {}
       <PhoenixStats />
 
-      {/* Banners Section */}
+      {}
       <PhoenixBanners />
 
-      {/* Bento Grid Section */}
+      {}
       <PhoenixBentoGrid />
 
-      {/* Final Call to Action Banner */}
+      {}
       <section className="container mx-auto px-4 md:px-8 pb-24 relative z-10">
         <ScrollReveal>
           <Link href="/contact" className="group relative w-full h-44 md:h-52 rounded-[2.5rem] overflow-hidden flex items-center justify-between px-8 md:px-16 bg-gradient-to-r from-blue-900 via-indigo-950 to-purple-950 border border-white/10 hover:border-blue-500/50 transition-all duration-500 shadow-2xl hover:-translate-y-2">

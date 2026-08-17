@@ -19,7 +19,7 @@ const handleResponse = async <T>(response: Response): Promise<{ data: T }> => {
     const text = await response.text();
     json = text ? JSON.parse(text) : null;
   } catch (e) {
-    // Not JSON
+    
   }
 
   if (!response.ok) {

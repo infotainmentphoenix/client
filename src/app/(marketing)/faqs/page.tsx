@@ -200,7 +200,7 @@ export default function FaqsPage() {
         )}
       </section>
 
-      {/* Still Have Questions CTA */}
+      {}
       <section className="container mx-auto px-4 md:px-8 pb-20">
         <div className="bg-gradient-to-r from-gray-900 via-black to-gray-900 border border-white/10 rounded-3xl p-8 md:p-12 text-center relative overflow-hidden text-white shadow-2xl">
           <div className="absolute top-0 right-0 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />

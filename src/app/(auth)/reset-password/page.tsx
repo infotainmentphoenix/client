@@ -20,6 +20,21 @@ const EyeOffIcon = ({ className }: { className?: string }) => (
 const AlertCircleIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
 );
+const CheckCircleIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+);
+
+
+
+const validatePassword = (value: string): string | null => {
+  if (value.length < 8) return 'Password must be at least 8 characters';
+  if (value.length > 16) return 'Password must be at most 16 characters';
+  if (!/[a-z]/.test(value)) return 'Password must contain at least one lowercase letter';
+  if (!/[A-Z]/.test(value)) return 'Password must contain at least one uppercase letter';
+  if (!/[0-9]/.test(value)) return 'Password must contain at least one number';
+  if (!/[^a-zA-Z0-9]/.test(value)) return 'Password must contain at least one special character';
+  return null;
+};
 
 function ResetPasswordForm() {
   const router = useRouter();
@@ -31,10 +46,17 @@ function ResetPasswordForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+
+    const passwordError = validatePassword(password);
+    if (passwordError) {
+      setError(passwordError);
+      return;
+    }
 
     if (password !== confirmPassword) {
       setError('Passwords do not match');
@@ -50,13 +72,34 @@ function ResetPasswordForm() {
 
     try {
       await authApi.resetPassword(password, token);
-      router.push('/login?reset=success');
+      
+      
+      setPassword('');
+      setConfirmPassword('');
+      setIsSuccess(true);
+      window.history.replaceState(null, '', '/reset-password');
+      setTimeout(() => router.push('/login?reset=success'), 2000);
     } catch (err: any) {
-      setError(err.message || 'Failed to reset password.');
+      setError(err.message || 'Failed to reset password. The link may be invalid or expired.');
     } finally {
       setIsLoading(false);
     }
   };
+
+  if (isSuccess) {
+    return (
+      <div className="w-full text-center">
+        <div className="bg-white/70 dark:bg-[#0a0a0a]/60 backdrop-blur-2xl border border-gray-200/50 dark:border-white/10 p-8 rounded-3xl shadow-sm">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-500 to-green-600 text-white mb-5 shadow-lg shadow-emerald-500/30">
+            <CheckCircleIcon className="w-6 h-6" />
+          </div>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Password Reset</h2>
+          <p className="text-gray-500 mb-6 text-sm">Your password has been changed successfully. Redirecting you to login&hellip;</p>
+          <Link href="/login" className="text-blue-600 hover:underline text-sm font-medium">Go to login now</Link>
+        </div>
+      </div>
+    );
+  }
 
   if (!token) {
     return (

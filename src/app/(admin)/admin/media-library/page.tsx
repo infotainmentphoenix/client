@@ -72,7 +72,7 @@ export default function AdminMediaLibraryPage() {
 
   const totalStorageBytes = media.reduce((sum, item) => sum + (item.sizeInBytes || 0), 0);
   const totalStorageMb = (totalStorageBytes / (1024 * 1024)).toFixed(1);
-  const storagePercentage = Math.min((totalStorageBytes / (50 * 1024 * 1024)) * 100, 100); // Assuming 50MB quota for mock
+  const storagePercentage = Math.min((totalStorageBytes / (50 * 1024 * 1024)) * 100, 100); 
 
   return (
     <div className="p-8 max-w-7xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -105,7 +105,7 @@ export default function AdminMediaLibraryPage() {
 
       <div className="flex flex-col lg:flex-row gap-8">
         
-        {/* Sidebar Filters */}
+        {}
         <div className="lg:w-64 shrink-0 space-y-6">
           <div className="space-y-1">
             <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 px-3">Categories</h3>
@@ -145,10 +145,10 @@ export default function AdminMediaLibraryPage() {
           </div>
         </div>
 
-        {/* Main Content */}
+        {}
         <div className="flex-1 space-y-6">
           
-          {/* Toolbar */}
+          {}
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-between bg-white dark:bg-white/5 p-2 rounded-2xl border border-gray-100 dark:border-white/10 shadow-sm">
             <div className="relative w-full sm:max-w-xs">
               <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -167,7 +167,7 @@ export default function AdminMediaLibraryPage() {
             </div>
           </div>
 
-          {/* Grid */}
+          {}
           {isLoading ? (
             <div className="flex justify-center py-20 text-gray-400">Loading Media...</div>
           ) : filteredMedia.length === 0 ? (

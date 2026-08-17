@@ -18,7 +18,7 @@ export function GalleryForm({ itemId }: GalleryFormProps) {
   const [error, setError] = useState<string | null>(null);
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
 
-  // Core form fields
+  
   const [formData, setFormData] = useState({
     title: '',
     subtitle: '',
@@ -81,7 +81,7 @@ export function GalleryForm({ itemId }: GalleryFormProps) {
       setFormData(prev => ({ ...prev, [name]: value }));
     }
 
-    // Clear validation error when field is updated
+    
     if (validationErrors[name]) {
       setValidationErrors(prev => {
         const updated = { ...prev };
@@ -91,7 +91,7 @@ export function GalleryForm({ itemId }: GalleryFormProps) {
     }
   };
 
-  // Image Selection Handlers
+  
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -156,7 +156,7 @@ export function GalleryForm({ itemId }: GalleryFormProps) {
       payload.append('sortOrder', String(formData.sortOrder));
       payload.append('isActive', String(formData.isActive));
 
-      // Append image file
+      
       if (imageFile) {
         payload.append('image', imageFile);
       }
@@ -216,7 +216,7 @@ export function GalleryForm({ itemId }: GalleryFormProps) {
         </div>
       )}
 
-      {/* Banner Details */}
+      {}
       <div className="bg-card rounded-2xl border border-border shadow-sm p-6 space-y-6">
         <h3 className="text-lg font-bold border-b border-border pb-4 tracking-tight">Banner Details</h3>
         
@@ -252,7 +252,7 @@ export function GalleryForm({ itemId }: GalleryFormProps) {
             </div>
           </div>
 
-          {/* Drag & Drop File Picker */}
+          {}
           <div>
             <label className="block text-sm font-semibold text-foreground mb-2">Media File Image *</label>
             
@@ -344,7 +344,7 @@ export function GalleryForm({ itemId }: GalleryFormProps) {
         </div>
       </div>
 
-      {/* Display Settings */}
+      {}
       <div className="bg-card rounded-2xl border border-border shadow-sm p-6 space-y-6">
         <h3 className="text-lg font-bold border-b border-border pb-4 tracking-tight">Display Settings</h3>
         
@@ -382,7 +382,7 @@ export function GalleryForm({ itemId }: GalleryFormProps) {
         </div>
       </div>
 
-      {/* Action Footer */}
+      {}
       <div className="flex justify-end gap-4 sticky bottom-4 bg-background/80 backdrop-blur-md p-4 rounded-xl border border-border shadow-lg z-10">
         <button 
           type="button" 

@@ -41,7 +41,7 @@ export function AdminSidebar() {
 
   return (
     <aside className="w-64 flex-shrink-0 h-screen sticky top-0 bg-white/70 dark:bg-black/40 backdrop-blur-xl border-r border-gray-200/50 dark:border-white/10 shadow-[4px_0_24px_rgb(0,0,0,0.02)] z-50 flex flex-col transition-all">
-      {/* Brand Logo Area */}
+      {}
       <div className="h-16 flex items-center px-6 border-b border-gray-200/50 dark:border-white/5">
         <Link href="/admin/dashboard" className="flex items-center gap-2 group">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-purple-600 flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform">
@@ -53,7 +53,7 @@ export function AdminSidebar() {
         </Link>
       </div>
 
-      {/* Navigation Links */}
+      {}
       <div className="flex-1 overflow-y-auto py-6 px-3 space-y-1 scrollbar-hide">
         <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 px-3">
           Main Menu
@@ -83,7 +83,7 @@ export function AdminSidebar() {
         })}
       </div>
 
-      {/* Bottom Area (e.g., Return to site) */}
+      {}
       <div className="p-4 border-t border-gray-200/50 dark:border-white/5">
         <Link 
           href="/" 

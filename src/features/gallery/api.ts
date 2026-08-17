@@ -19,7 +19,7 @@ export const fallbackGalleryItems: GalleryMediaItem[] = [
     category: 'Celebrity Shows',
     type: 'VIDEO',
     imageUrl: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1200&q=80',
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ', // Sample video player URL
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ', 
     location: 'Sahar Star, Mumbai',
     date: 'Dec 2025',
     description: 'Exclusive celebrity stage performance managed seamlessly by Phoenix Infotainment.',
@@ -107,7 +107,7 @@ export const galleryApi = {
       const response = await api.get<ApiResponse<any>>('/api/carousels');
       const carousels = response.data?.data?.items || response.data?.data;
       if (Array.isArray(carousels) && carousels.length > 0) {
-        // Map carousels into GalleryMediaItem
+        
         const mapped: GalleryMediaItem[] = carousels.map((c: any, index: number) => ({
           id: c.id || index + 10,
           title: c.title || 'Phoenix Event Showcase',

@@ -1,15 +1,12 @@
 import { api, BASE_URL } from '@/lib/api/client';
 import { LoginInput, RegisterInput, AuthResponse } from './types';
 
-// Standard delays for our mock API responses
-const MOCK_DELAY = 1500;
-
 export const authApi = {
-  // --- REAL BACKEND ENDPOINTS ---
+  
   
   login: async (data: LoginInput, requireAdmin = true): Promise<AuthResponse> => {
-    // Call backend login endpoint: POST /api/auth/login
-    // Backend returns: { success: true, data: { user, accessToken }, message: ... }
+    
+    
     const res = await api.post<any>('/api/auth/login', data);
     const authData: AuthResponse = res.data?.data || res.data;
 
@@ -60,7 +57,7 @@ export const authApi = {
     try {
       await api.post<any>('/api/auth/logout', {});
     } catch (error) {
-      // Ignore network errors on logout
+      
     } finally {
       if (typeof window !== 'undefined') {
         localStorage.removeItem('accessToken');
@@ -70,28 +67,14 @@ export const authApi = {
     }
   },
 
-  // --- MOCK ENDPOINTS (Simulating non-existent backend features) ---
-
-  forgotPassword: async (email: string): Promise<boolean> => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (!email.includes('@')) {
-          reject(new Error("Invalid email format"));
-        } else {
-          // Resolve perfectly as if a reset link was sent
-          resolve(true); 
-        }
-      }, MOCK_DELAY);
-    });
+  
+  
+  forgotPassword: async (email: string): Promise<void> => {
+    await api.post<any>('/api/auth/forgot-password', { email });
   },
 
-  resetPassword: async (password: string, token: string): Promise<boolean> => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (!token) reject(new Error("Invalid or expired token"));
-        else resolve(true);
-      }, MOCK_DELAY);
-    });
+  resetPassword: async (password: string, token: string): Promise<void> => {
+    await api.post<any>('/api/auth/reset-password', { token, password });
   },
 
   verifyEmail: async (token: string): Promise<boolean> => {
@@ -99,19 +82,19 @@ export const authApi = {
       setTimeout(() => {
         if (!token) reject(new Error("Invalid token"));
         else resolve(true);
-      }, 2000); // slightly longer delay for visual effect
+      }, 2000); 
     });
   },
 
-  // --- GOOGLE OAUTH (Passport.js, real backend) ---
+  
 
-  // Backend redirects the browser through Google's consent screen and back
-  // to GOOGLE_CALLBACK_URL; navigate the whole page here, don't fetch it.
+  
+  
   getGoogleLoginUrl: (): string => `${BASE_URL}/api/auth/google`,
 
-  // Called by the /google/callback page once the backend redirects back with
-  // our own access token in the URL fragment. Persists the session the same
-  // way a normal email/password login does, then fetches the profile.
+  
+  
+  
   completeGoogleLogin: async (accessToken: string): Promise<AuthResponse['user'] | null> => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('accessToken', accessToken);

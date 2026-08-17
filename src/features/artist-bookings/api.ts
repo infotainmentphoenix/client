@@ -104,7 +104,7 @@ export const bookingApi = {
       const response = await api.get<ApiResponse<any>>('/api/artist');
       const artists = response.data?.data?.items || response.data?.data;
       if (Array.isArray(artists) && artists.length > 0) {
-        // Build bookings list combining backend response
+        
         const mapped: ArtistBooking[] = artists.slice(0, 3).map((art: any, idx: number) => ({
           id: 200 + idx,
           artistId: art.id,

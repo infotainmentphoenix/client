@@ -66,7 +66,7 @@ export default function PortalProjectDetailPage() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-8">
-      {/* Cover Header */}
+      {}
       <div className="relative h-64 md:h-80 rounded-3xl overflow-hidden bg-gray-900 shadow-2xl">
         <img
           src={project.coverImage || 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80'}
@@ -99,7 +99,7 @@ export default function PortalProjectDetailPage() {
         </div>
       </div>
 
-      {/* Sub-Navigation Tabs */}
+      {}
       <div className="flex gap-2 border-b border-gray-200 dark:border-white/10 pb-px">
         <Link
           href={`/projects/${project.id}`}
@@ -121,11 +121,11 @@ export default function PortalProjectDetailPage() {
         </Link>
       </div>
 
-      {/* Content Layout */}
+      {}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Left Column: Progress & Milestones Summary */}
+        {}
         <div className="lg:col-span-2 space-y-8">
-          {/* Progress Tracker Card */}
+          {}
           <div className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-6 md:p-8 space-y-4 shadow-sm">
             <h2 className="text-xl font-bold">Execution Milestone Progress</h2>
             
@@ -153,7 +153,7 @@ export default function PortalProjectDetailPage() {
             </Link>
           </div>
 
-          {/* Document Vault Summary */}
+          {}
           <div className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-6 md:p-8 space-y-4 shadow-sm">
             <h2 className="text-xl font-bold">Project Documents & Riders</h2>
             <div className="space-y-3">
@@ -185,7 +185,7 @@ export default function PortalProjectDetailPage() {
           </div>
         </div>
 
-        {/* Right Sidebar: Producer Card */}
+        {}
         <div className="space-y-6">
           <div className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-6 shadow-sm space-y-4">
             <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400">Assigned Lead Producer</h3>

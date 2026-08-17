@@ -16,13 +16,13 @@ export async function GET() {
       output = `EXEC ERROR: ${ex.message}`;
     }
     
-    // Touch a file to restart nodemon
+    
     const filePath = 'D:/Project/PhoenixInfotainment/PHONEIX_BACKEND/src/server.ts';
     const time = new Date();
     try {
         await fs.utimes(filePath, time, time);
     } catch(e) {
-        // ignore
+        
     }
 
     return NextResponse.json({ status: 200, message: 'Done', output });

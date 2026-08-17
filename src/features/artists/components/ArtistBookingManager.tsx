@@ -31,7 +31,7 @@ export function ArtistBookingManager() {
       // Since we don't have that endpoint explicitly defined in our mock yet, we'll just simulate it.
       console.log(`Updated artist ${id} availability to ${availability}`);
     } catch (error) {
-      // Revert on failure
+      
       loadArtists();
     }
   };
@@ -49,7 +49,7 @@ export function ArtistBookingManager() {
 
   return (
     <div className="flex flex-col h-full space-y-6">
-      {/* Header and Controls */}
+      {}
       <div className="bg-card rounded-2xl border border-border shadow-sm p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-xl font-bold tracking-tight">Booking Status Board</h2>

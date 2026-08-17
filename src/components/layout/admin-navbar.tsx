@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { authApi } from '@/features/auth/api';
 
-// SVGs
+
 const SearchIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
 );
@@ -36,7 +36,7 @@ export function AdminNavbar() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [userName, setUserName] = useState('Admin');
 
-  // Initialize theme and user name based on document class & localStorage
+  
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const isDark = document.documentElement.classList.contains('dark') || 
@@ -73,7 +73,7 @@ export function AdminNavbar() {
     router.push('/login');
   };
   
-  // Create a nice breadcrumb title from the pathname
+  
   const pathSegments = pathname?.split('/').filter(Boolean) || [];
   const title = pathSegments.length > 1 
     ? pathSegments[pathSegments.length - 1].replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
@@ -83,16 +83,16 @@ export function AdminNavbar() {
     <header className="sticky top-0 z-40 w-full backdrop-blur-xl bg-white/70 dark:bg-[#0a0a0a]/80 border-b border-gray-200/50 dark:border-white/5 shadow-sm transition-all h-16 flex items-center px-6">
       <div className="flex items-center justify-between w-full">
         
-        {/* Left Side: Breadcrumb/Title */}
+        {}
         <div className="flex items-center gap-2">
           <h2 className="text-xl font-semibold text-gray-800 dark:text-white tracking-tight">
             {title}
           </h2>
         </div>
 
-        {/* Right Side: Search, Theme, Notifications, Profile */}
+        {}
         <div className="flex items-center gap-4">
-          {/* Global Search */}
+          {}
           <div className="relative hidden md:flex items-center group">
             <div className="absolute left-3 text-gray-400 group-focus-within:text-blue-500 transition-colors">
               <SearchIcon />
@@ -104,7 +104,7 @@ export function AdminNavbar() {
             />
           </div>
 
-          {/* Theme Toggle */}
+          {}
           <button 
             onClick={toggleTheme}
             className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 text-gray-600 dark:text-gray-300 transition-all active:scale-95"
@@ -113,13 +113,13 @@ export function AdminNavbar() {
             {isDarkMode ? <SunIcon /> : <MoonIcon />}
           </button>
 
-          {/* Notifications */}
+          {}
           <button className="relative p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 text-gray-600 dark:text-gray-300 transition-all active:scale-95">
             <BellIcon />
             <span className="absolute top-1.5 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-[#0a0a0a]" />
           </button>
 
-          {/* User Profile */}
+          {}
           <div className="h-8 w-px bg-gray-200 dark:bg-white/10 mx-1"></div>
           
           <div className="flex items-center gap-2 pr-2 rounded-full border border-gray-200/80 dark:border-white/10 bg-gray-50/50 dark:bg-white/5">

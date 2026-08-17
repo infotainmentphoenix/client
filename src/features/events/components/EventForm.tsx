@@ -22,7 +22,7 @@ export function EventForm({ eventId }: EventFormProps) {
   const [error, setError] = useState<string | null>(null);
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
 
-  // Core event fields
+  
   const [formData, setFormData] = useState({
     title: '',
     slug: '',
@@ -47,7 +47,7 @@ export function EventForm({ eventId }: EventFormProps) {
     eventType: 'CORPORATE',
   });
 
-  // Media/Image States
+  
   const [coverImageFile, setCoverImageFile] = useState<File | null>(null);
   const [coverImagePreview, setCoverImagePreview] = useState<string | null>(null);
   const [existingCoverImage, setExistingCoverImage] = useState<string | null>(null);
@@ -56,10 +56,10 @@ export function EventForm({ eventId }: EventFormProps) {
   const [existingGallery, setExistingGallery] = useState<EventImage[]>([]);
   const [deleteImageIds, setDeleteImageIds] = useState<number[]>([]);
 
-  // Drag-and-drop state
+  
   const [isDragOverCover, setIsDragOverCover] = useState(false);
 
-  // Load services and event data on mount
+  
   useEffect(() => {
     const init = async () => {
       setIsLoading(true);
@@ -130,7 +130,7 @@ export function EventForm({ eventId }: EventFormProps) {
     } else {
       setFormData(prev => {
         const newData = { ...prev, [name]: value };
-        // Auto-generate URL slug from title if we are creating a new event
+        
         if (name === 'title' && !isEditing) {
           newData.slug = value
             .trim()
@@ -163,7 +163,7 @@ export function EventForm({ eventId }: EventFormProps) {
     }
   };
 
-  // Cover Image selection
+  
   const handleCoverImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -262,7 +262,7 @@ export function EventForm({ eventId }: EventFormProps) {
         payload.append('serviceId', formData.serviceId);
       }
 
-      // Convert dates to standard ISO strings
+      
       if (formData.eventDate) {
         payload.append('eventDate', new Date(formData.eventDate).toISOString());
       }
@@ -270,20 +270,20 @@ export function EventForm({ eventId }: EventFormProps) {
         payload.append('endDate', new Date(formData.endDate).toISOString());
       }
 
-      // Append cover image
+      
       if (coverImageFile) {
         payload.append('coverImage', coverImageFile);
       } else if (!coverImagePreview && existingCoverImage) {
-        // cover image was explicitly cleared
+        
         payload.append('coverImage', 'null');
       }
 
-      // Append gallery files
+      
       galleryFiles.forEach(file => {
         payload.append('images', file);
       });
 
-      // Append deleted gallery image IDs for update endpoint
+      
       if (isEditing && deleteImageIds.length > 0) {
         payload.append('deleteImageIds', JSON.stringify(deleteImageIds));
       }
@@ -343,7 +343,7 @@ export function EventForm({ eventId }: EventFormProps) {
         </div>
       )}
 
-      {/* Basic Information */}
+      {}
       <div className="bg-card rounded-2xl border border-border shadow-sm p-6 space-y-6">
         <div className="flex items-center gap-3 border-b border-border pb-4">
           <div className="w-8 h-8 rounded-lg bg-blue-600/10 text-blue-600 flex items-center justify-center font-bold text-sm">1</div>
@@ -438,7 +438,7 @@ export function EventForm({ eventId }: EventFormProps) {
         </div>
       </div>
 
-      {/* Descriptions */}
+      {}
       <div className="bg-card rounded-2xl border border-border shadow-sm p-6 space-y-6">
         <div className="flex items-center gap-3 border-b border-border pb-4">
           <div className="w-8 h-8 rounded-lg bg-indigo-600/10 text-indigo-600 flex items-center justify-center font-bold text-sm">2</div>
@@ -508,7 +508,7 @@ export function EventForm({ eventId }: EventFormProps) {
         </div>
       </div>
 
-      {/* Logistics & Location */}
+      {}
       <div className="bg-card rounded-2xl border border-border shadow-sm p-6 space-y-6">
         <div className="flex items-center gap-3 border-b border-border pb-4">
           <div className="w-8 h-8 rounded-lg bg-green-600/10 text-green-600 flex items-center justify-center font-bold text-sm">3</div>
@@ -625,7 +625,7 @@ export function EventForm({ eventId }: EventFormProps) {
         </div>
       </div>
 
-      {/* Media & SEO */}
+      {}
       <div className="bg-card rounded-2xl border border-border shadow-sm p-6 space-y-6">
         <div className="flex items-center gap-3 border-b border-border pb-4">
           <div className="w-8 h-8 rounded-lg bg-purple-600/10 text-purple-600 flex items-center justify-center font-bold text-sm">4</div>
@@ -633,7 +633,7 @@ export function EventForm({ eventId }: EventFormProps) {
         </div>
         
         <div className="space-y-6">
-          {/* Cover Image Upload UI */}
+          {}
           <div>
             <label className="block text-sm font-semibold text-foreground mb-2">Cover Image</label>
             
@@ -692,7 +692,7 @@ export function EventForm({ eventId }: EventFormProps) {
             )}
           </div>
 
-          {/* Gallery Upload UI */}
+          {}
           <div className="pt-4 border-t border-border">
             <div className="flex items-center justify-between mb-3">
               <div>
@@ -717,10 +717,10 @@ export function EventForm({ eventId }: EventFormProps) {
               className="hidden"
             />
 
-            {/* Gallery Previews Grid */}
+            {}
             {((existingGallery && existingGallery.length > 0) || galleryFiles.length > 0) ? (
               <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4 mt-4">
-                {/* Existing Gallery Images */}
+                {}
                 {existingGallery.map(img => (
                   <div key={img.id} className="relative group aspect-square rounded-xl overflow-hidden border border-border shadow-sm">
                     <img 
@@ -743,7 +743,7 @@ export function EventForm({ eventId }: EventFormProps) {
                   </div>
                 ))}
 
-                {/* New Image Files */}
+                {}
                 {galleryFiles.map((file, index) => {
                   const previewUrl = URL.createObjectURL(file);
                   return (
@@ -827,7 +827,7 @@ export function EventForm({ eventId }: EventFormProps) {
         </div>
       </div>
 
-      {/* Display Settings */}
+      {}
       <div className="bg-card rounded-2xl border border-border shadow-sm p-6 space-y-6">
         <div className="flex items-center gap-3 border-b border-border pb-4">
           <div className="w-8 h-8 rounded-lg bg-orange-600/10 text-orange-600 flex items-center justify-center font-bold text-sm">5</div>
@@ -882,7 +882,7 @@ export function EventForm({ eventId }: EventFormProps) {
         </div>
       </div>
 
-      {/* Sticky Action Footer */}
+      {}
       <div className="flex justify-end gap-4 sticky bottom-4 bg-background/80 backdrop-blur-md p-4 rounded-xl border border-border shadow-lg z-10 animate-fade-in">
         <button 
           type="button" 

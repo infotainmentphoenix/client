@@ -44,7 +44,7 @@ export function PhoenixHero() {
     };
   }, []);
 
-  // Auto-play slider timer
+  
   useEffect(() => {
     if (slides.length <= 1) return;
     const timer = setInterval(() => {
@@ -71,7 +71,7 @@ export function PhoenixHero() {
     <section className="relative w-full h-[90vh] min-h-[700px] flex items-center justify-start overflow-hidden pt-32">
       <AuroraBackground />
       
-      {/* Dynamic Background Image & Cinematic Overlay */}
+      {}
       <div 
         key={activeSlide.imageUrl || currentIndex}
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-all duration-[1000ms] ease-in-out scale-105 hover:scale-110"
@@ -79,13 +79,13 @@ export function PhoenixHero() {
           backgroundImage: `url("${activeSlide.imageUrl || DEFAULT_SLIDE.imageUrl}")`,
         }}
       >
-        {/* Complex Multi-layered Gradients for Cinematic Feel */}
+        {}
         <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 dark:from-black dark:via-black/75 to-transparent opacity-90 transition-opacity duration-700"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-[#050505] via-transparent to-transparent opacity-100"></div>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/10 dark:from-blue-900/30 via-transparent to-transparent mix-blend-multiply dark:mix-blend-screen"></div>
       </div>
 
-      {/* Content */}
+      {}
       <div className="relative z-10 container mx-auto px-6 md:px-12 lg:px-24">
         <div className="max-w-3xl border-l-[3px] border-blue-500 pl-8 md:pl-12 py-2 animate-fadeIn">
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 mb-6 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 backdrop-blur-md animate-float">
@@ -128,7 +128,7 @@ export function PhoenixHero() {
         </div>
       </div>
 
-      {/* Carousel Controls (Previous / Next & Indicators) */}
+      {}
       {slides.length > 1 && (
         <div className="absolute bottom-10 right-10 z-20 flex items-center gap-3">
           <button
@@ -160,7 +160,7 @@ export function PhoenixHero() {
         </div>
       )}
       
-      {/* Scroll Down Indicator */}
+      {}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce text-gray-500 dark:text-white/50 pointer-events-none">
         <span className="text-[10px] tracking-widest uppercase mb-2">Scroll</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>

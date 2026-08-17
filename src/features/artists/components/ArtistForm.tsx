@@ -78,7 +78,7 @@ export function ArtistForm({ artistId }: ArtistFormProps) {
     } else if (type === 'number') {
       setFormData(prev => ({ ...prev, [name]: parseFloat(value) || 0 }));
     } else if (name === 'genre' || name === 'languages') {
-      // Split comma separated lists
+      
       setFormData(prev => ({ ...prev, [name]: value.split(',').map(s => s.trim()).filter(Boolean) }));
     } else {
       setFormData(prev => {

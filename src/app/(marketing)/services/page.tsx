@@ -31,7 +31,7 @@ export default function ServicesPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-black text-gray-900 dark:text-white transition-colors duration-300">
-      {/* Hero Section */}
+      {}
       <section className="relative overflow-hidden bg-gradient-to-b from-orange-50/50 via-white to-gray-50 dark:from-orange-950/20 dark:via-black dark:to-black pt-32 pb-20">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute -top-30 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-r from-orange-500/10 via-rose-500/10 to-purple-500/10 rounded-full blur-3xl" />
@@ -64,7 +64,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Services Grid */}
+      {}
       <section className="container mx-auto px-4 md:px-8 py-16">
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -80,7 +80,7 @@ export default function ServicesPage() {
                 className="group bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl overflow-hidden hover:shadow-2xl dark:hover:shadow-[0_10px_40px_rgba(0,0,0,0.5)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  {/* Cover Image */}
+                  {}
                   <div className="relative h-56 overflow-hidden bg-gray-900">
                     <img
                       src={service.coverImage || 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80'}
@@ -107,13 +107,13 @@ export default function ServicesPage() {
                     </div>
                   </div>
 
-                  {/* Description & Highlights */}
+                  {}
                   <div className="p-6">
                     <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-3 leading-relaxed mb-6">
                       {service.description}
                     </p>
 
-                    {/* Packages Preview Pill */}
+                    {}
                     {service.packages && service.packages.length > 0 && (
                       <div className="space-y-2 mb-6">
                         <span className="text-xs font-bold uppercase tracking-wider text-gray-400">Available Packages:</span>
@@ -129,7 +129,7 @@ export default function ServicesPage() {
                   </div>
                 </div>
 
-                {/* Actions Footer */}
+                {}
                 <div className="p-6 pt-0 flex items-center justify-between gap-3 border-t border-gray-100 dark:border-white/5 mt-auto">
                   <Link
                     href={`/services/${service.slug}`}
@@ -150,7 +150,7 @@ export default function ServicesPage() {
         )}
       </section>
 
-      {/* Why Choose Us */}
+      {}
       <section className="bg-white dark:bg-white/5 border-y border-gray-200 dark:border-white/5 py-20">
         <div className="container mx-auto px-4 md:px-8 max-w-5xl text-center">
           <h2 className="text-3xl font-black mb-4">Why Choose Phoenix Infotainment?</h2>
@@ -178,7 +178,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {}
       <section className="container mx-auto px-4 md:px-8 py-20">
         <div className="bg-gradient-to-r from-orange-600 via-rose-600 to-purple-600 rounded-3xl p-8 md:p-12 text-center text-white shadow-2xl">
           <h2 className="text-3xl md:text-5xl font-black mb-4">Ready to Plan Your Next Masterpiece?</h2>

@@ -2,8 +2,8 @@ import { api } from '@/lib/api/client';
 import { Event } from './types';
 
 export const eventApi = {
-  // Backend route is GET /api/event/getAllEvent
-  // Returns apiResponse.paginated → { data: { items: [...], pagination: {...} } }
+  
+  
   getEvents: async (params?: { eventType?: string; limit?: number }): Promise<Event[]> => {
     try {
       let url = '/api/event/getAllEvent?limit=100';
@@ -18,8 +18,8 @@ export const eventApi = {
     }
   },
 
-  // Backend route is GET /api/event/getEvent/:id
-  // Returns apiResponse.success → { data: eventObject (with images included) }
+  
+  
   getEvent: async (id: string | number): Promise<Event | null> => {
     try {
       const response = await api.get<any>(`/api/event/getEvent/${id}`);

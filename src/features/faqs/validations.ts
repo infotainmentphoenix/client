@@ -1,2 +1,2 @@
-// Validations for faqs
+
 export {};

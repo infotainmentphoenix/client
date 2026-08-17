@@ -28,17 +28,17 @@ export function AdminAuthGuard({ children }: { children: React.ReactNode }) {
             if (isMounted) setIsAuthenticated(true);
             return;
           } else {
-            // Not an admin
+            
             if (isMounted) setIsAuthenticated(false);
             router.push('/login');
             return;
           }
         } catch (e) {
-          // Ignore JSON parse error and fallback to API check
+          
         }
       }
 
-      // Verify token with backend GET /api/auth/me
+      
       const user = await authApi.getMe();
       if (isMounted) {
         if (user && user.role === 'ADMIN') {

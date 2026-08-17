@@ -32,13 +32,13 @@ export default function ArtistCategoryPage() {
     if (!slug) return;
     const load = async () => {
       setIsLoading(true);
-      // Fetch all categories and find by slug
+      
       const allCategories = await artistApi.getCategories();
       const found = allCategories.find(c => c.slug === slug) || null;
       setCategory(found);
 
       if (found) {
-        // Fetch artists by category
+        
         const allArtists = await artistApi.getArtists({ categoryId: found.id });
         setArtists(allArtists.filter(a => a.isActive));
       }
@@ -69,13 +69,13 @@ export default function ArtistCategoryPage() {
 
   return (
     <>
-      {/* Hero */}
+      {}
       <section className="relative overflow-hidden bg-gradient-to-b from-gray-50 to-white dark:from-black dark:to-[#0a0a0a] pt-32 pb-16">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute -top-40 -right-40 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
         </div>
         <div className="container mx-auto px-4 md:px-8 relative z-10">
-          {/* Breadcrumb */}
+          {}
           <nav className="flex items-center gap-2 text-sm text-gray-500 mb-8">
             <Link href="/artists" className="hover:text-purple-600 transition-colors">Artists</Link>
             <span>/</span>
@@ -96,7 +96,7 @@ export default function ArtistCategoryPage() {
         </div>
       </section>
 
-      {/* Artists Grid */}
+      {}
       <section className="container mx-auto px-4 md:px-8 py-16">
         {artists.length === 0 ? (
           <div className="text-center py-24">

@@ -6,7 +6,7 @@ export interface GalleryMediaItem {
   category: 'Concerts' | 'Corporate' | 'Weddings' | 'Celebrity Shows' | 'Production & Lighting';
   type: GalleryMediaType;
   imageUrl: string;
-  videoUrl?: string; // YouTube embed URL or video link
+  videoUrl?: string; 
   location?: string;
   date?: string;
   description?: string;

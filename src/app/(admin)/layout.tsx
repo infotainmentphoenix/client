@@ -17,27 +17,27 @@ export default function AdminLayout({
   return (
     <AdminAuthGuard>
       <div className="flex h-screen bg-gray-50/50 dark:bg-[#050505] overflow-hidden">
-        {/* Fixed Sidebar */}
+        {}
         <AdminSidebar />
         
-        {/* Main Content Area */}
+        {}
         <div className="flex flex-col flex-1 overflow-hidden relative">
-          {/* Subtle Background Effects for the content area */}
+          {}
           <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
             <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-blue-500/5 blur-[150px]" />
           </div>
 
-          {/* Top Navigation */}
+          {}
           <AdminNavbar />
           
-          {/* Scrollable Page Content */}
+          {}
           <main className="flex-1 overflow-y-auto p-6 z-10">
             <div className="max-w-7xl mx-auto w-full">
               {children}
             </div>
           </main>
           
-          {/* Footer */}
+          {}
           <div className="z-10">
             <AdminFooter />
           </div>

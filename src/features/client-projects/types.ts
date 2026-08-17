@@ -29,7 +29,7 @@ export interface ClientProject {
   venue: string;
   city: string;
   budget: number;
-  progress: number; // 0 to 100
+  progress: number; 
   status: ProjectStatus;
   coverImage?: string;
   leadProducer: string;

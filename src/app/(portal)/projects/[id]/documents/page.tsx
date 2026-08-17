@@ -41,14 +41,14 @@ export default function PortalProjectDocumentsPage() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-8">
-      {/* Breadcrumb Header */}
+      {}
       <div>
         <Link href={`/projects/${project.id}`} className="text-xs text-orange-500 font-bold hover:underline mb-2 inline-block">&larr; Back to Project Overview</Link>
         <h1 className="text-3xl font-black">{project.title} — Document Vault</h1>
         <p className="text-gray-500 text-sm mt-1">Digital repository for contracts, technical riders, 3D CAD stage blueprints, and tax invoices.</p>
       </div>
 
-      {/* Sub-Navigation Tabs */}
+      {}
       <div className="flex gap-2 border-b border-gray-200 dark:border-white/10 pb-px">
         <Link
           href={`/projects/${project.id}`}
@@ -70,7 +70,7 @@ export default function PortalProjectDocumentsPage() {
         </Link>
       </div>
 
-      {/* Vault Files List */}
+      {}
       <div className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-6 md:p-8 space-y-4 shadow-sm">
         <div className="flex items-center justify-between pb-4 border-b border-gray-100 dark:border-white/5">
           <h2 className="text-xl font-bold">All Project Files ({project.documents?.length || 0})</h2>

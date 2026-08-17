@@ -39,7 +39,7 @@ export function LiveEventsSection() {
 
   return (
     <section className="container mx-auto px-4 md:px-8 py-20 relative z-10">
-      {/* Section Header */}
+      {}
       <ScrollReveal className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
         <div>
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-600 dark:text-rose-400 text-xs font-bold uppercase tracking-widest mb-3">
@@ -65,7 +65,7 @@ export function LiveEventsSection() {
         </Link>
       </ScrollReveal>
 
-      {/* Events Grid */}
+      {}
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[1, 2, 3].map((n) => (
@@ -92,7 +92,7 @@ export function LiveEventsSection() {
                 href={`/events/${item.slug || item.id}`}
                 className="group relative flex flex-col h-[420px] rounded-3xl overflow-hidden border border-gray-200/80 dark:border-white/10 bg-white dark:bg-[#0a0a0c] shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500"
               >
-                {/* Background Image Banner */}
+                {}
                 <div
                   className="absolute inset-0 bg-cover bg-center bg-no-repeat group-hover:scale-110 transition-transform duration-700 ease-out"
                   style={{
@@ -103,11 +103,11 @@ export function LiveEventsSection() {
                   }}
                 />
 
-                {/* Gradient Overlays */}
+                {}
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 group-hover:opacity-80 transition-opacity" />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
 
-                {/* Top Badges */}
+                {}
                 <div className="relative z-10 p-6 flex justify-between items-start">
                   <span className="px-3 py-1 rounded-full bg-blue-600/80 backdrop-blur-md text-white text-[11px] font-bold uppercase tracking-wider shadow-md">
                     {item.eventType || 'LIVE EVENT'}
@@ -127,7 +127,7 @@ export function LiveEventsSection() {
                   )}
                 </div>
 
-                {/* Bottom Event Details */}
+                {}
                 <div className="relative z-10 mt-auto p-6 flex flex-col justify-end space-y-2">
                   {(item.venue || item.city) && (
                     <div className="flex items-center gap-1.5 text-xs font-semibold text-blue-400">

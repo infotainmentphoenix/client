@@ -63,7 +63,7 @@ export default function PortalBookingsPage() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-8">
-      {/* Header Banner */}
+      {}
       <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-gray-200 dark:border-white/10">
         <div>
           <h1 className="text-3xl font-black tracking-tight">Artist & Event Bookings</h1>
@@ -80,7 +80,7 @@ export default function PortalBookingsPage() {
         </button>
       </div>
 
-      {/* Filter Tabs */}
+      {}
       <div className="flex gap-2 overflow-x-auto no-scrollbar">
         {[
           { id: 'ALL', label: `All Bookings (${bookings.length})` },
@@ -103,7 +103,7 @@ export default function PortalBookingsPage() {
         ))}
       </div>
 
-      {/* Bookings List */}
+      {}
       {isLoading ? (
         <div className="space-y-4">
           {[...Array(3)].map((_, i) => (
@@ -132,7 +132,7 @@ export default function PortalBookingsPage() {
                 key={booking.id}
                 className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col lg:flex-row lg:items-center justify-between gap-6"
               >
-                {/* Left Info: Artist & Event */}
+                {}
                 <div className="flex items-start gap-5">
                   <img
                     src={booking.artistImage || 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=300&q=80'}
@@ -162,7 +162,7 @@ export default function PortalBookingsPage() {
                   </div>
                 </div>
 
-                {/* Right Specs & Actions */}
+                {}
                 <div className="flex flex-col sm:flex-row lg:flex-col items-start lg:items-end justify-between gap-4 pt-4 lg:pt-0 border-t lg:border-t-0 border-gray-100 dark:border-white/5">
                   <div className="text-left lg:text-right">
                     <p className="text-xs text-gray-400 font-semibold">Contract Amount</p>
@@ -196,7 +196,7 @@ export default function PortalBookingsPage() {
         </div>
       )}
 
-      {/* DETAIL MODAL */}
+      {}
       {activeDetailModal && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
           <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-white/10 rounded-3xl max-w-2xl w-full p-8 shadow-2xl relative animate-fadeIn space-y-6">
@@ -220,7 +220,7 @@ export default function PortalBookingsPage() {
               </div>
             </div>
 
-            {/* Logistics & Rider Grid */}
+            {}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
               <div className="p-4 bg-gray-50 dark:bg-white/5 rounded-2xl border border-gray-100 dark:border-white/5">
                 <span className="font-bold text-gray-400 uppercase tracking-wider">Tech Rider Status</span>
@@ -237,7 +237,7 @@ export default function PortalBookingsPage() {
               </div>
             </div>
 
-            {/* Coordinator Info */}
+            {}
             <div className="p-4 bg-orange-50 dark:bg-orange-500/10 rounded-2xl border border-orange-200 dark:border-orange-500/20">
               <span className="text-xs font-bold uppercase text-orange-600 dark:text-orange-400">Assigned On-Site Coordinator</span>
               <p className="text-base font-bold text-gray-900 dark:text-white mt-0.5">{activeDetailModal.coordinatorName}</p>
@@ -263,7 +263,7 @@ export default function PortalBookingsPage() {
         </div>
       )}
 
-      {/* NEW BOOKING MODAL */}
+      {}
       {showNewBookingModal && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
           <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-white/10 rounded-3xl max-w-lg w-full p-8 shadow-2xl relative animate-fadeIn space-y-6">

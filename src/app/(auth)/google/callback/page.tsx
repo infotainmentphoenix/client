@@ -14,14 +14,14 @@ export default function GoogleCallbackPage() {
 
   useEffect(() => {
     const finishLogin = async () => {
-      // The backend already set our session cookies; it hands the access
-      // token back in the URL fragment (never sent to servers/logs) so the
-      // frontend can mirror the same localStorage-backed session that a
-      // normal email/password login produces.
+      
+      
+      
+      
       const hashParams = new URLSearchParams(window.location.hash.replace(/^#/, ''));
       const accessToken = hashParams.get('accessToken');
 
-      // Strip the token out of the URL immediately, whether or not it's present.
+      
       window.history.replaceState(null, '', window.location.pathname);
 
       if (!accessToken) {

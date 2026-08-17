@@ -57,7 +57,7 @@ export default function PortalConsultationsPage() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-8">
-      {/* Header Banner */}
+      {}
       <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-gray-200 dark:border-white/10">
         <div>
           <h1 className="text-3xl font-black tracking-tight">Strategy Calls & Consultations</h1>
@@ -74,7 +74,7 @@ export default function PortalConsultationsPage() {
         </button>
       </div>
 
-      {/* Filter Tabs */}
+      {}
       <div className="flex gap-2 overflow-x-auto no-scrollbar">
         {[
           { id: 'ALL', label: `All Sessions (${consultations.length})` },
@@ -96,7 +96,7 @@ export default function PortalConsultationsPage() {
         ))}
       </div>
 
-      {/* Meetings Grid */}
+      {}
       {isLoading ? (
         <div className="space-y-4">
           {[...Array(3)].map((_, i) => (
@@ -125,7 +125,7 @@ export default function PortalConsultationsPage() {
                 key={item.id}
                 className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col lg:flex-row lg:items-center justify-between gap-6"
               >
-                {/* Left Meeting Info */}
+                {}
                 <div className="space-y-3 max-w-2xl">
                   <div className="flex flex-wrap items-center gap-2">
                     <span className={`px-3 py-1 text-xs font-bold rounded-full border ${badge.style}`}>
@@ -154,7 +154,7 @@ export default function PortalConsultationsPage() {
                   )}
                 </div>
 
-                {/* Right Consultant & Actions */}
+                {}
                 <div className="flex flex-col sm:flex-row lg:flex-col items-start lg:items-end justify-between gap-4 pt-4 lg:pt-0 border-t lg:border-t-0 border-gray-100 dark:border-white/5">
                   <div className="flex items-center gap-3">
                     <img
@@ -194,7 +194,7 @@ export default function PortalConsultationsPage() {
         </div>
       )}
 
-      {/* NOTES & RESCHEDULE MODAL */}
+      {}
       {activeNotesModal && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
           <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-white/10 rounded-3xl max-w-xl w-full p-8 shadow-2xl relative animate-fadeIn space-y-6">
@@ -237,7 +237,7 @@ export default function PortalConsultationsPage() {
         </div>
       )}
 
-      {/* NEW SCHEDULE MODAL */}
+      {}
       {showScheduleModal && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
           <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-white/10 rounded-3xl max-w-lg w-full p-8 shadow-2xl relative animate-fadeIn space-y-6">

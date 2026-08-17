@@ -162,7 +162,7 @@ export function ArtistList() {
         </table>
       </div>
       
-      {/* Footer / Pagination Placeholder */}
+      {}
       <div className="p-4 border-t border-border flex items-center justify-between text-sm text-gray-500">
         <div>Showing {filteredArtists.length} artists</div>
         <div className="flex gap-2">

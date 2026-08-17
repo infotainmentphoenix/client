@@ -22,7 +22,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
   useEffect(() => {
     setMounted(true);
-    // Check local storage or system preference
+    
     const savedTheme = localStorage.getItem('theme') as Theme | null;
     if (savedTheme) {
       setThemeState(savedTheme);

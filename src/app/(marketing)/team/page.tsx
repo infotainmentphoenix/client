@@ -41,7 +41,7 @@ export default function TeamPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-black text-gray-900 dark:text-white transition-colors duration-300">
-      {/* Hero Header */}
+      {}
       <section className="relative overflow-hidden bg-gradient-to-b from-purple-50/50 via-white to-gray-50 dark:from-purple-950/20 dark:via-black dark:to-black pt-32 pb-16">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-tr from-purple-500/10 to-rose-500/10 rounded-full blur-3xl" />
@@ -65,7 +65,7 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {/* Department Filter Bar */}
+      {}
       <section className="sticky top-0 z-20 bg-white/80 dark:bg-black/80 backdrop-blur-md border-y border-gray-200 dark:border-white/5">
         <div className="container mx-auto px-4 md:px-8 py-3 flex gap-2 overflow-x-auto no-scrollbar">
           {[
@@ -91,7 +91,7 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {/* Team Member Cards Grid */}
+      {}
       <section className="container mx-auto px-4 md:px-8 py-16">
         {isLoading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -108,7 +108,7 @@ export default function TeamPage() {
                 className="group bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer flex flex-col justify-between"
               >
                 <div>
-                  {/* Photo Container */}
+                  {}
                   <div className="relative h-72 overflow-hidden bg-gray-900">
                     <img
                       src={member.image || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80'}
@@ -137,7 +137,7 @@ export default function TeamPage() {
                     </div>
                   </div>
 
-                  {/* Short Bio */}
+                  {}
                   <div className="p-6">
                     <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-3 leading-relaxed">
                       {member.bio}
@@ -145,7 +145,7 @@ export default function TeamPage() {
                   </div>
                 </div>
 
-                {/* Footer Socials */}
+                {}
                 <div className="p-6 pt-0 flex items-center justify-between border-t border-gray-100 dark:border-white/5 mt-auto">
                   <span className="text-xs font-bold text-purple-600 dark:text-purple-400 hover:underline">
                     View Full Profile &rarr;
@@ -181,7 +181,7 @@ export default function TeamPage() {
         )}
       </section>
 
-      {/* Member Bio Modal */}
+      {}
       {activeModalMember && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
           <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-white/10 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl relative animate-fadeIn">
@@ -228,7 +228,7 @@ export default function TeamPage() {
         </div>
       )}
 
-      {/* Leadership Values */}
+      {}
       <section className="bg-white dark:bg-white/5 border-y border-gray-200 dark:border-white/5 py-20">
         <div className="container mx-auto px-4 md:px-8 max-w-5xl text-center">
           <h2 className="text-3xl font-black mb-4">Our Core Directives & Standards</h2>
@@ -251,7 +251,7 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {/* Career CTA */}
+      {}
       <section className="container mx-auto px-4 md:px-8 py-20">
         <div className="bg-gradient-to-r from-purple-700 via-rose-600 to-orange-600 rounded-3xl p-8 md:p-12 text-center text-white shadow-2xl">
           <h2 className="text-3xl md:text-4xl font-black mb-4">Want To Join The Phoenix Team?</h2>

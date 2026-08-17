@@ -41,8 +41,8 @@ export default function ArtistDetailPage() {
     if (!slug) return;
     const load = async () => {
       setIsLoading(true);
-      // The backend getArtistById takes numeric id, but our slug is a string.
-      // We'll fetch all artists and find by slug on the frontend since backend doesn't have a getBySlug endpoint.
+      
+      
       const allArtists = await artistApi.getArtists({ limit: 100 });
       const found = allArtists.find(a => a.slug === slug) || null;
       setArtist(found);
@@ -82,7 +82,7 @@ export default function ArtistDetailPage() {
 
   return (
     <>
-      {/* Cover / Hero Section */}
+      {}
       <section className="relative h-[40vh] md:h-[50vh] bg-gradient-to-br from-purple-900 via-indigo-900 to-black overflow-hidden">
         {artist.coverImage ? (
           <img src={artist.coverImage} alt={artist.name} className="absolute inset-0 w-full h-full object-cover opacity-50" />
@@ -93,7 +93,7 @@ export default function ArtistDetailPage() {
 
         <div className="absolute bottom-0 left-0 right-0">
           <div className="container mx-auto px-4 md:px-8 pb-8 flex items-end gap-6">
-            {/* Profile Image */}
+            {}
             <div className="w-28 h-28 md:w-36 md:h-36 rounded-2xl border-4 border-white dark:border-gray-900 shadow-2xl overflow-hidden bg-purple-200 dark:bg-purple-900 shrink-0 -mb-2">
               {artist.profileImage ? (
                 <img src={artist.profileImage} alt={artist.name} className="w-full h-full object-cover" />
@@ -114,7 +114,7 @@ export default function ArtistDetailPage() {
         </div>
       </section>
 
-      {/* Breadcrumb */}
+      {}
       <div className="bg-white dark:bg-[#0a0a0a] border-b border-gray-100 dark:border-white/5">
         <div className="container mx-auto px-4 md:px-8 py-3">
           <nav className="flex items-center gap-2 text-sm text-gray-500">
@@ -131,12 +131,12 @@ export default function ArtistDetailPage() {
         </div>
       </div>
 
-      {/* Content */}
+      {}
       <section className="container mx-auto px-4 md:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-          {/* Main Content */}
+          {}
           <div className="lg:col-span-2 space-y-10">
-            {/* About */}
+            {}
             {artist.bio && (
               <div>
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">About</h2>
@@ -146,7 +146,7 @@ export default function ArtistDetailPage() {
               </div>
             )}
 
-            {/* Genres & Languages */}
+            {}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {artist.genre && artist.genre.length > 0 && (
                 <div>
@@ -170,7 +170,7 @@ export default function ArtistDetailPage() {
               )}
             </div>
 
-            {/* Video Showreel */}
+            {}
             {artist.videoShowreel && (
               <div>
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Showreel</h2>
@@ -186,9 +186,9 @@ export default function ArtistDetailPage() {
             )}
           </div>
 
-          {/* Sidebar */}
+          {}
           <div className="space-y-6">
-            {/* Availability Card */}
+            {}
             <div className="bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-2xl p-6 space-y-5">
               <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-semibold ${avail.color}`}>
                 <span className="w-2 h-2 rounded-full bg-current" />
@@ -230,7 +230,7 @@ export default function ArtistDetailPage() {
               </Link>
             </div>
 
-            {/* Social Links */}
+            {}
             {(artist.instagramUrl || artist.youtubeUrl || artist.spotifyUrl || artist.websiteUrl) && (
               <div className="bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-2xl p-6">
                 <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4">Connect</h3>
@@ -254,7 +254,7 @@ export default function ArtistDetailPage() {
         </div>
       </section>
 
-      {/* Related Artists */}
+      {}
       {relatedArtists.length > 0 && (
         <section className="bg-gray-50 dark:bg-white/[0.02] border-t border-gray-100 dark:border-white/5 py-16">
           <div className="container mx-auto px-4 md:px-8">

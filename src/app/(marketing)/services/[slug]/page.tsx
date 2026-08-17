@@ -63,7 +63,7 @@ export default function ServiceDetailPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-black text-gray-900 dark:text-white transition-colors duration-300">
-      {/* Hero Cover */}
+      {}
       <section className="relative h-[50vh] md:h-[60vh] bg-gradient-to-br from-gray-950 via-orange-950 to-black overflow-hidden">
         {service.coverImage ? (
           <img
@@ -93,7 +93,7 @@ export default function ServiceDetailPage() {
         </div>
       </section>
 
-      {/* Breadcrumbs */}
+      {}
       <div className="bg-white dark:bg-[#0a0a0a] border-b border-gray-200 dark:border-white/5">
         <div className="container mx-auto px-4 md:px-8 py-3.5">
           <nav className="flex items-center gap-2 text-sm text-gray-500">
@@ -104,12 +104,12 @@ export default function ServiceDetailPage() {
         </div>
       </div>
 
-      {/* Main Content Layout */}
+      {}
       <section className="container mx-auto px-4 md:px-8 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* Left Main Column */}
+          {}
           <div className="lg:col-span-2 space-y-12">
-            {/* Overview */}
+            {}
             <div className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-8 shadow-sm">
               <h2 className="text-2xl font-black mb-4">About {service.name}</h2>
               <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed whitespace-pre-line">
@@ -117,7 +117,7 @@ export default function ServiceDetailPage() {
               </p>
             </div>
 
-            {/* Packages Section */}
+            {}
             {service.packages && service.packages.length > 0 && (
               <div>
                 <div className="mb-8">
@@ -179,7 +179,7 @@ export default function ServiceDetailPage() {
               </div>
             )}
 
-            {/* Service FAQs */}
+            {}
             {service.faqs && service.faqs.length > 0 && (
               <div>
                 <h2 className="text-2xl font-black mb-6">Frequently Asked Questions</h2>
@@ -211,7 +211,7 @@ export default function ServiceDetailPage() {
             )}
           </div>
 
-          {/* Right Sidebar CTA Card */}
+          {}
           <div className="space-y-8">
             <div className="bg-gradient-to-br from-orange-500/10 via-rose-500/5 to-purple-600/10 dark:from-orange-500/20 dark:via-rose-500/10 dark:to-purple-600/20 border border-orange-500/20 dark:border-white/10 rounded-3xl p-6 md:p-8 shadow-xl sticky top-28 text-center">
               <span className="w-12 h-12 rounded-2xl bg-orange-500/10 text-orange-500 flex items-center justify-center text-2xl mx-auto mb-4">✨</span>

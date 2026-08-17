@@ -1,2 +1,2 @@
-// Types for careers
+
 export {};

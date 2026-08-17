@@ -136,7 +136,7 @@ export default function ContentDashboardPage() {
 
   return (
     <div className="space-y-8">
-      {/* Header */}
+      {}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-black text-foreground tracking-tight">Content Hub</h1>
@@ -144,7 +144,7 @@ export default function ContentDashboardPage() {
         </div>
       </div>
 
-      {/* Grid */}
+      {}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {CONTENT_MODULES.map((module) => {
           let count = 0;
@@ -154,7 +154,7 @@ export default function ContentDashboardPage() {
 
           return (
             <Link key={module.id} href={module.href} className="group flex flex-col bg-card border border-border hover:border-transparent rounded-2xl p-6 transition-all shadow-sm hover:shadow-xl hover:-translate-y-1 relative overflow-hidden">
-              {/* Animated Background Blob on Hover */}
+              {}
               <div className={`absolute -right-8 -top-8 w-32 h-32 rounded-full blur-3xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 ${module.color}`} />
               
               <div className="flex items-start justify-between mb-4 relative z-10">
@@ -191,7 +191,7 @@ export default function ContentDashboardPage() {
         })}
       </div>
 
-      {/* Media Quick Upload Section */}
+      {}
       <div className="bg-card border border-dashed border-border rounded-2xl p-8 flex flex-col items-center justify-center text-center">
         <div className="w-16 h-16 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-600 flex items-center justify-center mb-4">
           <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>

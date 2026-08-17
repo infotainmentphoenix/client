@@ -138,7 +138,7 @@ export function InquiryDetail({ inquiryId }: InquiryDetailProps) {
           </div>
         </div>
 
-        {/* Requirements */}
+        {}
         <div className="bg-card rounded-2xl border border-border shadow-sm p-6">
           <h3 className="text-lg font-bold mb-6 border-b border-border pb-4">Message & Requirements</h3>
           
@@ -163,10 +163,10 @@ export function InquiryDetail({ inquiryId }: InquiryDetailProps) {
 
       </div>
 
-      {/* Right Column - Status & Activity */}
+      {}
       <div className="space-y-6">
         
-        {/* Management Card */}
+        {}
         <div className="bg-card rounded-2xl border border-border shadow-sm p-6">
           <h3 className="text-lg font-bold mb-6 border-b border-border pb-4">Manage Lead</h3>
           
@@ -218,7 +218,7 @@ export function InquiryDetail({ inquiryId }: InquiryDetailProps) {
           </div>
         </div>
 
-        {/* Lead Activity Timeline */}
+        {}
         <div className="bg-card rounded-2xl border border-border shadow-sm p-6">
           <div className="flex items-center justify-between mb-6 border-b border-border pb-4">
             <h3 className="text-lg font-bold">Activity Timeline</h3>

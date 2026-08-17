@@ -29,8 +29,8 @@ export function AnalyticsDashboard() {
     loadData();
   }, []);
 
-  // Compute analytics
-  const totalInquiries = inquiries.length || 248; // Fallback for demo if no data
+  
+  const totalInquiries = inquiries.length || 248; 
   const closedWon = inquiries.filter(i => i.status === 'CLOSED_WON' || i.status === 'WON').length || 42;
   const conversionRate = totalInquiries > 0 ? Math.round((closedWon / totalInquiries) * 100) : 0;
   
@@ -69,7 +69,7 @@ export function AnalyticsDashboard() {
 
   return (
     <div className="space-y-6 pb-12">
-      {/* Top Stats Row */}
+      {}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {[
           { label: 'Total Lead Volume', value: totalInquiries.toString(), trend: '+14% from last month', icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z', color: 'text-blue-500', bg: 'bg-blue-500/10' },
@@ -97,10 +97,10 @@ export function AnalyticsDashboard() {
         ))}
       </div>
 
-      {/* Main Charts Area */}
+      {}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
-        {/* Growth Bar Chart */}
+        {}
         <div className="bg-card border border-border p-6 rounded-2xl shadow-sm lg:col-span-2">
           <div className="flex items-center justify-between mb-8">
             <div>
@@ -119,11 +119,11 @@ export function AnalyticsDashboard() {
               return (
                 <div key={i} className="flex-1 flex flex-col items-center gap-3 group">
                   <div className="w-full relative flex justify-center h-full items-end">
-                    {/* Tooltip */}
+                    {}
                     <div className="opacity-0 group-hover:opacity-100 absolute -top-10 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs py-1 px-2 rounded font-medium transition-opacity whitespace-nowrap z-10 pointer-events-none">
                       {data.value} leads
                     </div>
-                    {/* Bar */}
+                    {}
                     <div 
                       className="w-full max-w-[3rem] bg-blue-100 dark:bg-blue-900/30 group-hover:bg-blue-500 dark:group-hover:bg-blue-500 rounded-t-md transition-all duration-500 ease-out"
                       style={{ height: `${heightPercent}%` }}
@@ -138,7 +138,7 @@ export function AnalyticsDashboard() {
           </div>
         </div>
 
-        {/* Inquiry Distribution Progress Bars */}
+        {}
         <div className="bg-card border border-border p-6 rounded-2xl shadow-sm flex flex-col">
           <h3 className="text-lg font-bold mb-1">Inquiry Distribution</h3>
           <p className="text-sm text-gray-500 mb-8">Breakdown by inquiry type.</p>
@@ -165,7 +165,7 @@ export function AnalyticsDashboard() {
         </div>
       </div>
 
-      {/* Bottom Insights Row */}
+      {}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden">
           <div className="relative z-10">
@@ -180,7 +180,7 @@ export function AnalyticsDashboard() {
               View Detailed Report
             </button>
           </div>
-          {/* Abstract bg shapes */}
+          {}
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
         </div>
 

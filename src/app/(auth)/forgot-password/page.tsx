@@ -104,18 +104,11 @@ export default function ForgotPasswordPage() {
           </form>
         ) : (
           <div className="mt-6 flex flex-col gap-4">
-            <Link 
-              href="/login" 
+            <Link
+              href="/login"
               className="w-full py-3.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-medium rounded-xl shadow-lg shadow-amber-500/25 transition-all text-center"
             >
               Back to Login
-            </Link>
-            {/* Demonstration only link to simulate clicking the email link */}
-            <Link 
-              href="/reset-password?token=mock_token_123" 
-              className="text-xs text-center text-gray-400 hover:text-gray-600 transition-colors"
-            >
-              (Developer: Click here to simulate email link)
             </Link>
           </div>
         )}

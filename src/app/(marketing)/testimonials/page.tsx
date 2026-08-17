@@ -41,7 +41,7 @@ export default function TestimonialsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-black text-gray-900 dark:text-white transition-colors duration-300">
-      {/* Hero Section */}
+      {}
       <section className="relative overflow-hidden bg-gradient-to-b from-amber-50/50 via-white to-gray-50 dark:from-amber-950/20 dark:via-black dark:to-black pt-32 pb-16">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-tr from-amber-500/10 to-orange-500/10 rounded-full blur-3xl" />
@@ -63,7 +63,7 @@ export default function TestimonialsPage() {
             Read real stories from corporate VPs, royal wedding families, and playback singers about their experience with Phoenix Infotainment.
           </p>
 
-          {/* Stats Bar */}
+          {}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto p-6 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl shadow-xl">
             <div>
               <p className="text-3xl font-black text-amber-500">100+</p>
@@ -85,7 +85,7 @@ export default function TestimonialsPage() {
         </div>
       </section>
 
-      {/* Category Filter Tabs */}
+      {}
       <section className="sticky top-0 z-20 bg-white/80 dark:bg-black/80 backdrop-blur-md border-y border-gray-200 dark:border-white/5">
         <div className="container mx-auto px-4 md:px-8 py-3 flex gap-2 overflow-x-auto no-scrollbar">
           {[
@@ -110,7 +110,7 @@ export default function TestimonialsPage() {
         </div>
       </section>
 
-      {/* Testimonials Grid */}
+      {}
       <section className="container mx-auto px-4 md:px-8 py-16">
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -125,13 +125,13 @@ export default function TestimonialsPage() {
                 key={item.id}
                 className="group relative bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-8 shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
               >
-                {/* Background Decor */}
+                {}
                 <div className="absolute top-6 right-6 text-amber-500/10 dark:text-amber-500/20 group-hover:scale-110 transition-transform">
                   <QuoteIcon className="w-16 h-16" />
                 </div>
 
                 <div>
-                  {/* Category Badge & Rating */}
+                  {}
                   <div className="flex items-center justify-between mb-6 relative z-10">
                     <span className="px-3 py-1 bg-amber-100 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 text-xs font-bold rounded-full">
                       {item.category}
@@ -143,20 +143,20 @@ export default function TestimonialsPage() {
                     </div>
                   </div>
 
-                  {/* Event Title */}
+                  {}
                   {item.eventTitle && (
                     <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">
                       Event: {item.eventTitle}
                     </h3>
                   )}
 
-                  {/* Quote */}
+                  {}
                   <p className="text-gray-700 dark:text-gray-200 text-base leading-relaxed italic mb-8 relative z-10">
                     &quot;{item.clientQuote}&quot;
                   </p>
                 </div>
 
-                {/* Client Profile Footer */}
+                {}
                 <div className="flex items-center justify-between pt-6 border-t border-gray-100 dark:border-white/5 relative z-10">
                   <div className="flex items-center gap-3.5">
                     <img
@@ -174,7 +174,7 @@ export default function TestimonialsPage() {
                     </div>
                   </div>
 
-                  {/* Video Trigger Button */}
+                  {}
                   {item.videoUrl && (
                     <button
                       onClick={() => setActiveVideoModal(item.videoUrl!)}
@@ -191,7 +191,7 @@ export default function TestimonialsPage() {
         )}
       </section>
 
-      {/* Video Modal */}
+      {}
       {activeVideoModal && (
         <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center p-4">
           <div className="relative w-full max-w-4xl bg-gray-900 border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
@@ -214,7 +214,7 @@ export default function TestimonialsPage() {
         </div>
       )}
 
-      {/* Bottom CTA */}
+      {}
       <section className="container mx-auto px-4 md:px-8 pb-20">
         <div className="bg-gradient-to-r from-amber-600 via-orange-600 to-rose-600 rounded-3xl p-8 md:p-12 text-center text-white shadow-2xl">
           <h2 className="text-3xl md:text-5xl font-black mb-4">Experience The Phoenix Standard</h2>
