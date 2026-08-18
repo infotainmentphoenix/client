@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 
 const DashboardIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
@@ -38,30 +39,59 @@ const NAV_ITEMS = [
 
 export function AdminSidebar() {
   const pathname = usePathname();
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
-    <aside className="w-64 flex-shrink-0 h-screen sticky top-0 bg-white/70 dark:bg-black/40 backdrop-blur-xl border-r border-gray-200/50 dark:border-white/10 shadow-[4px_0_24px_rgb(0,0,0,0.02)] z-50 flex flex-col transition-all">
-      {}
-      <div className="h-16 flex items-center px-6 border-b border-gray-200/50 dark:border-white/5">
-        <Link href="/admin/dashboard" className="flex items-center group transition-transform hover:scale-105">
-          <img 
-            src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20White.png" 
-            alt="Phoenix Infotainment Logo (Dark Mode)" 
-            className="hidden dark:block h-[40px] sm:h-[50px] w-auto object-contain" 
-          />
-          <img 
-            src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20Black.png" 
-            alt="Phoenix Infotainment Logo (Light Mode)" 
-            className="block dark:hidden h-[40px] sm:h-[50px] w-auto object-contain" 
-          />
-        </Link>
+    <aside className={`${isCollapsed ? 'w-20' : 'w-72'} flex-shrink-0 h-screen sticky top-0 bg-white dark:bg-[#0a0a0a] border-r border-gray-100 dark:border-white/5 shadow-[4px_0_24px_rgb(0,0,0,0.02)] z-50 flex flex-col transition-all duration-300 relative`}>
+      
+      {/* Toggle Button */}
+      <button 
+        onClick={() => setIsCollapsed(!isCollapsed)}
+        className="absolute -right-4 top-6 w-8 h-8 bg-white dark:bg-[#111] border border-gray-200 dark:border-white/10 rounded-full hover:bg-gray-50 dark:hover:bg-white/5 transition-all hover:scale-105 z-50 shadow-md flex items-center justify-center text-gray-500 dark:text-gray-400 focus:outline-none"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${isCollapsed ? 'rotate-180' : ''}`}>
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+      </button>
+
+      {/* Header / Logo */}
+      <div className="h-20 flex items-center justify-center px-4 border-b border-gray-100 dark:border-white/5 overflow-hidden shrink-0">
+        {isCollapsed ? (
+          <Link href="/admin/dashboard" className="flex items-center justify-center w-full transition-transform hover:scale-105">
+            <img 
+              src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20White.png" 
+              alt="Phoenix Infotainment Logo" 
+              className="hidden dark:block h-10 w-auto object-contain shrink-0" 
+            />
+            <img 
+              src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20Black.png" 
+              alt="Phoenix Infotainment Logo" 
+              className="block dark:hidden h-10 w-auto object-contain shrink-0" 
+            />
+          </Link>
+        ) : (
+          <Link href="/admin/dashboard" className="flex items-center justify-center w-full group transition-transform hover:scale-[1.02]">
+            <img 
+              src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20White.png" 
+              alt="Phoenix Infotainment Logo (Dark Mode)" 
+              className="hidden dark:block h-[50px] sm:h-[60px] w-auto object-contain shrink-0" 
+            />
+            <img 
+              src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20Black.png" 
+              alt="Phoenix Infotainment Logo (Light Mode)" 
+              className="block dark:hidden h-[50px] sm:h-[60px] w-auto object-contain shrink-0" 
+            />
+          </Link>
+        )}
       </div>
 
-      {}
-      <div className="flex-1 overflow-y-auto py-6 px-3 space-y-1 scrollbar-hide">
-        <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 px-3">
-          Main Menu
-        </div>
+      {/* Navigation */}
+      <div className="flex-1 overflow-y-auto py-6 px-3 space-y-2 scrollbar-hide">
+        {!isCollapsed && (
+          <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 px-3">
+            Main Menu
+          </div>
+        )}
         
         {NAV_ITEMS.map((item) => {
           const isActive = pathname?.startsWith(item.href);
@@ -71,30 +101,34 @@ export function AdminSidebar() {
             <Link
               key={item.name}
               href={item.href}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 group relative overflow-hidden ${
+              className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-200 group relative overflow-hidden ${
                 isActive 
-                  ? 'bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 font-medium' 
-                  : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white'
-              }`}
+                  ? 'bg-blue-600 text-white font-medium shadow-md shadow-blue-500/20' 
+                  : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white'
+              } ${isCollapsed ? 'justify-center' : ''}`}
+              title={isCollapsed ? item.name : undefined}
             >
-              {isActive && (
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-600 rounded-r-full" />
+              {isActive && !isCollapsed && (
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-white/20 rounded-r-full" />
               )}
-              <Icon />
-              <span className="text-sm">{item.name}</span>
+              <div className="shrink-0 flex items-center justify-center">
+                <Icon />
+              </div>
+              {!isCollapsed && <span className="text-sm truncate">{item.name}</span>}
             </Link>
           );
         })}
       </div>
 
-      {}
-      <div className="p-4 border-t border-gray-200/50 dark:border-white/5">
+      {/* Footer / Return Link */}
+      <div className="p-4 border-t border-gray-100 dark:border-white/5">
         <Link 
           href="/" 
-          className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition-colors"
+          title={isCollapsed ? "Return to Site" : undefined}
+          className={`flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition-colors ${!isCollapsed ? 'px-4' : ''}`}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-          Return to Site
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          {!isCollapsed && <span className="truncate">Return to Site</span>}
         </Link>
       </div>
     </aside>

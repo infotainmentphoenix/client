@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { serviceApi } from '@/features/services/api';
@@ -17,6 +18,7 @@ const XIcon = ({ className }: { className?: string }) => (
 );
 
 export function Navbar() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -44,26 +46,26 @@ export function Navbar() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 flex justify-center pt-4 md:pt-6 px-4 pointer-events-none">
+    <header className="fixed top-0 left-0 w-full z-50 flex justify-center pt-2 md:pt-4 px-4 pointer-events-none">
       <div 
         className={`pointer-events-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]
           ${isScrolled 
-            ? 'w-full max-w-6xl bg-white/80 dark:bg-black/75 backdrop-blur-3xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.6)] rounded-full px-5 py-3' 
-            : 'w-full max-w-7xl bg-transparent px-2 py-4'
+            ? 'w-full max-w-6xl bg-white/80 dark:bg-black/75 backdrop-blur-3xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.6)] rounded-full px-5 py-1' 
+            : 'w-full max-w-7xl bg-transparent px-2 py-1.5'
           }
         `}
       >
         {}
-        <Link href="/" className="flex items-center shrink-0 transition-transform group-hover:scale-105 duration-300">
+        <Link href="/" className="flex items-center shrink-0 transition-transform hover:scale-105 duration-300 ml-2 md:ml-4">
           <img 
             src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20White.png" 
-            alt="Phoenix Infotainment Logo (Dark Mode)" 
-            className="hidden dark:block h-[50px] sm:h-[65px] w-auto object-contain" 
+            alt="Phoenix Infotainment Logo (White)" 
+            className={`h-[55px] sm:h-[75px] w-auto object-contain ${(pathname === '/' && !isScrolled) ? 'block' : 'hidden dark:block'}`}
           />
           <img 
             src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20Black.png" 
-            alt="Phoenix Infotainment Logo (Light Mode)" 
-            className="block dark:hidden h-[50px] sm:h-[65px] w-auto object-contain" 
+            alt="Phoenix Infotainment Logo (Black)" 
+            className={`h-[55px] sm:h-[75px] w-auto object-contain ${(pathname === '/' && !isScrolled) ? 'hidden' : 'block dark:hidden'}`}
           />
         </Link>
 

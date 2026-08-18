@@ -52,28 +52,28 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="relative bg-[#f5f5f5] dark:bg-[#020202] text-gray-900 dark:text-white pt-24 pb-12 overflow-hidden border-t border-black/5 dark:border-white/5">
+    <footer className="relative bg-[#f5f5f5] dark:bg-[#020202] text-gray-900 dark:text-white pt-10 pb-6 overflow-hidden border-t border-black/5 dark:border-white/5">
       {/* Glow Effects */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-blue-500/30 dark:via-blue-500/50 to-transparent"></div>
       <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-full max-w-3xl h-80 bg-blue-500/5 dark:bg-blue-500/10 blur-[120px] rounded-full pointer-events-none"></div>
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6 mb-8">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <div className="flex items-center mb-6">
+            <div className="flex items-center mb-4">
               <img 
                 src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20White.png" 
                 alt="Phoenix Infotainment Logo (Dark Mode)" 
-                className="hidden dark:block h-[80px] sm:h-[110px] w-auto object-contain" 
+                className="hidden dark:block h-[90px] sm:h-[120px] w-auto object-contain" 
               />
               <img 
                 src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20Black.png" 
                 alt="Phoenix Infotainment Logo (Light Mode)" 
-                className="block dark:hidden h-[80px] sm:h-[110px] w-auto object-contain" 
+                className="block dark:hidden h-[90px] sm:h-[120px] w-auto object-contain" 
               />
             </div>
-            <p className="text-gray-600 dark:text-gray-400 text-base mb-8 max-w-sm leading-relaxed font-light">
+            <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base mb-6 max-w-sm leading-relaxed font-light">
               Discover the life, energy & purpose of Phoenix Infotainment. Premium events, top artists, and unforgettable, legendary experiences.
             </p>
             {/* Social Icons */}
@@ -95,7 +95,7 @@ export function Footer() {
 
           {}
           <div>
-            <h4 className="text-lg font-semibold mb-6 tracking-wide">Explore</h4>
+            <h4 className="text-lg font-semibold mb-4 tracking-wide">Explore</h4>
             <ul className="flex flex-col gap-4 text-sm font-medium text-gray-600 dark:text-gray-400">
               {['About Us', 'Events', 'Artists', 'Gallery', 'Our Vision'].map((link) => (
                 <li key={link}><Link href={`/${link.toLowerCase().replace(' ', '-')}`} className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors inline-block hover:translate-x-1 duration-300">{link}</Link></li>
@@ -105,7 +105,7 @@ export function Footer() {
 
           {}
           <div>
-            <h4 className="text-lg font-semibold mb-6 tracking-wide">Support</h4>
+            <h4 className="text-lg font-semibold mb-4 tracking-wide">Support</h4>
             <ul className="flex flex-col gap-4 text-sm font-medium text-gray-600 dark:text-gray-400">
               {['Contact Us', 'FAQs', 'Terms of Service', 'Privacy Policy'].map((link) => {
                 const href = link === 'Contact Us' ? '/contact' : `/${link.toLowerCase().replace(/ /g, '-')}`;
@@ -122,17 +122,35 @@ export function Footer() {
 
           {}
           <div>
-            <h4 className="text-lg font-semibold mb-6 tracking-wide">Get in Touch</h4>
+            <h4 className="text-lg font-semibold mb-4 tracking-wide">Contact Us</h4>
             <div className="text-sm font-medium text-gray-600 dark:text-gray-400 flex flex-col gap-4">
-              <a href="mailto:info@phoenixinfotainment.com" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors block">info@phoenixinfotainment.com</a>
-              <a href="tel:+919822775922" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors block text-xl font-bold text-gray-900 dark:text-white">+91 9822775922</a>
-              <p className="mt-4 text-gray-500 leading-relaxed font-light">123 Phoenix Tower, <br />Innovation District, <br />Global City 40001</p>
+              <a href="mailto:events@phoenixinfotainment.com" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors block">events@phoenixinfotainment.com</a>
+              <a href="tel:+919822775922" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors block">+91 9822775922</a>
+              <p className="mt-4 text-gray-500 leading-relaxed font-light">
+                A R Avenue Opposite Country Club<br />
+                Veera Desai Road, Andheri West,<br />
+                Mumbai, 400053
+              </p>
+              <p className="text-gray-500 font-light mt-2">Mon - Fri: 09:00 - 18:00</p>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-black/10 dark:border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm font-medium text-gray-500">
-          <p>&copy; {new Date().getFullYear()} Phoenix Infotainment. All rights reserved.</p>
+        <div className="border-t border-black/10 dark:border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center text-sm font-medium text-gray-500">
+          <div className="flex flex-col items-center md:items-start gap-1">
+            <p>&copy; {new Date().getFullYear()} Phoenix Infotainment. All rights reserved.</p>
+            <p className="text-xs">
+              Designed and developed by{' '}
+              <a 
+                href="https://www.apxteck.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors font-semibold"
+              >
+                APX Teck
+              </a>
+            </p>
+          </div>
           <div className="flex gap-6 mt-4 md:mt-0">
             <Link href="/privacy" className="hover:text-gray-800 dark:hover:text-white transition-colors">Privacy</Link>
             <Link href="/terms" className="hover:text-gray-800 dark:hover:text-white transition-colors">Terms</Link>

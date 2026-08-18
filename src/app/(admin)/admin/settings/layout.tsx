@@ -25,22 +25,22 @@ export default function SettingsLayout({ children }: { children: React.ReactNode
 
       <div className="flex flex-col md:flex-row gap-8 items-start">
         
-        {}
-        <div className="w-full md:w-64 shrink-0 bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-2xl p-2 shadow-sm">
-          <nav className="space-y-1">
+        {/* Sidebar Nav */}
+        <div className="w-full md:w-64 shrink-0 bg-white dark:bg-[#0a0a0a] border border-gray-100 dark:border-white/10 rounded-2xl p-3 shadow-sm">
+          <nav className="space-y-1.5">
             {navItems.map((item) => {
               const isActive = pathname === item.href;
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all ${
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all ${
                     isActive 
-                      ? 'bg-black text-white dark:bg-white dark:text-black font-medium shadow-sm' 
-                      : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/10'
+                      ? 'bg-blue-600 text-white font-medium shadow-md shadow-blue-500/20' 
+                      : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5'
                   }`}
                 >
-                  <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className={`w-5 h-5 shrink-0 transition-colors ${isActive ? 'text-white' : 'text-gray-400 dark:text-gray-500'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
                   </svg>
                   {item.label}

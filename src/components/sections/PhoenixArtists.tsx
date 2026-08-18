@@ -88,7 +88,7 @@ export function PhoenixArtists() {
       try {
         const a = await artistApi.getArtists({ limit: 4, featured: true }); 
         
-        let fetchedArtists = [];
+        let fetchedArtists: any[] = [];
         if (a && a.length > 0) {
           fetchedArtists = a.filter(x => x.isActive).slice(0, 4);
         } else {

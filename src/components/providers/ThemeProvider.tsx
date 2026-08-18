@@ -1,63 +1,28 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import * as React from 'react';
+import { ThemeProvider as NextThemesProvider, useTheme as useNextTheme } from 'next-themes';
 
-type Theme = 'light' | 'dark';
+type ThemeProviderProps = React.ComponentProps<typeof NextThemesProvider>;
 
-type ThemeProviderProps = {
-  children: React.ReactNode;
-};
-
-type ThemeContextType = {
-  theme: Theme;
-  setTheme: (theme: Theme) => void;
-  toggleTheme: () => void;
-};
-
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
-
-export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [theme, setThemeState] = useState<Theme>('dark');
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    
-    const savedTheme = localStorage.getItem('theme') as Theme | null;
-    if (savedTheme) {
-      setThemeState(savedTheme);
-    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-      setThemeState('light');
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
-    const root = window.document.documentElement;
-    root.classList.remove('light', 'dark');
-    root.classList.add(theme);
-    localStorage.setItem('theme', theme);
-  }, [theme, mounted]);
-
-  const setTheme = (newTheme: Theme) => {
-    setThemeState(newTheme);
-  };
-
-  const toggleTheme = () => {
-    setThemeState((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
-
+export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
+    <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange {...props}>
       {children}
-    </ThemeContext.Provider>
+    </NextThemesProvider>
   );
 }
 
+// Keep the old hook interface for backwards compatibility with ThemeToggle
 export const useTheme = () => {
-  const context = useContext(ThemeContext);
-  if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return context;
+  const { theme, setTheme, systemTheme } = useNextTheme();
+  
+  const toggleTheme = () => {
+    if (theme === 'dark') setTheme('light');
+    else if (theme === 'light') setTheme('dark');
+    else if (systemTheme === 'dark') setTheme('light');
+    else setTheme('dark');
+  };
+
+  return { theme: theme === 'system' ? systemTheme : theme, setTheme, toggleTheme };
 };

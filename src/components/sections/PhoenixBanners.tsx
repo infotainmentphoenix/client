@@ -16,18 +16,18 @@ export function PhoenixBanners() {
     <section className="container mx-auto px-4 md:px-8 py-16 flex flex-col gap-8 relative z-10">
       {}
       <ScrollReveal delay={0}>
-        <Link href="/events/online" className="group relative w-full h-56 md:h-72 rounded-[2rem] overflow-hidden flex items-center bg-gray-100 dark:bg-gray-900 border border-black/10 dark:border-white/10 hover:border-blue-500/50 transition-all duration-500 shadow-[0_10px_40px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+        <Link href="/events/online" className="group relative w-full h-56 md:h-72 rounded-[2rem] overflow-hidden flex items-center bg-gray-900 border border-white/10 hover:border-blue-500/50 transition-all duration-500 shadow-[0_10px_40px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
           <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 dark:opacity-40 group-hover:opacity-40 dark:group-hover:opacity-70 group-hover:scale-105 transition-all duration-700 ease-out"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700 ease-out"
             style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=1200&auto=format&fit=crop")' }}
           ></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 dark:from-black dark:via-black/50 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent"></div>
           <div className="relative z-10 p-8 md:p-16 w-full flex justify-between items-center">
             <div>
-              <h2 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-3 tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-500">Join Us <br />Live Online</h2>
-              <p className="text-gray-600 dark:text-gray-400 text-base md:text-lg max-w-md font-light">Experience the energy from anywhere. Streaming live every Saturday at 7pm & 9pm.</p>
+              <h2 className="text-4xl md:text-5xl font-black text-white mb-3 tracking-tight group-hover:text-blue-400 transition-colors duration-500">Join Us <br />Live Online</h2>
+              <p className="text-gray-300 text-base md:text-lg max-w-md font-light">Experience the energy from anywhere. Streaming live every Saturday at 7pm & 9pm.</p>
             </div>
-            <div className="hidden md:flex w-16 h-16 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/10 dark:border-white/20 items-center justify-center text-black dark:text-white group-hover:text-white group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12 shadow-xl">
+            <div className="hidden md:flex w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/20 items-center justify-center text-white group-hover:text-white group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12 shadow-xl">
               <ArrowUpRightIcon className="w-8 h-8" />
             </div>
           </div>
@@ -36,7 +36,7 @@ export function PhoenixBanners() {
 
       {}
       <ScrollReveal delay={200}>
-        <Link href="/artists" className="group relative w-full h-48 md:h-64 rounded-[2rem] overflow-hidden flex items-center justify-center bg-gray-50 dark:bg-[#0a0a0a] border border-black/5 dark:border-white/10 hover:border-purple-500/50 transition-all duration-500 shadow-[0_10px_40px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+        <Link href="/artists" className="group relative w-full h-48 md:h-64 rounded-[2rem] overflow-hidden flex items-center justify-center bg-white dark:bg-[#0a0a0a] border border-black/5 dark:border-white/10 hover:border-purple-500/50 transition-all duration-500 shadow-[0_10px_40px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-200/50 dark:from-purple-900/30 via-transparent to-transparent opacity-80 dark:opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"></div>
           
           {}

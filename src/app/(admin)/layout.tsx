@@ -16,7 +16,7 @@ export default function AdminLayout({
 }) {
   return (
     <AdminAuthGuard>
-      <div className="flex h-screen bg-gray-50/50 dark:bg-[#050505] overflow-hidden">
+      <div className="flex h-screen bg-gray-50 dark:bg-black overflow-hidden">
         {}
         <AdminSidebar />
         

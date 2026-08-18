@@ -32,15 +32,15 @@ export function PhoenixMarquee() {
   ];
 
   return (
-    <div className="w-full relative py-6 md:py-10 overflow-hidden flex flex-col justify-center bg-transparent z-20">
+    <div className="w-full relative py-6 md:py-10 overflow-hidden flex flex-col justify-center bg-gray-950 dark:bg-transparent z-20">
       
       {/* Subtle background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-24 max-w-4xl bg-blue-500/5 blur-[50px] rounded-full pointer-events-none"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-24 max-w-4xl bg-blue-500/10 blur-[50px] rounded-full pointer-events-none"></div>
 
       <div className="relative z-10 flex flex-col gap-2 -rotate-1 scale-[1.01] transform-gpu">
         
         {/* Row 1 - Glassmorphic Dark Ribbon */}
-        <div className="flex w-full overflow-hidden bg-white/[0.02] py-2.5 border-y border-white/[0.05] backdrop-blur-md shadow-xl group">
+        <div className="flex w-full overflow-hidden bg-white/[0.05] dark:bg-white/[0.02] py-2.5 border-y border-white/[0.05] backdrop-blur-md shadow-xl group">
           <div className="flex animate-marquee min-w-full shrink-0 items-center group-hover:[animation-play-state:paused] transition-all duration-300">
             {items.map((item, i) => <MarqueeItem key={i} text={item} />)}
             {items.map((item, i) => <MarqueeItem key={`dup-${i}`} text={item} />)}
@@ -52,7 +52,7 @@ export function PhoenixMarquee() {
         </div>
 
         {/* Row 2 - Very faint reverse ribbon */}
-        <div className="flex w-full overflow-hidden bg-black/40 py-2.5 border-b border-white/[0.02] backdrop-blur-sm group -mt-[1px]">
+        <div className="flex w-full overflow-hidden bg-black/60 dark:bg-black/40 py-2.5 border-b border-white/[0.02] backdrop-blur-sm group -mt-[1px]">
           <div 
             className="flex animate-marquee min-w-full shrink-0 items-center group-hover:[animation-play-state:paused] transition-all duration-300 opacity-60" 
             style={{ animationDirection: 'reverse' }}
@@ -73,8 +73,8 @@ export function PhoenixMarquee() {
       </div>
 
       {/* Fade edges */}
-      <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-black via-black/50 to-transparent z-30 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-black via-black/50 to-transparent z-30 pointer-events-none" />
+      <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-gray-950 dark:from-background via-gray-950/50 dark:via-background/50 to-transparent z-30 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-gray-950 dark:from-background via-gray-950/50 dark:via-background/50 to-transparent z-30 pointer-events-none" />
     </div>
   );
 }

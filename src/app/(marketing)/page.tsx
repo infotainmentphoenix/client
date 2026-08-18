@@ -5,6 +5,7 @@ import { PhoenixStats } from '@/components/sections/PhoenixStats';
 import { PhoenixBanners } from '@/components/sections/PhoenixBanners';
 import { PhoenixBentoGrid } from '@/components/sections/PhoenixBentoGrid';
 import { PhoenixArtists } from '@/components/sections/PhoenixArtists';
+import { ClientLogosMarquee } from '@/components/sections/ClientLogosMarquee';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import Link from 'next/link';
 
@@ -39,6 +40,9 @@ export default function Home() {
 
       { }
       <PhoenixBentoGrid />
+
+      {/* Sponsor / Client Logos Marquee */}
+      <ClientLogosMarquee />
 
       { }
       <section className="container mx-auto px-4 md:px-8 pb-24 pt-16 relative z-10">

@@ -87,28 +87,28 @@ export function PhoenixHero() {
       ))}
       
       {/* Overlays */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-r from-white/95 via-white/80 dark:from-black dark:via-black/75 to-transparent opacity-90"></div>
-      <div className="absolute inset-0 z-0 bg-gradient-to-t from-white dark:from-[#050505] via-transparent to-transparent opacity-100"></div>
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/10 dark:from-blue-900/30 via-transparent to-transparent mix-blend-multiply dark:mix-blend-screen"></div>
+      <div className="absolute inset-0 z-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent opacity-90"></div>
+      <div className="absolute inset-0 z-0 bg-gradient-to-t from-gray-950 dark:from-background via-gray-950/20 dark:via-background/20 to-transparent opacity-100"></div>
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent mix-blend-screen"></div>
 
       {}
       <div className="relative z-10 container mx-auto px-6 md:px-12 lg:px-24">
         <div key={currentIndex} className="max-w-3xl border-l-[3px] border-blue-500 pl-8 md:pl-12 py-2 animate-fadeIn">
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 mb-6 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 backdrop-blur-md animate-float">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 mb-6 rounded-full bg-white/10 border border-white/20 backdrop-blur-md animate-float">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
             </span>
-            <span className="text-blue-600 dark:text-blue-400 font-semibold text-xs tracking-[0.2em] uppercase">
+            <span className="text-blue-300 font-semibold text-xs tracking-[0.2em] uppercase">
               Phoenix Premium &bull; Slide {currentIndex + 1} of {slides.length || 1}
             </span>
           </div>
           
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-br from-gray-900 via-gray-700 to-gray-500 dark:from-white dark:via-gray-200 dark:to-gray-500 leading-[1.1] mb-6 drop-shadow-sm dark:drop-shadow-2xl tracking-tighter">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white via-gray-200 to-gray-500 leading-[1.1] mb-6 drop-shadow-2xl tracking-tighter">
             {activeSlide.title || DEFAULT_SLIDE.title}
           </h1>
           
-          <p className="text-gray-700 dark:text-gray-300 text-lg md:text-2xl mb-10 font-light drop-shadow-sm dark:drop-shadow-md max-w-xl leading-relaxed">
+          <p className="text-gray-200 text-lg md:text-2xl mb-10 font-light drop-shadow-md max-w-xl leading-relaxed">
             {activeSlide.subtitle || DEFAULT_SLIDE.subtitle}
           </p>
           
@@ -117,16 +117,16 @@ export function PhoenixHero() {
               href={activeSlide.linkUrl || '/events'}
               className="relative inline-flex items-center justify-center px-8 py-4 overflow-hidden font-medium text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-full group animate-pulse-glow hover:scale-105 transition-all duration-300"
             >
-              <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-black dark:bg-white rounded-full group-hover:w-64 group-hover:h-56"></span>
-              <span className="relative flex items-center group-hover:text-white dark:group-hover:text-blue-600 transition-colors duration-300">
+              <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-64 group-hover:h-56"></span>
+              <span className="relative flex items-center group-hover:text-blue-600 transition-colors duration-300">
                 {activeSlide.buttonText || 'Explore Events'}
                 <ArrowUpRightIcon className="ml-2 w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
               </span>
             </Link>
             
-            <Link href="/about" className="inline-flex items-center text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors group">
+            <Link href="/about" className="inline-flex items-center text-white hover:text-blue-300 font-medium transition-colors group">
               Watch Highlight Reel
-              <div className="ml-3 w-12 h-12 rounded-full border border-gray-300 dark:border-white/30 flex items-center justify-center backdrop-blur-sm group-hover:border-blue-600 dark:group-hover:border-blue-400 group-hover:bg-blue-600/10 dark:group-hover:bg-blue-400/10 transition-all">
+              <div className="ml-3 w-12 h-12 rounded-full border border-white/30 flex items-center justify-center backdrop-blur-sm group-hover:border-blue-400 group-hover:bg-blue-400/20 transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="ml-1"><polygon points="5 3 19 12 5 21 5 3"/></svg>
               </div>
             </Link>
@@ -140,7 +140,7 @@ export function PhoenixHero() {
           <button
             onClick={prevSlide}
             aria-label="Previous Slide"
-            className="w-10 h-10 rounded-full bg-white/60 dark:bg-black/60 border border-gray-200 dark:border-white/20 backdrop-blur-md flex items-center justify-center text-gray-800 dark:text-white hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition-all"
+            className="w-10 h-10 rounded-full bg-black/40 border border-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-500 transition-all"
           >
             &larr;
           </button>
@@ -151,7 +151,7 @@ export function PhoenixHero() {
                 onClick={() => setCurrentIndex(idx)}
                 aria-label={`Go to slide ${idx + 1}`}
                 className={`h-2 rounded-full transition-all duration-300 ${
-                  idx === currentIndex ? 'w-8 bg-blue-600 dark:bg-blue-400' : 'w-2 bg-gray-300 dark:bg-white/30'
+                  idx === currentIndex ? 'w-8 bg-blue-500' : 'w-2 bg-white/40 hover:bg-white/60'
                 }`}
               />
             ))}
@@ -159,7 +159,7 @@ export function PhoenixHero() {
           <button
             onClick={nextSlide}
             aria-label="Next Slide"
-            className="w-10 h-10 rounded-full bg-white/60 dark:bg-black/60 border border-gray-200 dark:border-white/20 backdrop-blur-md flex items-center justify-center text-gray-800 dark:text-white hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition-all"
+            className="w-10 h-10 rounded-full bg-black/40 border border-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-500 transition-all"
           >
             &rarr;
           </button>

@@ -62,7 +62,7 @@ export function AdminNavbar() {
     : 'Dashboard';
 
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur-xl bg-white/70 dark:bg-[#0a0a0a]/80 border-b border-gray-200/50 dark:border-white/5 shadow-sm transition-all h-16 flex items-center px-6">
+    <header className="sticky top-0 z-40 w-full bg-white dark:bg-[#0a0a0a] border-b border-gray-100 dark:border-white/5 shadow-sm transition-all h-20 flex items-center px-8">
       <div className="flex items-center justify-between w-full">
         
         {}

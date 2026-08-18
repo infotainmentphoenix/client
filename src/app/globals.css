@@ -14,25 +14,39 @@
 
 @layer base {
   :root {
-    --background: #ffffff;
-    --foreground: #0a0a0a;
-    --card: #f9f9f9;
-    --card-foreground: #111111;
-    --border: rgba(0, 0, 0, 0.1);
+    --background: #f8fafc;
+    --foreground: #020617;
+    --card: #ffffff;
+    --card-foreground: #020617;
+    --border: #e2e8f0;
+    --input: #e2e8f0;
+    --primary: #3b82f6;
+    --primary-foreground: #ffffff;
+    --muted: #f1f5f9;
+    --muted-foreground: #64748b;
+    --accent: #f1f5f9;
+    --accent-foreground: #020617;
   }
 
   .dark {
     --background: #050505;
-    --foreground: #ffffff;
+    --foreground: #fafafa;
     --card: #111111;
-    --card-foreground: #eeeeee;
-    --border: rgba(255, 255, 255, 0.1);
+    --card-foreground: #fafafa;
+    --border: #27272a;
+    --input: #27272a;
+    --primary: #3b82f6; /* blue-500 */
+    --primary-foreground: #ffffff;
+    --muted: #27272a;
+    --muted-foreground: #a1a1aa;
+    --accent: #27272a;
+    --accent-foreground: #fafafa;
   }
 
   body {
     background-color: var(--background);
     color: var(--foreground);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    /* Transition removed to let next-themes handle it via disableTransitionOnChange */
   }
 }
 
