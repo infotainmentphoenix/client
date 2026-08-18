@@ -193,14 +193,14 @@ export default function EventsPage() {
                       {typeLabel}
                     </span>
 
-                    {}
+                    { }
                     {event.featured && (
                       <span className="absolute top-4 right-4 px-3 py-1 bg-amber-500 text-white text-xs font-bold rounded-full shadow-lg flex items-center gap-1">
                         ★ Featured
                       </span>
                     )}
 
-                    {}
+                    { }
                     {event.city && (
                       <div className="absolute bottom-4 left-4 z-10 flex items-center gap-1 px-3 py-1 bg-black/80 backdrop-blur-md rounded-full text-white text-xs font-semibold border border-white/10">
                         <MapPinIcon className="w-3.5 h-3.5 text-orange-400" />
@@ -209,7 +209,7 @@ export default function EventsPage() {
                     )}
                   </div>
 
-                  {}
+                  { }
                   <div className="p-6 flex-1 flex flex-col justify-between">
                     <div>
                       <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-orange-500 transition-colors line-clamp-1 mb-2">
@@ -251,7 +251,7 @@ export default function EventsPage() {
         )}
       </section>
 
-      {}
+      { }
       <section className="relative overflow-hidden bg-gradient-to-r from-orange-600 via-rose-600 to-purple-700 py-20 text-white">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1),transparent_70%)] pointer-events-none" />
         <div className="container mx-auto px-4 md:px-8 text-center relative z-10 max-w-3xl">

@@ -38,7 +38,7 @@ export function LiveEventsSection() {
   }, []);
 
   return (
-    <section className="container mx-auto px-4 md:px-8 py-20 relative z-10">
+    <section className="container mx-auto px-4 md:px-8 pt-2 md:pt-4 pb-20 relative z-10">
       {}
       <ScrollReveal className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
         <div>

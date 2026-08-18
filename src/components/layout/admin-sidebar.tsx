@@ -43,13 +43,17 @@ export function AdminSidebar() {
     <aside className="w-64 flex-shrink-0 h-screen sticky top-0 bg-white/70 dark:bg-black/40 backdrop-blur-xl border-r border-gray-200/50 dark:border-white/10 shadow-[4px_0_24px_rgb(0,0,0,0.02)] z-50 flex flex-col transition-all">
       {}
       <div className="h-16 flex items-center px-6 border-b border-gray-200/50 dark:border-white/5">
-        <Link href="/admin/dashboard" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-purple-600 flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform">
-            <span className="font-bold text-lg">P</span>
-          </div>
-          <span className="font-bold text-lg bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400">
-            Phoenix
-          </span>
+        <Link href="/admin/dashboard" className="flex items-center group transition-transform hover:scale-105">
+          <img 
+            src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20White.png" 
+            alt="Phoenix Infotainment Logo (Dark Mode)" 
+            className="hidden dark:block h-[40px] sm:h-[50px] w-auto object-contain" 
+          />
+          <img 
+            src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20Black.png" 
+            alt="Phoenix Infotainment Logo (Light Mode)" 
+            className="block dark:hidden h-[40px] sm:h-[50px] w-auto object-contain" 
+          />
         </Link>
       </div>
 

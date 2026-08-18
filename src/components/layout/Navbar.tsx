@@ -48,29 +48,28 @@ export function Navbar() {
       <div 
         className={`pointer-events-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]
           ${isScrolled 
-            ? 'w-full max-w-6xl bg-white/80 dark:bg-black/75 backdrop-blur-3xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.6)] rounded-full px-5 py-3 border border-gray-200/50 dark:border-white/10' 
+            ? 'w-full max-w-6xl bg-white/80 dark:bg-black/75 backdrop-blur-3xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.6)] rounded-full px-5 py-3' 
             : 'w-full max-w-7xl bg-transparent px-2 py-4'
           }
         `}
       >
         {}
-        <Link href="/" className="flex items-center gap-3 group shrink-0">
-          <div className="w-10 h-10 bg-gradient-to-tr from-orange-500 via-rose-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
-            <span className="text-white font-black text-xl italic tracking-tighter">P</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-gray-900 dark:text-white font-black tracking-[0.2em] uppercase text-sm leading-none">
-              PHOENIX
-            </span>
-            <span className="text-[9px] font-bold tracking-[0.3em] uppercase text-orange-500 leading-tight">
-              INFOTAINMENT
-            </span>
-          </div>
+        <Link href="/" className="flex items-center shrink-0 transition-transform group-hover:scale-105 duration-300">
+          <img 
+            src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20White.png" 
+            alt="Phoenix Infotainment Logo (Dark Mode)" 
+            className="hidden dark:block h-[50px] sm:h-[65px] w-auto object-contain" 
+          />
+          <img 
+            src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20Black.png" 
+            alt="Phoenix Infotainment Logo (Light Mode)" 
+            className="block dark:hidden h-[50px] sm:h-[65px] w-auto object-contain" 
+          />
         </Link>
 
         {}
         <nav className={`hidden lg:flex items-center gap-1 p-1 rounded-full transition-all duration-500
-          ${isScrolled ? 'bg-gray-100/60 dark:bg-white/5' : 'bg-white/60 dark:bg-black/40 backdrop-blur-xl border border-gray-200/50 dark:border-white/10'}
+          ${isScrolled ? 'bg-gray-100/60 dark:bg-white/5' : 'bg-white/60 dark:bg-black/40 backdrop-blur-xl'}
         `}>
           {}
           <div 

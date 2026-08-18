@@ -10,7 +10,7 @@ interface ApiResponse<T> {
 export const pageApi = {
   getSettings: async (): Promise<SiteSetting[]> => {
     try {
-      const response = await api.get<ApiResponse<{ items: SiteSetting[] }>>('/api/settings');
+      const response = await api.get<ApiResponse<{ items: SiteSetting[] }>>('/api/site-settings');
       return response.data.data.items || [];
     } catch (error) {
       console.error('Error fetching site settings:', error);
@@ -20,7 +20,7 @@ export const pageApi = {
 
   getSetting: async (id: string | number): Promise<SiteSetting | null> => {
     try {
-      const response = await api.get<ApiResponse<{ setting: SiteSetting }>>(`/api/settings/${id}`);
+      const response = await api.get<ApiResponse<{ setting: SiteSetting }>>(`/api/site-settings/${id}`);
       return response.data.data.setting;
     } catch (error) {
       console.error(`Error fetching setting ${id}:`, error);
@@ -30,7 +30,7 @@ export const pageApi = {
 
   createSetting: async (data: Partial<SiteSetting>): Promise<SiteSetting | null> => {
     try {
-      const response = await api.post<ApiResponse<{ setting: SiteSetting }>>('/api/settings', data);
+      const response = await api.post<ApiResponse<{ setting: SiteSetting }>>('/api/site-settings', data);
       return response.data.data.setting;
     } catch (error) {
       console.error('Error creating setting:', error);
@@ -40,7 +40,7 @@ export const pageApi = {
 
   updateSetting: async (id: string | number, data: Partial<SiteSetting>): Promise<SiteSetting | null> => {
     try {
-      const response = await api.patch<ApiResponse<{ setting: SiteSetting }>>(`/api/settings/${id}`, data);
+      const response = await api.patch<ApiResponse<{ setting: SiteSetting }>>(`/api/site-settings/${id}`, data);
       return response.data.data.setting;
     } catch (error) {
       console.error(`Error updating setting ${id}:`, error);
@@ -50,7 +50,7 @@ export const pageApi = {
 
   deleteSetting: async (id: string | number): Promise<boolean> => {
     try {
-      await api.delete(`/api/settings/${id}`);
+      await api.delete(`/api/site-settings/${id}`);
       return true;
     } catch (error) {
       console.error(`Error deleting setting ${id}:`, error);

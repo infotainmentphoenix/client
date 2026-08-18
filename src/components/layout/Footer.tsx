@@ -61,11 +61,17 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-black dark:bg-white rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.1)] dark:shadow-[0_0_15px_rgba(255,255,255,0.3)]">
-                <span className="text-white dark:text-black font-black text-2xl italic tracking-tighter">P</span>
-              </div>
-              <span className="text-gray-900 dark:text-white font-bold text-2xl tracking-[0.2em]">PHOENIX</span>
+            <div className="flex items-center mb-6">
+              <img 
+                src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20White.png" 
+                alt="Phoenix Infotainment Logo (Dark Mode)" 
+                className="hidden dark:block h-[80px] sm:h-[110px] w-auto object-contain" 
+              />
+              <img 
+                src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20Black.png" 
+                alt="Phoenix Infotainment Logo (Light Mode)" 
+                className="block dark:hidden h-[80px] sm:h-[110px] w-auto object-contain" 
+              />
             </div>
             <p className="text-gray-600 dark:text-gray-400 text-base mb-8 max-w-sm leading-relaxed font-light">
               Discover the life, energy & purpose of Phoenix Infotainment. Premium events, top artists, and unforgettable, legendary experiences.

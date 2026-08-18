@@ -34,18 +34,17 @@ export function PortalNav() {
     <aside className="w-64 flex-shrink-0 h-screen sticky top-0 bg-white/80 dark:bg-black/60 backdrop-blur-xl border-r border-gray-200 dark:border-white/10 shadow-[4px_0_24px_rgba(0,0,0,0.02)] z-50 flex flex-col transition-all">
       {}
       <div className="h-16 flex items-center px-6 border-b border-gray-200 dark:border-white/5">
-        <Link href="/dashboard" className="flex items-center gap-2.5 group">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-orange-500 to-rose-600 flex items-center justify-center text-white font-bold shadow-lg group-hover:scale-105 transition-transform">
-            P
-          </div>
-          <div className="flex flex-col">
-            <span className="font-bold text-sm bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
-              Phoenix Portal
-            </span>
-            <span className="text-[10px] text-orange-500 font-semibold uppercase tracking-wider">
-              Client Hub
-            </span>
-          </div>
+        <Link href="/dashboard" className="flex items-center group transition-transform hover:scale-105">
+          <img 
+            src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20White.png" 
+            alt="Phoenix Infotainment Logo (Dark Mode)" 
+            className="hidden dark:block h-[40px] sm:h-[50px] w-auto object-contain" 
+          />
+          <img 
+            src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20Black.png" 
+            alt="Phoenix Infotainment Logo (Light Mode)" 
+            className="block dark:hidden h-[40px] sm:h-[50px] w-auto object-contain" 
+          />
         </Link>
       </div>
 
