@@ -4,8 +4,13 @@ import { SiteSetting, ClientLogo, SocialLink } from './types';
 export const siteSettingsApi = {
   
   getSiteSettings: async (): Promise<Record<string, string>> => {
-    const res = await api.get<any>('/api/site-settings');
-    return res.data.data || {};
+    try {
+      const res = await api.get<any>('/api/site-settings');
+      return res.data.data || {};
+    } catch (error) {
+      console.error('Failed to fetch site settings:', error);
+      return {};
+    }
   },
   
   bulkUpsertSettings: async (settings: { key: string; value: string; type?: string }[]): Promise<Record<string, string>> => {
@@ -30,11 +35,15 @@ export const siteSettingsApi = {
 
   
   getSocialLinks: async (): Promise<{ data: SocialLink[], meta: any }> => {
-    const res = await api.get<any>('/api/social-links/getAllSocialLinks');
-    
-    const items = res.data?.data?.items || [];
-    const pagination = res.data?.data?.pagination || {};
-    return { data: items, meta: pagination };
+    try {
+      const res = await api.get<any>('/api/social-links/getAllSocialLinks');
+      const items = res.data?.data?.items || [];
+      const pagination = res.data?.data?.pagination || {};
+      return { data: items, meta: pagination };
+    } catch (error) {
+      console.error('Failed to fetch social links:', error);
+      return { data: [], meta: {} };
+    }
   },
 
   createSocialLink: async (data: FormData | any): Promise<SocialLink> => {

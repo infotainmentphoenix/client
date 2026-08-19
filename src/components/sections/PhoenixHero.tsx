@@ -14,13 +14,7 @@ function ArrowUpRightIcon({ className }: { className?: string }) {
   );
 }
 
-const DEFAULT_SLIDE: Partial<Carousel> = {
-  title: 'Elevate Your Experience',
-  subtitle: 'Discover the life, energy, and unyielding purpose of Phoenix Infotainment. Where moments become legendary.',
-  imageUrl: 'https://images.unsplash.com/photo-1470229722913-7c090be5c560?q=80&w=2000&auto=format&fit=crop',
-  buttonText: 'Explore Events',
-  linkUrl: '/events',
-};
+
 
 export function PhoenixHero() {
   const [slides, setSlides] = useState<Partial<Carousel>[]>([]);
@@ -33,8 +27,6 @@ export function PhoenixHero() {
       if (isMounted) {
         if (data && data.length > 0) {
           setSlides(data);
-        } else {
-          setSlides([DEFAULT_SLIDE]);
         }
       }
     };
@@ -53,7 +45,20 @@ export function PhoenixHero() {
     return () => clearInterval(timer);
   }, [slides.length]);
 
-  const activeSlide = slides[currentIndex] || DEFAULT_SLIDE;
+  const activeSlide = slides[currentIndex];
+
+  if (!activeSlide) {
+    return (
+      <section className="relative w-full h-[50vh] flex items-center justify-center overflow-hidden bg-black pt-20 border-b border-white/10">
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
+        <div className="relative z-10 text-center">
+          <h1 className="text-3xl md:text-5xl font-black text-gray-500 tracking-tighter">
+            Welcome to Phoenix
+          </h1>
+        </div>
+      </section>
+    );
+  }
 
   const nextSlide = () => {
     if (slides.length > 1) {
@@ -81,7 +86,7 @@ export function PhoenixHero() {
               : 'opacity-0 scale-100'
           }`}
           style={{
-            backgroundImage: `url("${slide.imageUrl || DEFAULT_SLIDE.imageUrl}")`,
+            backgroundImage: `url("${slide.imageUrl}")`,
           }}
         />
       ))}
@@ -105,11 +110,11 @@ export function PhoenixHero() {
           </div>
           
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white via-gray-200 to-gray-500 leading-[1.1] mb-6 drop-shadow-2xl tracking-tighter">
-            {activeSlide.title || DEFAULT_SLIDE.title}
+            {activeSlide.title}
           </h1>
           
           <p className="text-gray-200 text-lg md:text-2xl mb-10 font-light drop-shadow-md max-w-xl leading-relaxed">
-            {activeSlide.subtitle || DEFAULT_SLIDE.subtitle}
+            {activeSlide.subtitle}
           </p>
           
           <div className="flex flex-wrap gap-6 items-center">

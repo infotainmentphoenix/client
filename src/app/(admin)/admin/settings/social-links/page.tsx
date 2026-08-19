@@ -44,6 +44,8 @@ export default function AdminSettingsSocialLinksPage() {
   const [newPlatform, setNewPlatform] = useState<SocialPlatform>('INSTAGRAM');
   const [newUrl, setNewUrl] = useState('');
   const [isSaving, setIsSaving] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     loadLinks();
@@ -66,6 +68,8 @@ export default function AdminSettingsSocialLinksPage() {
     if (!newUrl) return;
 
     setIsSaving(true);
+    setSuccessMessage(null);
+    setErrorMessage(null);
     try {
       const payload = {
         platform: newPlatform,
@@ -78,8 +82,11 @@ export default function AdminSettingsSocialLinksPage() {
       setLinks(prev => [...prev, newLink]);
       setNewUrl('');
       setIsAdding(false);
+      setSuccessMessage('Social link added successfully!');
+      setTimeout(() => setSuccessMessage(null), 5000);
     } catch (err: any) {
-      alert(err.message || 'Failed to add social link');
+      setErrorMessage(err.message || 'Failed to add social link');
+      setTimeout(() => setErrorMessage(null), 5000);
     } finally {
       setIsSaving(false);
     }
@@ -87,11 +94,16 @@ export default function AdminSettingsSocialLinksPage() {
 
   const handleDelete = async (id: number) => {
     if (!window.confirm('Remove this social link?')) return;
+    setSuccessMessage(null);
+    setErrorMessage(null);
     try {
       await siteSettingsApi.deleteSocialLink(id);
       setLinks(prev => prev.filter(l => l.id !== id));
-    } catch (err) {
-      alert('Failed to delete social link');
+      setSuccessMessage('Social link removed.');
+      setTimeout(() => setSuccessMessage(null), 5000);
+    } catch (err: any) {
+      setErrorMessage(err.message || 'Failed to delete social link');
+      setTimeout(() => setErrorMessage(null), 5000);
     }
   };
 
@@ -108,6 +120,30 @@ export default function AdminSettingsSocialLinksPage() {
       
       {/* Decorative Blur */}
       <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+
+      {successMessage && (
+        <div className="mb-6 relative z-10 p-4 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-sm rounded-xl flex items-center justify-between shadow-sm animate-in fade-in duration-200">
+          <div className="flex items-center gap-2">
+            <svg className="w-5 h-5 text-emerald-500 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>{successMessage}</span>
+          </div>
+          <button onClick={() => setSuccessMessage(null)} className="hover:opacity-75 transition-opacity">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+      )}
+
+      {errorMessage && (
+        <div className="mb-6 relative z-10 p-4 bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-500/20 text-red-700 dark:text-red-400 text-sm rounded-xl flex items-center justify-between shadow-sm animate-in fade-in duration-200">
+          <div className="flex items-center gap-2">
+            <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            <span>{errorMessage}</span>
+          </div>
+          <button onClick={() => setErrorMessage(null)} className="hover:opacity-75 transition-opacity">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+      )}
 
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 relative z-10">
         <div>

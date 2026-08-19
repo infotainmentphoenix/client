@@ -3,8 +3,13 @@ import { User, CreateUserInput, UpdateUserInput } from './types';
 
 export const userApi = {
   getUsers: async (): Promise<User[]> => {
-    const res = await api.get<any>('/api/users');
-    return res.data.data || [];
+    try {
+      const res = await api.get<any>('/api/users');
+      return res.data?.data?.items || res.data?.data || [];
+    } catch (error) {
+      console.error('Failed to fetch users:', error);
+      return [];
+    }
   },
 
   getUserById: async (id: number): Promise<User> => {

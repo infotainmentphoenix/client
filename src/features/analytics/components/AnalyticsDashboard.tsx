@@ -66,6 +66,36 @@ export function AnalyticsDashboard() {
   ];
   const totalTypedInquiries = inquiryTypes.reduce((acc, curr) => acc + curr.count, 0);
 
+  const thirtyDaysAgo = new Date();
+  thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+  
+  const sixtyDaysAgo = new Date();
+  sixtyDaysAgo.setDate(sixtyDaysAgo.getDate() - 60);
+
+  const inquiriesLast30 = inquiries.filter(i => new Date(i.createdAt) >= thirtyDaysAgo);
+  const inquiriesPrev30 = inquiries.filter(i => new Date(i.createdAt) >= sixtyDaysAgo && new Date(i.createdAt) < thirtyDaysAgo);
+
+  const calcTrend = (current: number, previous: number) => {
+    if (previous === 0) return current > 0 ? '+100% from last month' : 'No change';
+    const percent = Math.round(((current - previous) / previous) * 100);
+    return percent >= 0 ? `+${percent}% from last month` : `${percent}% from last month`;
+  };
+
+  const leadVolumeTrend = calcTrend(inquiriesLast30.length, inquiriesPrev30.length);
+  
+  const closedLast30 = inquiriesLast30.filter(i => i.status === 'CLOSED_WON' || i.status === 'WON').length;
+  const closedPrev30 = inquiriesPrev30.filter(i => i.status === 'CLOSED_WON' || i.status === 'WON').length;
+  const convRateLast30 = inquiriesLast30.length > 0 ? (closedLast30 / inquiriesLast30.length) * 100 : 0;
+  const convRatePrev30 = inquiriesPrev30.length > 0 ? (closedPrev30 / inquiriesPrev30.length) * 100 : 0;
+  
+  const convRateDiff = Math.round(convRateLast30 - convRatePrev30);
+  const convRateTrend = convRatePrev30 === 0 && convRateLast30 > 0 ? '+100% from last month' : convRatePrev30 === 0 && convRateLast30 === 0 ? 'No change' : `${convRateDiff >= 0 ? '+' : ''}${convRateDiff}% from last month`;
+
+  const bestCategory = inquiryTypes.reduce((prev, curr) => (prev.count > curr.count) ? prev : curr, inquiryTypes[0]);
+  const aiInsightText = totalInquiries > 0 
+    ? `Your top inquiry category is "${bestCategory.name}" with ${bestCategory.count} leads. Consider tailoring your marketing to capitalize on this interest.`
+    : `You haven't received any inquiries yet. Try running targeted ad campaigns or optimizing your landing page SEO to attract your first leads.`;
+
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center h-64 text-gray-500">
@@ -80,8 +110,8 @@ export function AnalyticsDashboard() {
       {}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {[
-          { label: 'Total Lead Volume', value: totalInquiries.toString(), trend: '+14% from last month', icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z', color: 'text-blue-500', bg: 'bg-blue-500/10' },
-          { label: 'Conversion Rate', value: `${conversionRate}%`, trend: '+2.4% from last month', icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z', color: 'text-emerald-500', bg: 'bg-emerald-500/10' },
+          { label: 'Total Lead Volume', value: totalInquiries.toString(), trend: leadVolumeTrend, icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z', color: 'text-blue-500', bg: 'bg-blue-500/10' },
+          { label: 'Conversion Rate', value: `${conversionRate}%`, trend: convRateTrend, icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z', color: 'text-emerald-500', bg: 'bg-emerald-500/10' },
           { label: 'Upcoming Events', value: upcomingEvents.toString(), trend: 'Next 30 days', icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z', color: 'text-purple-500', bg: 'bg-purple-500/10' },
           { label: 'Total Successful Events', value: pastEvents.toString(), trend: 'All time', icon: 'M5 3v4M19 3v4M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2zM15 11h2v2h-2v-2zM11 11h2v2h-2v-2zM7 11h2v2H7v-2z', color: 'text-orange-500', bg: 'bg-orange-500/10' },
         ].map((stat, i) => (
@@ -182,7 +212,7 @@ export function AnalyticsDashboard() {
             </div>
             <h3 className="text-xl font-bold mb-2">AI Performance Insight</h3>
             <p className="text-blue-100 text-sm leading-relaxed mb-4">
-              Your artist bookings have increased by 24% this quarter. Consider highlighting your top-performing musicians on the homepage to capitalize on this trend.
+              {aiInsightText}
             </p>
             <button className="text-sm font-semibold bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition-colors">
               View Detailed Report

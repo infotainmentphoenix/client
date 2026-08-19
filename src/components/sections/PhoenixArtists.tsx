@@ -23,61 +23,6 @@ const availabilityLabels: Record<string, { text: string; dot: string; bg: string
   ON_REQUEST: { text: 'On Request', dot: 'bg-blue-400 animate-pulse shadow-[0_0_12px_rgba(96,165,250,0.9)]', bg: 'bg-blue-500/20 border-blue-500/40 text-blue-300' },
 };
 
-const FALLBACK_ARTISTS: any[] = [
-  {
-    id: 901,
-    name: "DJ Skrillex",
-    slug: "dj-skrillex",
-    category: { name: "Electronic / Dubstep" },
-    availability: "AVAILABLE",
-    verified: true,
-    featured: true,
-    profileImage: "https://images.unsplash.com/photo-1571266028243-3716f02d2d2e?q=80&w=800&auto=format&fit=crop",
-    shortBio: "Multi-Grammy Award winning electronic music producer and DJ renowned for energetic live performances.",
-    basedIn: "Los Angeles",
-    priceRange: "Premium"
-  },
-  {
-    id: 902,
-    name: "Martin Garrix",
-    slug: "martin-garrix",
-    category: { name: "EDM / House" },
-    availability: "BUSY",
-    verified: true,
-    featured: true,
-    profileImage: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop",
-    shortBio: "Dutch DJ and record producer consistently ranked among the top DJs globally.",
-    basedIn: "Amsterdam",
-    priceRange: "Premium"
-  },
-  {
-    id: 903,
-    name: "A.R. Rahman",
-    slug: "ar-rahman",
-    category: { name: "World / Classical" },
-    availability: "ON_REQUEST",
-    verified: true,
-    featured: true,
-    profileImage: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop",
-    shortBio: "Legendary composer, singer-songwriter, and music producer bringing unparalleled musical magic.",
-    basedIn: "Chennai",
-    priceRange: "Exclusive"
-  },
-  {
-    id: 904,
-    name: "Divine",
-    slug: "divine",
-    category: { name: "Hip Hop / Rap" },
-    availability: "AVAILABLE",
-    verified: true,
-    featured: false,
-    profileImage: "https://images.unsplash.com/photo-1493225457124-a1a2a5f5f4dc?q=80&w=800&auto=format&fit=crop",
-    shortBio: "Pioneering Indian rapper and hip-hop artist known for electrifying the crowd.",
-    basedIn: "Mumbai",
-    priceRange: "Standard"
-  }
-];
-
 export function PhoenixArtists() {
   const [artists, setArtists] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -98,15 +43,11 @@ export function PhoenixArtists() {
           }
         }
 
-        // If the database has absolutely no artists or API fails, use the beautiful fallback ones
-        // so the homepage always looks perfect.
-        if (fetchedArtists.length === 0) {
-          setArtists(FALLBACK_ARTISTS);
-        } else {
+        if (fetchedArtists.length > 0) {
           setArtists(fetchedArtists);
         }
       } catch (err) {
-        setArtists(FALLBACK_ARTISTS);
+        console.error("Failed to load artists", err);
       }
       setIsLoading(false);
     };
@@ -148,6 +89,10 @@ export function PhoenixArtists() {
             {[...Array(4)].map((_, i) => (
               <div key={i} className="w-64 h-64 sm:w-72 sm:h-72 rounded-full bg-white/5 animate-pulse" />
             ))}
+          </div>
+        ) : artists.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-16 text-center text-gray-500">
+            <p className="text-lg">No artists available at the moment.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 justify-items-center">

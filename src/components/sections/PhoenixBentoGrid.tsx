@@ -1,8 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { useRef, MouseEvent } from 'react';
+import { useRef, MouseEvent, useState, useEffect } from 'react';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { serviceApi } from '@/features/services/api';
+import { Service } from '@/features/services/types';
 
 function ArrowUpRightIcon({ className }: { className?: string }) {
   return (
@@ -57,6 +59,20 @@ function GlowCard({ children, className, href }: { children: React.ReactNode, cl
 }
 
 export function PhoenixBentoGrid() {
+  const [services, setServices] = useState<Service[]>([]);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const data = await serviceApi.getServices();
+        setServices(data.filter(s => s.isActive).slice(0, 8)); // Top 8 active services
+      } catch (err) {
+        console.error("Failed to load services", err);
+      }
+    };
+    fetchServices();
+  }, []);
+
   return (
     <section className="container mx-auto px-4 md:px-8 pt-16 md:pt-24 pb-24 relative z-10">
       <ScrollReveal className="flex flex-col items-center justify-center mb-16">
@@ -95,11 +111,14 @@ export function PhoenixBentoGrid() {
             
             <div className="flex flex-wrap gap-3 mt-auto relative z-10 overflow-y-auto flex-1 content-start pb-4 hide-scroll" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
               <style dangerouslySetInnerHTML={{ __html: `.hide-scroll::-webkit-scrollbar { display: none; }` }} />
-              {['Corporate Events', 'Weddings', 'Concerts', 'Photography', 'Videography', 'Live Streaming', 'Artist Management', 'Stage Setup'].map((tag, i) => (
-                <Link href="/services" key={tag} className="px-4 py-2.5 rounded-full border border-black/10 dark:border-white/10 text-sm font-medium text-gray-700 dark:text-gray-300 bg-black/5 dark:bg-white/5 hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 hover:text-white dark:hover:text-white hover:border-transparent cursor-pointer transition-all duration-500 hover:shadow-[0_4px_20px_rgba(147,51,234,0.3)] hover:-translate-y-1" style={{ animationDelay: `${i * 100}ms` }}>
-                  {tag}
+              {services.map((service, i) => (
+                <Link href={`/services/${service.slug}`} key={service.id} className="px-4 py-2.5 rounded-full border border-black/10 dark:border-white/10 text-sm font-medium text-gray-700 dark:text-gray-300 bg-black/5 dark:bg-white/5 hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 hover:text-white dark:hover:text-white hover:border-transparent cursor-pointer transition-all duration-500 hover:shadow-[0_4px_20px_rgba(147,51,234,0.3)] hover:-translate-y-1" style={{ animationDelay: `${i * 100}ms` }}>
+                  {service.name}
                 </Link>
               ))}
+              {services.length === 0 && (
+                <p className="text-sm text-gray-500 dark:text-gray-400">No services available yet.</p>
+              )}
             </div>
           </GlowCard>
         </ScrollReveal>

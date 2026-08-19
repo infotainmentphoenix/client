@@ -74,31 +74,6 @@ export default function PressReleaseDetailPage({ params }: PageProps) {
           setPost(found);
           // Suggest other posts (excluding current)
           setRecentPosts(items.filter(p => p.id !== found.id).slice(0, 3));
-        } else {
-          // Check fallbacks if slug belongs to mock releases
-          const isMock = slug.startsWith('phoenix-') || slug.startsWith('how-');
-          if (isMock) {
-            const fallbackReleases = await pressApi.getPressReleases();
-            const foundMock = fallbackReleases.find(r => r.slug === slug);
-            if (foundMock) {
-              // Convert mock release to BlogPost format
-              const mappedMock: BlogPost = {
-                id: foundMock.id,
-                title: foundMock.title,
-                slug: foundMock.slug || slug,
-                excerpt: foundMock.summary,
-                content: foundMock.summary + '\n\nThis is a featured press story published on our media outlets. Contact our PR team for the full press package or read the story details directly on the main publications.',
-                youtubeUrl: null,
-                featuredImage: foundMock.featuredImage,
-                status: 'PUBLISHED',
-                publishedAt: new Date().toISOString(),
-                createdAt: new Date().toISOString(),
-                updatedAt: new Date().toISOString(),
-              };
-              setPost(mappedMock);
-              setRecentPosts([]);
-            }
-          }
         }
       } catch (error) {
         console.error('Error fetching press post:', error);

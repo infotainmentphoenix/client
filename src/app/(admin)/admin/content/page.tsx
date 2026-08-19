@@ -4,6 +4,13 @@ import Link from 'next/link';
 import { artistApi } from '@/features/artists/api';
 import { eventApi } from '@/features/events/api';
 import { serviceApi } from '@/features/services/api';
+import { faqApi } from '@/features/faqs/api';
+import { carouselApi } from '@/features/carousel/api';
+import { galleryApi } from '@/features/gallery/api';
+import { pageApi } from '@/features/pages/api';
+import { pressApi } from '@/features/press/api';
+import { teamApi } from '@/features/team/api';
+import { testimonialApi } from '@/features/testimonials/api';
 
 const CONTENT_MODULES = [
   {
@@ -109,22 +116,49 @@ const CONTENT_MODULES = [
 ];
 
 export default function ContentDashboardPage() {
-  const [counts, setCounts] = useState<{ artists: number; events: number; services: number }>({
+  const [counts, setCounts] = useState<{ [key: string]: number }>({
     artists: 0,
     events: 0,
-    services: 0
+    services: 0,
+    faqs: 0,
+    carousels: 0,
+    gallery: 0,
+    pages: 0,
+    press: 0,
+    team: 0,
+    testimonials: 0
   });
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function loadCounts() {
       try {
-        const [a, e, s] = await Promise.all([
-          artistApi.getArtists(),
-          eventApi.getEvents(),
-          serviceApi.getServices(true)
+        const [
+          a, e, s, f, c, g, p, pr, t, test
+        ] = await Promise.all([
+          artistApi.getArtists().catch(() => []),
+          eventApi.getEvents().catch(() => []),
+          serviceApi.getServices(true).catch(() => []),
+          faqApi.getFaqs().catch(() => []),
+          carouselApi.getCarousels().catch(() => []),
+          galleryApi.getItems().catch(() => []),
+          pageApi.getSettings().catch(() => []),
+          pressApi.getBlogPosts().catch(() => ({ items: [] })).then(res => Array.isArray(res) ? res : (res?.items || [])),
+          teamApi.getMembers().catch(() => []),
+          testimonialApi.getTestimonials().catch(() => [])
         ]);
-        setCounts({ artists: a.length, events: e.length, services: s.length });
+        setCounts({ 
+          artists: a.length, 
+          events: e.length, 
+          services: s.length,
+          faqs: f.length,
+          carousels: c.length,
+          gallery: g.length,
+          pages: p.length,
+          press: pr.length,
+          team: t.length,
+          testimonials: test.length
+        });
       } catch (error) {
         console.error("Failed to load counts", error);
       } finally {
@@ -147,10 +181,7 @@ export default function ContentDashboardPage() {
       {}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {CONTENT_MODULES.map((module) => {
-          let count = 0;
-          if (module.id === 'artists') count = counts.artists;
-          if (module.id === 'events') count = counts.events;
-          if (module.id === 'services') count = counts.services;
+          let count = counts[module.id] || 0;
 
           return (
             <Link key={module.id} href={module.href} className="group flex flex-col bg-card border border-border hover:border-transparent rounded-2xl p-6 transition-all shadow-sm hover:shadow-xl hover:-translate-y-1 relative overflow-hidden">
@@ -163,16 +194,14 @@ export default function ContentDashboardPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={module.icon} />
                   </svg>
                 </div>
-                {['artists', 'events', 'services'].includes(module.id) && (
-                  <div className="text-right">
-                    {isLoading ? (
-                      <div className="w-8 h-6 bg-gray-200 dark:bg-white/10 rounded animate-pulse" />
-                    ) : (
-                      <span className="text-2xl font-bold tracking-tight text-foreground">{count || '-'}</span>
-                    )}
-                    <p className="text-xs text-gray-500 font-medium uppercase tracking-wider">Total</p>
-                  </div>
-                )}
+                <div className="text-right">
+                  {isLoading ? (
+                    <div className="w-8 h-6 bg-gray-200 dark:bg-white/10 rounded animate-pulse inline-block" />
+                  ) : (
+                    <span className="text-2xl font-bold tracking-tight text-foreground">{count || '0'}</span>
+                  )}
+                  <p className="text-xs text-gray-500 font-medium uppercase tracking-wider">Total</p>
+                </div>
               </div>
               
               <div className="relative z-10">
@@ -191,17 +220,7 @@ export default function ContentDashboardPage() {
         })}
       </div>
 
-      {}
-      <div className="bg-card border border-dashed border-border rounded-2xl p-8 flex flex-col items-center justify-center text-center">
-        <div className="w-16 h-16 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-600 flex items-center justify-center mb-4">
-          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
-        </div>
-        <h3 className="text-xl font-bold mb-2">Quick Media Upload</h3>
-        <p className="text-gray-500 max-w-md mx-auto mb-6">Drag and drop images here to quickly add them to your central media library. You can attach them to events or artists later.</p>
-        <button className="px-6 py-2.5 bg-foreground text-background font-medium rounded-lg hover:opacity-90 transition-opacity">
-          Browse Files
-        </button>
-      </div>
+
     </div>
   );
 }
