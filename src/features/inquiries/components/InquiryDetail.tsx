@@ -20,16 +20,35 @@ export function InquiryDetail({ inquiryId }: InquiryDetailProps) {
   });
   
   const [isAddingActivity, setIsAddingActivity] = useState(false);
+  const [localLeadScore, setLocalLeadScore] = useState<number | null>(null);
 
   useEffect(() => {
     loadInquiry();
   }, [inquiryId]);
+
+  useEffect(() => {
+    if (inquiry) {
+      setLocalLeadScore(inquiry.leadScore ?? 0);
+    }
+  }, [inquiry?.id, inquiry?.leadScore]);
 
   const loadInquiry = async () => {
     setIsLoading(true);
     const data = await inquiryApi.getInquiry(inquiryId);
     setInquiry(data);
     setIsLoading(false);
+  };
+
+  const saveLeadScore = async (score: number) => {
+    if (!inquiry) return;
+    const cleanScore = Math.min(100, Math.max(0, score));
+    const success = await inquiryApi.updateInquiry(inquiry.id, { leadScore: cleanScore });
+    if (success) {
+      setInquiry({ ...inquiry, leadScore: cleanScore });
+    } else {
+      setLocalLeadScore(inquiry.leadScore ?? 0);
+      alert('Failed to update lead score.');
+    }
   };
 
   const handleStatusChange = async (status: InquiryStatus) => {
@@ -203,16 +222,41 @@ export function InquiryDetail({ inquiryId }: InquiryDetailProps) {
               </select>
             </div>
 
-            {inquiry.leadScore !== undefined && (
+            {localLeadScore !== null && (
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">Lead Score</label>
-                <div className="w-full bg-background border border-border rounded-lg overflow-hidden h-6">
-                  <div 
-                    className={`h-full ${inquiry.leadScore > 70 ? 'bg-green-500' : inquiry.leadScore > 40 ? 'bg-yellow-500' : 'bg-red-500'}`} 
-                    style={{ width: `${Math.min(100, Math.max(0, inquiry.leadScore))}%` }}
-                  ></div>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="block text-sm font-medium text-foreground">Lead Score</label>
+                  <input
+                    type="number"
+                    min="0"
+                    max="100"
+                    value={localLeadScore}
+                    onChange={(e) => setLocalLeadScore(Math.min(100, Math.max(0, parseInt(e.target.value) || 0)))}
+                    onBlur={() => saveLeadScore(localLeadScore)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        saveLeadScore(localLeadScore);
+                      }
+                    }}
+                    className="w-16 px-2 py-0.5 text-xs text-right bg-background border border-border rounded focus:outline-none focus:ring-1 focus:ring-blue-500 font-semibold"
+                  />
                 </div>
-                <p className="text-xs text-right mt-1 text-gray-500">{inquiry.leadScore} / 100</p>
+                
+                <div className="flex items-center gap-3">
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={localLeadScore}
+                    onChange={(e) => setLocalLeadScore(parseInt(e.target.value) || 0)}
+                    onMouseUp={() => saveLeadScore(localLeadScore)}
+                    onTouchEnd={() => saveLeadScore(localLeadScore)}
+                    className="flex-grow h-1.5 bg-gray-200 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                  />
+                  <span className={`text-xs font-bold w-8 text-right ${localLeadScore > 70 ? 'text-green-500' : localLeadScore > 40 ? 'text-yellow-500' : 'text-red-500'}`}>
+                    {localLeadScore}%
+                  </span>
+                </div>
               </div>
             )}
           </div>

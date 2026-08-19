@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { galleryApi } from '../api';
 import { CarouselItem } from '../types';
+import { extractValidationErrors } from '@/lib/utils';
 
 interface GalleryFormProps {
   itemId?: string | number;
@@ -43,7 +44,7 @@ export function GalleryForm({ itemId }: GalleryFormProps) {
   const loadItem = async () => {
     setIsLoading(true);
     try {
-      const data = await galleryApi.getItem(itemId!);
+      const data = await galleryApi.getItem(itemId!, true);
       if (data) {
         setFormData({
           title: data.title || '',
@@ -175,16 +176,19 @@ export function GalleryForm({ itemId }: GalleryFormProps) {
       console.error('Error submitting gallery form:', err);
       setError(err.message || 'An error occurred while uploading gallery media.');
       
-      if (err.errors?.issues) {
-        const fieldErrors: Record<string, string> = {};
-        err.errors.issues.forEach((issue: any) => {
-          const path = issue.path[0];
-          if (path) {
-            fieldErrors[path] = issue.message;
-          }
-        });
-        setValidationErrors(fieldErrors);
-      }
+      const fieldErrors = extractValidationErrors(err);
+      setValidationErrors(fieldErrors);
+
+      // Scroll to the first error field or top of the form
+      setTimeout(() => {
+        const errorInput = document.querySelector('.border-red-500');
+        if (errorInput) {
+          errorInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          (errorInput as HTMLElement).focus?.();
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }, 100);
     } finally {
       setIsLoading(false);
     }

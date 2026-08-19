@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { serviceApi } from '../api';
 import { Service } from '../types';
+import { extractValidationErrors } from '@/lib/utils';
 
 interface ServiceFormProps {
   serviceId?: string | number;
@@ -55,7 +56,7 @@ export function ServiceForm({ serviceId }: ServiceFormProps) {
   const loadService = async () => {
     setIsLoading(true);
     try {
-      const data = await serviceApi.getService(serviceId!);
+      const data = await serviceApi.getService(serviceId!, true);
       if (data) {
         setFormData({
           name: data.name || '',
@@ -255,16 +256,19 @@ export function ServiceForm({ serviceId }: ServiceFormProps) {
       console.error('Error submitting form:', err);
       setError(err.message || 'An error occurred while saving the service.');
       
-      if (err.errors?.issues) {
-        const fieldErrors: Record<string, string> = {};
-        err.errors.issues.forEach((issue: any) => {
-          const path = issue.path[0];
-          if (path) {
-            fieldErrors[path] = issue.message;
-          }
-        });
-        setValidationErrors(fieldErrors);
-      }
+      const fieldErrors = extractValidationErrors(err);
+      setValidationErrors(fieldErrors);
+
+      // Scroll to the first error field or top of the form
+      setTimeout(() => {
+        const errorInput = document.querySelector('.border-red-500');
+        if (errorInput) {
+          errorInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          (errorInput as HTMLElement).focus?.();
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }, 100);
     } finally {
       setIsLoading(false);
     }

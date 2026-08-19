@@ -15,7 +15,7 @@ export function GalleryList() {
 
   const loadItems = async () => {
     setIsLoading(true);
-    const data = await galleryApi.getItems();
+    const data = await galleryApi.getItems(true);
     setItems(data);
     setIsLoading(false);
   };

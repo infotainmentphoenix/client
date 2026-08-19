@@ -201,38 +201,41 @@ interface ApiResponse<T> {
 }
 
 export const serviceApi = {
-  getServices: async (): Promise<Service[]> => {
+  getServices: async (ignoreFallback: boolean = false): Promise<Service[]> => {
     try {
       const response = await api.get<ApiResponse<any>>('/api/services');
       const items = response.data?.data?.items || response.data?.data || response.data;
       if (Array.isArray(items)) {
-        return items.length > 0 ? items : fallbackServices;
+        if (items.length > 0) return items;
+        return ignoreFallback ? [] : fallbackServices;
       }
-      return fallbackServices;
+      return ignoreFallback ? [] : fallbackServices;
     } catch (error) {
       console.warn('Backend API unavailable, using database fallback services:', error);
-      return fallbackServices;
+      return ignoreFallback ? [] : fallbackServices;
     }
   },
 
-  getServiceBySlug: async (slug: string): Promise<Service | null> => {
+  getServiceBySlug: async (slug: string, ignoreFallback: boolean = false): Promise<Service | null> => {
     try {
       const response = await api.get<ApiResponse<any>>(`/api/services/${slug}`);
       const item = response.data?.data?.item || response.data?.data?.service || response.data?.data;
       if (item && (item.slug || item.id)) {
         return item;
       }
+      if (ignoreFallback) return null;
       const found = fallbackServices.find(s => s.slug === slug || s.id.toString() === slug);
       return found || fallbackServices[0];
     } catch (error) {
       console.warn(`Backend API unavailable for service slug ${slug}, using database fallback:`, error);
+      if (ignoreFallback) return null;
       const found = fallbackServices.find(s => s.slug === slug || s.id.toString() === slug);
       return found || fallbackServices[0];
     }
   },
 
-  getService: async (id: string | number): Promise<Service | null> => {
-    const services = await serviceApi.getServices();
+  getService: async (id: string | number, ignoreFallback: boolean = false): Promise<Service | null> => {
+    const services = await serviceApi.getServices(ignoreFallback);
     return services.find(s => s.id.toString() === id.toString() || s.slug === id) || null;
   },
 

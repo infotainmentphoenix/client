@@ -30,31 +30,39 @@ export function AnalyticsDashboard() {
   }, []);
 
   
-  const totalInquiries = inquiries.length || 248; 
-  const closedWon = inquiries.filter(i => i.status === 'CLOSED_WON' || i.status === 'WON').length || 42;
+  const totalInquiries = inquiries.length; 
+  const closedWon = inquiries.filter(i => i.status === 'CLOSED_WON' || i.status === 'WON').length;
   const conversionRate = totalInquiries > 0 ? Math.round((closedWon / totalInquiries) * 100) : 0;
   
-  const upcomingEvents = events.filter(e => new Date(e.eventDate || '') > new Date()).length || 15;
-  const pastEvents = events.filter(e => new Date(e.eventDate || '') <= new Date()).length || 120;
+  const upcomingEvents = events.filter(e => e.eventDate && new Date(e.eventDate) > new Date()).length;
+  const pastEvents = events.filter(e => e.eventDate && new Date(e.eventDate) <= new Date()).length;
 
-  // Mock data for visual charts if real data is sparse
-  const monthlyData = [
-    { month: 'Jan', value: 45 },
-    { month: 'Feb', value: 52 },
-    { month: 'Mar', value: 38 },
-    { month: 'Apr', value: 65 },
-    { month: 'May', value: 48 },
-    { month: 'Jun', value: 85 },
-    { month: 'Jul', value: 72 },
-  ];
+  // Group real inquiries by month for the last 7 months
+  const last7Months = Array.from({ length: 7 }, (_, i) => {
+    const d = new Date();
+    d.setMonth(d.getMonth() - (6 - i));
+    return {
+      month: d.toLocaleString('default', { month: 'short' }),
+      monthNum: d.getMonth(),
+      year: d.getFullYear()
+    };
+  });
 
-  const maxMonthlyValue = Math.max(...monthlyData.map(d => d.value));
+  const monthlyData = last7Months.map(m => {
+    const count = inquiries.filter(inq => {
+      const date = new Date(inq.createdAt);
+      return date.getMonth() === m.monthNum && date.getFullYear() === m.year;
+    }).length;
+    return { month: m.month, value: count };
+  });
+
+  const maxMonthlyValue = Math.max(...monthlyData.map(d => d.value), 1);
 
   const inquiryTypes = [
-    { name: 'General', count: inquiries.filter(i => i.inquiryType === 'GENERAL').length || 45, color: 'bg-blue-500' },
-    { name: 'Artist Booking', count: inquiries.filter(i => i.inquiryType === 'ARTIST_BOOKING').length || 85, color: 'bg-purple-500' },
-    { name: 'Event Mgmt', count: inquiries.filter(i => i.inquiryType === 'EVENT_MANAGEMENT').length || 65, color: 'bg-emerald-500' },
-    { name: 'Services', count: inquiries.filter(i => i.inquiryType === 'SERVICE_INQUIRY').length || 32, color: 'bg-orange-500' },
+    { name: 'General', count: inquiries.filter(i => i.inquiryType === 'GENERAL').length, color: 'bg-blue-500' },
+    { name: 'Artist Booking', count: inquiries.filter(i => i.inquiryType === 'ARTIST_BOOKING').length, color: 'bg-purple-500' },
+    { name: 'Event Mgmt', count: inquiries.filter(i => i.inquiryType === 'EVENT_MANAGEMENT').length, color: 'bg-emerald-500' },
+    { name: 'Services', count: inquiries.filter(i => i.inquiryType === 'SERVICE_INQUIRY').length, color: 'bg-orange-500' },
   ];
   const totalTypedInquiries = inquiryTypes.reduce((acc, curr) => acc + curr.count, 0);
 
@@ -187,27 +195,69 @@ export function AnalyticsDashboard() {
         <div className="bg-card border border-border p-6 rounded-2xl shadow-sm">
           <h3 className="text-lg font-bold mb-4">Recent Conversion Wins</h3>
           <div className="space-y-4">
-            {[
-              { client: 'Rahul Sharma', amount: '₹1.2L', time: '2 hours ago', service: 'Wedding Entertainment' },
-              { client: 'TechCorp India', amount: '₹4.5L', time: '5 hours ago', service: 'Corporate Event' },
-              { client: 'Priya Patel', amount: '₹85K', time: 'Yesterday', service: 'Private Party' },
-            ].map((win, i) => (
-              <div key={i} className="flex items-center justify-between p-3 hover:bg-foreground/[0.02] rounded-lg transition-colors border border-transparent hover:border-border">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-green-100 dark:bg-green-500/20 text-green-600 flex items-center justify-center font-bold text-sm">
-                    {win.client.charAt(0)}
+            {(() => {
+              const conversionWins = inquiries
+                .filter(i => i.status === 'WON' || i.status === 'CLOSED_WON')
+                .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
+                .slice(0, 3)
+                .map(win => {
+                  let amountStr = 'N/A';
+                  if (win.budgetMax) {
+                    amountStr = `${win.currency || '₹'}${win.budgetMax >= 100000 ? `${(win.budgetMax / 100000).toFixed(1)}L` : win.budgetMax >= 1000 ? `${(win.budgetMax / 1000).toFixed(0)}K` : win.budgetMax}`;
+                  } else if (win.budgetMin) {
+                    amountStr = `${win.currency || '₹'}${win.budgetMin >= 100000 ? `${(win.budgetMin / 100000).toFixed(1)}L` : win.budgetMin >= 1000 ? `${(win.budgetMin / 1000).toFixed(0)}K` : win.budgetMin}`;
+                  }
+                  
+                  const date = new Date(win.updatedAt);
+                  const diffMs = new Date().getTime() - date.getTime();
+                  const diffHrs = Math.floor(diffMs / (1000 * 60 * 60));
+                  const diffDays = Math.floor(diffHrs / 24);
+                  
+                  let timeStr = '';
+                  if (diffHrs < 1) {
+                    timeStr = 'Just now';
+                  } else if (diffHrs < 24) {
+                    timeStr = `${diffHrs} ${diffHrs === 1 ? 'hour' : 'hours'} ago`;
+                  } else if (diffDays === 1) {
+                    timeStr = 'Yesterday';
+                  } else {
+                    timeStr = `${diffDays} days ago`;
+                  }
+
+                  return {
+                    client: win.name,
+                    amount: amountStr,
+                    time: timeStr,
+                    service: win.eventType?.replace('_', ' ') || 'Event Services'
+                  };
+                });
+
+              if (conversionWins.length === 0) {
+                return (
+                  <div className="text-center py-8 text-gray-500 text-sm">
+                    No conversion wins recorded yet.
                   </div>
-                  <div>
-                    <p className="font-semibold text-sm">{win.client}</p>
-                    <p className="text-xs text-gray-500">{win.service}</p>
+                );
+              }
+
+              return conversionWins.map((win, i) => (
+                <div key={i} className="flex items-center justify-between p-3 hover:bg-foreground/[0.02] rounded-lg transition-colors border border-transparent hover:border-border">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-green-100 dark:bg-green-500/20 text-green-600 flex items-center justify-center font-bold text-sm">
+                      {win.client.charAt(0)}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-sm">{win.client}</p>
+                      <p className="text-xs text-gray-500">{win.service}</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-bold text-sm text-emerald-600 dark:text-emerald-400">{win.amount}</p>
+                    <p className="text-xs text-gray-500">{win.time}</p>
                   </div>
                 </div>
-                <div className="text-right">
-                  <p className="font-bold text-sm text-emerald-600 dark:text-emerald-400">{win.amount}</p>
-                  <p className="text-xs text-gray-500">{win.time}</p>
-                </div>
-              </div>
-            ))}
+              ));
+            })()}
           </div>
         </div>
       </div>

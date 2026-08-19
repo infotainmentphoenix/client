@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { artistApi } from '../api';
 import { Artist, ArtistCategory } from '../types';
+import { extractValidationErrors } from '@/lib/utils';
 
 interface ArtistFormProps {
   artistId?: string | number;
@@ -162,7 +163,16 @@ export function ArtistForm({ artistId }: ArtistFormProps) {
       }
     } catch (err: any) {
       setIsLoading(false);
-      alert(err.message || 'Failed to save artist.');
+      let message = err.message || 'Failed to save artist.';
+      const fieldErrors = extractValidationErrors(err);
+      const errorList = Object.entries(fieldErrors).map(([field, msg]) => {
+        const capitalizedField = field.charAt(0).toUpperCase() + field.slice(1);
+        return `${capitalizedField}: ${msg}`;
+      });
+      if (errorList.length > 0) {
+        message = errorList.join('; ');
+      }
+      alert(message);
     }
   };
 

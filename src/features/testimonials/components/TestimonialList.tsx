@@ -16,7 +16,7 @@ export function TestimonialList() {
 
   const loadTestimonials = async () => {
     setIsLoading(true);
-    const data = await testimonialApi.getTestimonials();
+    const data = await testimonialApi.getTestimonials(true);
     setTestimonials(data);
     setIsLoading(false);
   };

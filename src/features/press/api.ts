@@ -59,16 +59,16 @@ interface ApiResponse<T> {
 }
 
 export const pressApi = {
-  getLogos: async (): Promise<PressLogo[]> => {
+  getLogos: async (ignoreFallback: boolean = false): Promise<PressLogo[]> => {
     try {
       const response = await api.get<ApiResponse<PressLogo[]>>('/api/client-logos');
       const items = response.data?.data;
       if (Array.isArray(items) && items.length > 0) {
         return items;
       }
-      return fallbackPressLogos;
+      return ignoreFallback ? [] : fallbackPressLogos;
     } catch (error) {
-      return fallbackPressLogos;
+      return ignoreFallback ? [] : fallbackPressLogos;
     }
   },
 
@@ -76,12 +76,12 @@ export const pressApi = {
     return Promise.resolve(fallbackPressReleases);
   },
 
-  getLogo: async (id: string | number): Promise<PressLogo | null> => {
+  getLogo: async (id: string | number, ignoreFallback: boolean = false): Promise<PressLogo | null> => {
     try {
       const response = await api.get<ApiResponse<PressLogo>>(`/api/client-logos/${id}`);
       return response.data?.data || null;
     } catch (error) {
-      const logos = await pressApi.getLogos();
+      const logos = await pressApi.getLogos(ignoreFallback);
       return logos.find(l => l.id.toString() === id.toString()) || null;
     }
   },

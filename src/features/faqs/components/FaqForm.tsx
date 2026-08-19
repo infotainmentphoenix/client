@@ -33,7 +33,7 @@ export function FaqForm({ faqId }: FaqFormProps) {
   }, [faqId]);
 
   const loadCategories = async () => {
-    const data = await faqApi.getCategories();
+    const data = await faqApi.getCategories(true);
     setCategories(data);
     if (!isEditing && data.length > 0 && !formData.categoryId) {
       setFormData(prev => ({ ...prev, categoryId: data[0].id }));

@@ -16,7 +16,7 @@ export function PressList() {
 
   const loadLogos = async () => {
     setIsLoading(true);
-    const data = await pressApi.getLogos();
+    const data = await pressApi.getLogos(true);
     setLogos(data);
     setIsLoading(false);
   };

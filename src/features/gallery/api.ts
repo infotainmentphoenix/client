@@ -102,7 +102,7 @@ interface ApiResponse<T> {
 }
 
 export const galleryApi = {
-  getItems: async (): Promise<GalleryMediaItem[]> => {
+  getItems: async (ignoreFallback: boolean = false): Promise<GalleryMediaItem[]> => {
     try {
       const response = await api.get<ApiResponse<any>>('/api/carousels');
       const carousels = response.data?.data?.items || response.data?.data;
@@ -119,15 +119,15 @@ export const galleryApi = {
         }));
         return mapped;
       }
-      return fallbackGalleryItems;
+      return ignoreFallback ? [] : fallbackGalleryItems;
     } catch (error) {
       console.warn('Backend API unavailable, using fallback gallery items:', error);
-      return fallbackGalleryItems;
+      return ignoreFallback ? [] : fallbackGalleryItems;
     }
   },
 
-  getItem: async (id: string | number): Promise<GalleryMediaItem | null> => {
-    const items = await galleryApi.getItems();
+  getItem: async (id: string | number, ignoreFallback: boolean = false): Promise<GalleryMediaItem | null> => {
+    const items = await galleryApi.getItems(ignoreFallback);
     return items.find(i => i.id.toString() === id.toString()) || null;
   },
 

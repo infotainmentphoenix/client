@@ -29,7 +29,7 @@ export function FaqCategoryForm({ categoryId }: FaqCategoryFormProps) {
 
   const loadCategory = async () => {
     setIsLoading(true);
-    const data = await faqApi.getCategory(categoryId!);
+    const data = await faqApi.getCategory(categoryId!, true);
     if (data) {
       setFormData(data);
     }

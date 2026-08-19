@@ -27,6 +27,43 @@ export default function UsersPage() {
     isActive: true,
   });
   const [isSaving, setIsSaving] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+
+  const parseValidationErrors = (err: any): Record<string, string> => {
+    const errors: Record<string, string> = {};
+    if (err && err.errors) {
+      const zodErr = err.errors;
+      if (zodErr.name === 'ZodError') {
+        if (typeof zodErr.message === 'string') {
+          try {
+            const issues = JSON.parse(zodErr.message);
+            issues.forEach((issue: any) => {
+              const field = issue.path[0];
+              if (field) {
+                errors[field.toString()] = issue.message;
+              }
+            });
+          } catch (e) {}
+        } else if (Array.isArray(zodErr.issues)) {
+          zodErr.issues.forEach((issue: any) => {
+            const field = issue.path[0];
+            if (field) {
+              errors[field.toString()] = issue.message;
+            }
+          });
+        }
+      }
+    } else if (err && err.message && err.statusCode === 400) {
+      if (err.message.toLowerCase().includes('email')) {
+        errors.email = err.message;
+      } else {
+        errors.general = err.message;
+      }
+    } else {
+      errors.general = err?.message || 'Failed to save user.';
+    }
+    return errors;
+  };
 
   useEffect(() => {
     loadUsers();
@@ -47,6 +84,7 @@ export default function UsersPage() {
   const handleOpenAdd = () => {
     setEditingUser(null);
     setFormData({ name: '', email: '', password: '', phone: '', role: 'CLIENT', isActive: true });
+    setFieldErrors({});
     setIsModalOpen(true);
   };
 
@@ -60,24 +98,30 @@ export default function UsersPage() {
       isActive: user.isActive,
       password: '', // Leave blank for edit unless changing
     });
+    setFieldErrors({});
     setIsModalOpen(true);
   };
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
+    setFieldErrors({});
     try {
+      const data = { ...formData };
+      if (!data.phone) delete data.phone;
+      
       if (editingUser) {
-        const updateData: UpdateUserInput = { ...formData };
-        if (!updateData.password) delete (updateData as any).password;
-        await userApi.updateUser(editingUser.id, updateData);
+        if (!data.password) delete data.password;
+        await userApi.updateUser(editingUser.id, data);
       } else {
-        await userApi.createUser(formData);
+        await userApi.createUser(data);
       }
       await loadUsers();
       setIsModalOpen(false);
     } catch (err) {
-      alert('Failed to save user. Check if email already exists.');
+      console.error(err);
+      const parsedErrors = parseValidationErrors(err);
+      setFieldErrors(parsedErrors);
     } finally {
       setIsSaving(false);
     }
@@ -191,21 +235,33 @@ export default function UsersPage() {
       {}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+          <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             <div className="p-6 border-b border-gray-100 dark:border-white/10">
               <h3 className="text-xl font-bold">{editingUser ? 'Edit User' : 'Add New User'}</h3>
             </div>
             
             <form onSubmit={handleSave} className="p-6 space-y-4">
+              {fieldErrors.general && (
+                <div className="p-3 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-500/20 text-red-600 dark:text-red-400 text-sm rounded-lg">
+                  {fieldErrors.general}
+                </div>
+              )}
+              
               <div className="space-y-1.5">
                 <label className="text-sm font-medium">Name</label>
                 <input 
                   required
                   type="text" 
                   value={formData.name}
-                  onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                  className="w-full px-4 py-2 bg-gray-50 dark:bg-white/5 border border-transparent focus:bg-white focus:border-blue-500 rounded-lg text-sm outline-none"
+                  onChange={e => {
+                    setFormData(prev => ({ ...prev, name: e.target.value }));
+                    setFieldErrors(prev => ({ ...prev, name: '' }));
+                  }}
+                  className={`w-full px-4 py-2 bg-gray-50 dark:bg-white/5 border ${fieldErrors.name ? 'border-red-500' : 'border-transparent dark:border-white/5'} focus:bg-white dark:focus:bg-black/50 focus:border-blue-500 rounded-lg text-sm outline-none text-gray-800 dark:text-gray-200 transition-all`}
                 />
+                {fieldErrors.name && (
+                  <p className="text-red-500 text-xs mt-1">{fieldErrors.name}</p>
+                )}
               </div>
 
               <div className="space-y-1.5">
@@ -214,9 +270,15 @@ export default function UsersPage() {
                   required
                   type="email" 
                   value={formData.email}
-                  onChange={e => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                  className="w-full px-4 py-2 bg-gray-50 dark:bg-white/5 border border-transparent focus:bg-white focus:border-blue-500 rounded-lg text-sm outline-none"
+                  onChange={e => {
+                    setFormData(prev => ({ ...prev, email: e.target.value }));
+                    setFieldErrors(prev => ({ ...prev, email: '' }));
+                  }}
+                  className={`w-full px-4 py-2 bg-gray-50 dark:bg-white/5 border ${fieldErrors.email ? 'border-red-500' : 'border-transparent dark:border-white/5'} focus:bg-white dark:focus:bg-black/50 focus:border-blue-500 rounded-lg text-sm outline-none text-gray-800 dark:text-gray-200 transition-all`}
                 />
+                {fieldErrors.email && (
+                  <p className="text-red-500 text-xs mt-1">{fieldErrors.email}</p>
+                )}
               </div>
 
               <div className="space-y-1.5">
@@ -225,9 +287,15 @@ export default function UsersPage() {
                   type="password" 
                   required={!editingUser}
                   value={formData.password}
-                  onChange={e => setFormData(prev => ({ ...prev, password: e.target.value }))}
-                  className="w-full px-4 py-2 bg-gray-50 dark:bg-white/5 border border-transparent focus:bg-white focus:border-blue-500 rounded-lg text-sm outline-none"
+                  onChange={e => {
+                    setFormData(prev => ({ ...prev, password: e.target.value }));
+                    setFieldErrors(prev => ({ ...prev, password: '' }));
+                  }}
+                  className={`w-full px-4 py-2 bg-gray-50 dark:bg-white/5 border ${fieldErrors.password ? 'border-red-500' : 'border-transparent dark:border-white/5'} focus:bg-white dark:focus:bg-black/50 focus:border-blue-500 rounded-lg text-sm outline-none text-gray-800 dark:text-gray-200 transition-all`}
                 />
+                {fieldErrors.password && (
+                  <p className="text-red-500 text-xs mt-1">{fieldErrors.password}</p>
+                )}
               </div>
 
               <div className="grid grid-cols-2 gap-4">
@@ -235,24 +303,36 @@ export default function UsersPage() {
                   <label className="text-sm font-medium">Role</label>
                   <select 
                     value={formData.role}
-                    onChange={e => setFormData(prev => ({ ...prev, role: e.target.value as UserRole }))}
-                    className="w-full px-4 py-2 bg-gray-50 dark:bg-white/5 border border-transparent focus:bg-white focus:border-blue-500 rounded-lg text-sm outline-none"
+                    onChange={e => {
+                      setFormData(prev => ({ ...prev, role: e.target.value as UserRole }));
+                      setFieldErrors(prev => ({ ...prev, role: '' }));
+                    }}
+                    className={`w-full px-4 py-2 bg-gray-50 dark:bg-white/5 border ${fieldErrors.role ? 'border-red-500' : 'border-transparent dark:border-white/5'} focus:bg-white dark:focus:bg-black/50 focus:border-blue-500 rounded-lg text-sm outline-none text-gray-800 dark:text-gray-200 transition-all`}
                   >
-                    <option value="CLIENT">Client</option>
-                    <option value="TEAM_MEMBER">Team Member</option>
-                    <option value="ADMIN">Admin</option>
+                    <option value="CLIENT" className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">Client</option>
+                    <option value="TEAM_MEMBER" className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">Team Member</option>
+                    <option value="ADMIN" className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">Admin</option>
                   </select>
+                  {fieldErrors.role && (
+                    <p className="text-red-500 text-xs mt-1">{fieldErrors.role}</p>
+                  )}
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium">Status</label>
                   <select 
                     value={formData.isActive ? 'true' : 'false'}
-                    onChange={e => setFormData(prev => ({ ...prev, isActive: e.target.value === 'true' }))}
-                    className="w-full px-4 py-2 bg-gray-50 dark:bg-white/5 border border-transparent focus:bg-white focus:border-blue-500 rounded-lg text-sm outline-none"
+                    onChange={e => {
+                      setFormData(prev => ({ ...prev, isActive: e.target.value === 'true' }));
+                      setFieldErrors(prev => ({ ...prev, isActive: '' }));
+                    }}
+                    className={`w-full px-4 py-2 bg-gray-50 dark:bg-white/5 border ${fieldErrors.isActive ? 'border-red-500' : 'border-transparent dark:border-white/5'} focus:bg-white dark:focus:bg-black/50 focus:border-blue-500 rounded-lg text-sm outline-none text-gray-800 dark:text-gray-200 transition-all`}
                   >
-                    <option value="true">Active</option>
-                    <option value="false">Inactive</option>
+                    <option value="true" className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">Active</option>
+                    <option value="false" className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">Inactive</option>
                   </select>
+                  {fieldErrors.isActive && (
+                    <p className="text-red-500 text-xs mt-1">{fieldErrors.isActive}</p>
+                  )}
                 </div>
               </div>
 

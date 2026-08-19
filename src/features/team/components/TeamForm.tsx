@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { teamApi } from '../api';
 import { TeamMember } from '../types';
+import { extractValidationErrors } from '@/lib/utils';
 
 interface TeamFormProps {
   memberId?: string | number;
@@ -13,6 +14,8 @@ export function TeamForm({ memberId }: TeamFormProps) {
   const router = useRouter();
   const isEditing = !!memberId;
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [error, setError] = useState<string | null>(null);
   
   const [formData, setFormData] = useState<Partial<TeamMember>>({
     name: '',
@@ -33,7 +36,7 @@ export function TeamForm({ memberId }: TeamFormProps) {
 
   const loadMember = async () => {
     setIsLoading(true);
-    const data = await teamApi.getMember(memberId!);
+    const data = await teamApi.getMember(memberId!, true);
     if (data) {
       setFormData(data);
     }
@@ -51,23 +54,63 @@ export function TeamForm({ memberId }: TeamFormProps) {
     }
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = e.target;
+    if (files && files[0]) {
+      const file = files[0];
+      setSelectedFile(file);
+      setFormData(prev => ({ ...prev, image: URL.createObjectURL(file) }));
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setError(null);
 
-    let result;
-    if (isEditing) {
-      result = await teamApi.updateMember(memberId!, formData);
-    } else {
-      result = await teamApi.createMember(formData);
+    const payload = new FormData();
+    if (selectedFile) {
+      payload.append('image', selectedFile);
+    } else if (formData.image) {
+      payload.append('image', formData.image);
     }
 
-    setIsLoading(false);
-    
-    if (result) {
-      router.push('/admin/content/team');
-    } else {
-      alert('Failed to save team member. Check console for details.');
+    if (formData.name) payload.append('name', formData.name);
+    if (formData.email) payload.append('email', formData.email);
+    if (formData.role) payload.append('role', formData.role);
+    if (formData.phone) payload.append('phone', formData.phone);
+    if (formData.password) payload.append('password', formData.password);
+    if (formData.fieldId) payload.append('fieldId', formData.fieldId);
+    payload.append('isActive', (formData.isActive ?? true).toString());
+
+    try {
+      let result;
+      if (isEditing) {
+        result = await teamApi.updateMember(memberId!, payload);
+      } else {
+        result = await teamApi.createMember(payload);
+      }
+
+      if (result) {
+        router.push('/admin/content/team');
+      } else {
+        setError('Failed to save team member.');
+      }
+    } catch (err: any) {
+      console.error(err);
+      let message = err.message || 'An unexpected error occurred.';
+      
+      const fieldErrors = extractValidationErrors(err);
+      const errorList = Object.entries(fieldErrors).map(([field, msg]) => {
+        const capitalizedField = field.charAt(0).toUpperCase() + field.slice(1);
+        return `${capitalizedField}: ${msg}`;
+      });
+      if (errorList.length > 0) {
+        message = errorList.join('; ');
+      }
+      setError(message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -77,6 +120,23 @@ export function TeamForm({ memberId }: TeamFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8 pb-12">
+      {error && (
+        <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 text-red-700 dark:text-red-400 p-4 rounded-xl text-sm font-medium flex items-start gap-3 relative shadow-sm">
+          <svg className="w-5 h-5 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <div className="flex-1">
+            <div className="font-bold">Failed to Save Team Member</div>
+            <p className="mt-1 text-xs opacity-90">{error}</p>
+          </div>
+          <button type="button" onClick={() => setError(null)} className="hover:opacity-75 transition-opacity absolute right-4 top-4">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      )}
+
       <div className="bg-card rounded-2xl border border-border shadow-sm p-6">
         <h3 className="text-lg font-bold mb-6 border-b border-border pb-4">Personal Details</h3>
         
@@ -156,32 +216,18 @@ export function TeamForm({ memberId }: TeamFormProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-foreground mb-1">Profile Avatar URL</label>
+              <label className="block text-sm font-medium text-foreground mb-1">Upload Profile Avatar</label>
               <input 
-                type="url" 
-                name="image" 
-                value={formData.image || ''} 
-                onChange={handleChange}
-                className="w-full px-4 py-2 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="https://ik.imagekit.io/..."
+                type="file" 
+                accept="image/*"
+                onChange={handleFileChange}
+                className="w-full px-4 py-2 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 file:mr-4 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-white/10 dark:file:text-white"
               />
               {formData.image && (
                 <div className="mt-4 w-24 h-24 rounded-full bg-gray-100 overflow-hidden border border-border">
                   <img src={formData.image} alt="Preview" className="w-full h-full object-cover" />
                 </div>
               )}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-foreground mb-1">Avatar Image Field ID</label>
-              <input 
-                type="text" 
-                name="fieldId" 
-                value={formData.fieldId || ''} 
-                onChange={handleChange}
-                className="w-full px-4 py-2 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono"
-                placeholder="Optional (ImageKit ID)"
-              />
             </div>
           </div>
           

@@ -122,7 +122,7 @@ export default function ContentDashboardPage() {
         const [a, e, s] = await Promise.all([
           artistApi.getArtists(),
           eventApi.getEvents(),
-          serviceApi.getServices()
+          serviceApi.getServices(true)
         ]);
         setCounts({ artists: a.length, events: e.length, services: s.length });
       } catch (error) {

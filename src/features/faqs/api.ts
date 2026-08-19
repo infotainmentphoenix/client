@@ -89,7 +89,7 @@ interface ApiResponse<T> {
 }
 
 export const faqApi = {
-  getFaqs: async (params?: { categoryId?: number; serviceId?: number; search?: string }): Promise<Faq[]> => {
+  getFaqs: async (params?: { categoryId?: number; serviceId?: number; search?: string }, ignoreFallback: boolean = false): Promise<Faq[]> => {
     try {
       const queryParts: string[] = [];
       if (params?.categoryId) queryParts.push(`categoryId=${params.categoryId}`);
@@ -102,28 +102,28 @@ export const faqApi = {
       if (response.data?.success && Array.isArray(response.data.data) && response.data.data.length > 0) {
         return response.data.data;
       }
-      return fallbackFaqs;
+      return ignoreFallback ? [] : fallbackFaqs;
     } catch (error) {
       console.warn('Backend API unavailable, using fallback FAQs:', error);
-      return fallbackFaqs;
+      return ignoreFallback ? [] : fallbackFaqs;
     }
   },
 
-  getCategories: async (): Promise<FaqCategory[]> => {
+  getCategories: async (ignoreFallback: boolean = false): Promise<FaqCategory[]> => {
     try {
       const response = await api.get<ApiResponse<FaqCategory[]>>('/api/faqs/categories');
       if (response.data?.success && Array.isArray(response.data.data) && response.data.data.length > 0) {
         return response.data.data;
       }
-      return fallbackCategories;
+      return ignoreFallback ? [] : fallbackCategories;
     } catch (error) {
       console.warn('Backend API unavailable, using fallback FAQ categories:', error);
-      return fallbackCategories;
+      return ignoreFallback ? [] : fallbackCategories;
     }
   },
 
-  getCategory: async (id: string | number): Promise<FaqCategory | null> => {
-    const categories = await faqApi.getCategories();
+  getCategory: async (id: string | number, ignoreFallback: boolean = false): Promise<FaqCategory | null> => {
+    const categories = await faqApi.getCategories(ignoreFallback);
     return categories.find(c => c.id.toString() === id.toString()) || null;
   },
 

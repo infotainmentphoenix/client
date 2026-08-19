@@ -16,7 +16,7 @@ export function ServiceList() {
 
   const loadServices = async () => {
     setIsLoading(true);
-    const data = await serviceApi.getServices();
+    const data = await serviceApi.getServices(true);
     setServices(data);
     setIsLoading(false);
   };

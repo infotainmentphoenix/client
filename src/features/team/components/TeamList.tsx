@@ -16,7 +16,7 @@ export function TeamList() {
 
   const loadMembers = async () => {
     setIsLoading(true);
-    const data = await teamApi.getMembers();
+    const data = await teamApi.getMembers(true);
     setMembers(data);
     setIsLoading(false);
   };

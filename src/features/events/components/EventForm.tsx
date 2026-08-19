@@ -6,6 +6,7 @@ import { eventApi } from '../api';
 import { Event, EventImage } from '../types';
 import { serviceApi } from '@/features/services/api';
 import { Service } from '@/features/services/types';
+import { extractValidationErrors } from '@/lib/utils';
 
 interface EventFormProps {
   eventId?: string | number;
@@ -64,7 +65,7 @@ export function EventForm({ eventId }: EventFormProps) {
     const init = async () => {
       setIsLoading(true);
       try {
-        const fetchedServices = await serviceApi.getServices();
+        const fetchedServices = await serviceApi.getServices(true);
         setServices(fetchedServices);
 
         if (isEditing) {
@@ -302,16 +303,19 @@ export function EventForm({ eventId }: EventFormProps) {
       console.error('Error submitting form:', err);
       setError(err.message || 'An error occurred while saving the event.');
       
-      if (err.errors?.issues) {
-        const fieldErrors: Record<string, string> = {};
-        err.errors.issues.forEach((issue: any) => {
-          const path = issue.path[0];
-          if (path) {
-            fieldErrors[path] = issue.message;
-          }
-        });
-        setValidationErrors(fieldErrors);
-      }
+      const fieldErrors = extractValidationErrors(err);
+      setValidationErrors(fieldErrors);
+
+      // Scroll to the first error field or top of the form
+      setTimeout(() => {
+        const errorInput = document.querySelector('.border-red-500');
+        if (errorInput) {
+          errorInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          (errorInput as HTMLElement).focus?.();
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }, 100);
     } finally {
       setIsLoading(false);
     }

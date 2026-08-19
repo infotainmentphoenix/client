@@ -78,7 +78,7 @@ interface ApiResponse<T> {
 }
 
 export const testimonialApi = {
-  getTestimonials: async (): Promise<Testimonial[]> => {
+  getTestimonials: async (ignoreFallback: boolean = false): Promise<Testimonial[]> => {
     try {
       const response = await api.get<ApiResponse<any>>('/api/event/getAllEvent');
       const events = response.data?.data?.items || response.data?.data;
@@ -97,22 +97,22 @@ export const testimonialApi = {
             coverImage: e.coverImage,
             createdAt: e.createdAt,
           }));
-        if (mapped.length > 0) return [...mapped, ...fallbackTestimonials];
+        if (mapped.length > 0) return ignoreFallback ? mapped : [...mapped, ...fallbackTestimonials];
       }
-      return fallbackTestimonials;
+      return ignoreFallback ? [] : fallbackTestimonials;
     } catch (error) {
       console.warn('Backend API unavailable, using fallback testimonials:', error);
-      return fallbackTestimonials;
+      return ignoreFallback ? [] : fallbackTestimonials;
     }
   },
 
   getTestimonial: async (eventId: string | number): Promise<Testimonial | null> => {
-    const list = await testimonialApi.getTestimonials();
+    const list = await testimonialApi.getTestimonials(true);
     return list.find(t => (t.eventId || t.id).toString() === eventId.toString()) || null;
   },
 
   getAvailableEvents: async (): Promise<{ id: number; title: string; clientName: string }[]> => {
-    const list = await testimonialApi.getTestimonials();
+    const list = await testimonialApi.getTestimonials(true);
     return list.map(t => ({ id: t.eventId || t.id, title: t.eventTitle, clientName: t.clientName }));
   },
 

@@ -2,14 +2,7 @@ import { MediaFile } from './types';
 
 const MEDIA_KEY = 'mock_media_library';
 
-const initialMedia: MediaFile[] = [
-  { id: 1, name: 'hero-banner.jpg', type: 'image', size: '2.4 MB', sizeInBytes: 2516582, date: '2024-03-15', url: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80' },
-  { id: 2, name: 'artist-profile-1.png', type: 'image', size: '1.1 MB', sizeInBytes: 1153433, date: '2024-03-14', url: 'https://images.unsplash.com/photo-1516280440502-6c245958bd85?w=800&q=80' },
-  { id: 3, name: 'event-wedding-2023.jpg', type: 'image', size: '3.5 MB', sizeInBytes: 3670016, date: '2024-03-10', url: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&q=80' },
-  { id: 4, name: 'promo-video-draft.mp4', type: 'video', size: '24.5 MB', sizeInBytes: 25690112, date: '2024-03-08', url: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&q=80' },
-  { id: 5, name: 'corporate-logo.svg', type: 'image', size: '150 KB', sizeInBytes: 153600, date: '2024-03-01', url: 'https://images.unsplash.com/photo-1561489422-45de3d015e3e?w=800&q=80' },
-  { id: 6, name: 'service-brochure.pdf', type: 'document', size: '5.2 MB', sizeInBytes: 5452595, date: '2024-02-28', url: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80' },
-];
+const initialMedia: MediaFile[] = [];
 
 const getMediaData = (): MediaFile[] => {
   if (typeof window === 'undefined') return initialMedia;

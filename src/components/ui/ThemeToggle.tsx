@@ -3,7 +3,7 @@
 import { useTheme } from '@/components/providers/ThemeProvider';
 import { useEffect, useState } from 'react';
 
-export function ThemeToggle() {
+export function ThemeToggle({ isTransparentHome }: { isTransparentHome?: boolean }) {
   const { theme, toggleTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -14,7 +14,12 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="w-10 h-10 border border-black/10 dark:border-white/20 rounded-full flex items-center justify-center backdrop-blur-sm text-gray-800 dark:text-white hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105 transition-all duration-300 shadow-sm cursor-pointer"
+      className={`w-10 h-10 border rounded-full flex items-center justify-center backdrop-blur-md hover:scale-105 transition-all duration-300 shadow-sm cursor-pointer
+        ${isTransparentHome
+          ? 'border-white/20 text-white bg-white/10 hover:bg-white/20'
+          : 'border-black/10 dark:border-white/20 text-gray-800 dark:text-white bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10'
+        }
+      `}
       aria-label="Toggle Theme"
     >
       {theme === 'dark' ? (

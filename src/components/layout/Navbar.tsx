@@ -165,11 +165,16 @@ export function Navbar() {
 
         {}
         <div className="flex items-center gap-2.5">
-          <ThemeToggle />
+          <ThemeToggle isTransparentHome={pathname === '/' && !isScrolled} />
 
           <Link
             href="/login"
-            className="hidden sm:flex items-center justify-center px-4 py-2 rounded-full border border-gray-200 dark:border-white/15 hover:bg-gray-100 dark:hover:bg-white/10 text-gray-800 dark:text-gray-200 font-bold text-xs transition-all"
+            className={`hidden sm:flex items-center justify-center px-4.5 py-2 rounded-full border transition-all font-bold text-xs duration-300 backdrop-blur-xl hover:scale-105 shadow-sm
+              ${pathname === '/' && !isScrolled
+                ? 'bg-white/10 border-white/20 text-white hover:bg-white/20 hover:border-white/40'
+                : 'bg-white/30 dark:bg-white/5 border-gray-200 dark:border-white/15 text-gray-800 dark:text-gray-200 hover:bg-gray-100/60 dark:hover:bg-white/10'
+              }
+            `}
           >
             Sign In
           </Link>

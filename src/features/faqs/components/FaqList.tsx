@@ -16,7 +16,7 @@ export function FaqList() {
 
   const loadFaqs = async () => {
     setIsLoading(true);
-    const data = await faqApi.getFaqs();
+    const data = await faqApi.getFaqs(undefined, true);
     setFaqs(data);
     setIsLoading(false);
   };
@@ -51,6 +51,9 @@ export function FaqList() {
               className="pl-9 pr-4 py-2 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-64"
             />
           </div>
+          <Link href="/admin/content/faqs/categories" className="flex items-center gap-2 border border-border hover:bg-foreground/5 text-foreground px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap">
+            Manage Categories
+          </Link>
           <Link href="/admin/content/faqs/new" className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
             Add FAQ

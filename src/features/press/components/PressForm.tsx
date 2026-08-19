@@ -31,7 +31,7 @@ export function PressForm({ logoId }: PressFormProps) {
 
   const loadLogo = async () => {
     setIsLoading(true);
-    const data = await pressApi.getLogo(logoId!);
+    const data = await pressApi.getLogo(logoId!, true);
     if (data) {
       setFormData(data);
     }

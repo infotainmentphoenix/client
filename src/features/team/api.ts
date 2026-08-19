@@ -114,12 +114,11 @@ interface ApiResponse<T> {
 }
 
 export const teamApi = {
-  getMembers: async (): Promise<TeamMember[]> => {
+  getMembers: async (ignoreFallback: boolean = false): Promise<TeamMember[]> => {
     try {
       const response = await api.get<ApiResponse<any>>('/api/users');
       const users = response.data?.data;
       if (Array.isArray(users) && users.length > 0) {
-        
         const mapped: TeamMember[] = users.map((u: any, idx: number) => ({
           id: u.id || idx + 1,
           name: u.name || 'Team Member',
@@ -128,34 +127,38 @@ export const teamApi = {
           designation: u.role === 'ADMIN' ? 'Executive Director' : 'Event Specialist',
           department: idx % 2 === 0 ? 'Event Operations' : 'Artist Curation',
           bio: 'Dedicated event professional delivering excellence for Phoenix Infotainment.',
-          image: u.image || fallbackTeamMembers[idx % fallbackTeamMembers.length].image,
+          image: u.image || (ignoreFallback ? '' : fallbackTeamMembers[idx % fallbackTeamMembers.length].image),
           isActive: u.isActive !== false,
           createdAt: u.createdAt || new Date().toISOString(),
         }));
-        return [...mapped, ...fallbackTeamMembers.slice(mapped.length)];
+        
+        if (ignoreFallback) {
+          return mapped;
+        }
+        
+        const mappedEmails = new Set(mapped.map(m => m.email.toLowerCase()));
+        const mappedIds = new Set(mapped.map(m => m.id));
+        const filteredFallbacks = fallbackTeamMembers.filter(
+          f => !mappedEmails.has(f.email.toLowerCase()) && !mappedIds.has(f.id)
+        );
+        
+        return [...mapped, ...filteredFallbacks.slice(mapped.length)];
       }
-      return fallbackTeamMembers;
+      return ignoreFallback ? [] : fallbackTeamMembers;
     } catch (error) {
       console.warn('Backend API unavailable, using fallback team dataset:', error);
-      return fallbackTeamMembers;
+      return ignoreFallback ? [] : fallbackTeamMembers;
     }
   },
 
-  getMember: async (id: string | number): Promise<TeamMember | null> => {
-    const members = await teamApi.getMembers();
+  getMember: async (id: string | number, ignoreFallback: boolean = false): Promise<TeamMember | null> => {
+    const members = await teamApi.getMembers(ignoreFallback);
     return members.find(m => m.id.toString() === id.toString()) || null;
   },
 
-  createMember: async (data: Partial<TeamMember>): Promise<TeamMember> => {
+  createMember: async (data: Partial<TeamMember> | FormData): Promise<TeamMember> => {
     try {
-      const payload = {
-        name: data.name,
-        email: data.email || `team-${Date.now()}@phoenixinfotainment.com`,
-        phone: data.phone,
-        role: data.role || 'TEAM_MEMBER',
-        isActive: data.isActive ?? true,
-      };
-      const response = await api.post<ApiResponse<any>>('/api/users', payload);
+      const response = await api.post<ApiResponse<any>>('/api/users', data);
       return response.data?.data || (data as TeamMember);
     } catch (error) {
       console.error('Error creating team member user:', error);
@@ -163,20 +166,13 @@ export const teamApi = {
     }
   },
 
-  updateMember: async (id: string | number, data: Partial<TeamMember>): Promise<TeamMember | null> => {
+  updateMember: async (id: string | number, data: Partial<TeamMember> | FormData): Promise<TeamMember | null> => {
     try {
-      const payload = {
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        role: data.role,
-        isActive: data.isActive,
-      };
-      const response = await api.put<ApiResponse<any>>(`/api/users/${id}`, payload);
+      const response = await api.put<ApiResponse<any>>(`/api/users/${id}`, data);
       return response.data?.data || null;
     } catch (error) {
       console.error(`Error updating team member user ${id}:`, error);
-      return null;
+      throw error;
     }
   },
 
