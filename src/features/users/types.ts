@@ -7,6 +7,8 @@ export interface User {
   phone: string | null;
   role: UserRole;
   isActive: boolean;
+  image?: string | null;
+  fieldId?: string | null;
   createdAt: string;
 }
 

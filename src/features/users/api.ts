@@ -12,12 +12,12 @@ export const userApi = {
     return res.data.data;
   },
 
-  createUser: async (data: CreateUserInput): Promise<User> => {
+  createUser: async (data: CreateUserInput | FormData): Promise<User> => {
     const res = await api.post<any>('/api/users', data);
     return res.data.data;
   },
 
-  updateUser: async (id: number, data: UpdateUserInput): Promise<User> => {
+  updateUser: async (id: number, data: UpdateUserInput | FormData): Promise<User> => {
     const res = await api.put<any>(`/api/users/${id}`, data);
     return res.data.data;
   },
