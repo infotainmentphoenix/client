@@ -91,6 +91,21 @@ export function Footer() {
                 </a>
               ))}
             </div>
+
+            {/* Digital Card Link */}
+            <div className="mt-5">
+              <a 
+                href="https://digitalgurujiofficial.com/nfc/phoenix-infotainment-events/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 group"
+              >
+                <span>Digital Card</span>
+                <svg className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
           </div>
 
           {}
@@ -107,8 +122,10 @@ export function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4 tracking-wide">Support</h4>
             <ul className="flex flex-col gap-4 text-sm font-medium text-gray-600 dark:text-gray-400">
-              {['Contact Us', 'FAQs', 'Terms of Service', 'Privacy Policy'].map((link) => {
-                const href = link === 'Contact Us' ? '/contact' : `/${link.toLowerCase().replace(/ /g, '-')}`;
+              {['Contact Us', 'FAQs', 'Privacy Policy'].map((link) => {
+                let href = `/${link.toLowerCase().replace(/ /g, '-')}`;
+                if (link === 'Contact Us') href = '/contact';
+                if (link === 'Privacy Policy') href = '/privacy';
                 return (
                   <li key={link}>
                     <Link href={href} className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors inline-block hover:translate-x-1 duration-300">
@@ -154,7 +171,6 @@ export function Footer() {
           <div className="flex gap-6 mt-4 md:mt-0">
             <Link href="/privacy" className="hover:text-gray-800 dark:hover:text-white transition-colors">Privacy</Link>
             <Link href="/terms" className="hover:text-gray-800 dark:hover:text-white transition-colors">Terms</Link>
-            <Link href="/sitemap" className="hover:text-gray-800 dark:hover:text-white transition-colors">Sitemap</Link>
           </div>
         </div>
       </div>

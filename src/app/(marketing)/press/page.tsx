@@ -129,9 +129,11 @@ export default function PressPage() {
                       <span>{story.date}</span>
                     </div>
 
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-500 transition-colors leading-snug">
-                      {story.title}
-                    </h3>
+                    <Link href={`/press/${story.slug}`}>
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-500 transition-colors leading-snug">
+                        {story.title}
+                      </h3>
+                    </Link>
 
                     <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-3 leading-relaxed">
                       {story.summary}
@@ -140,13 +142,12 @@ export default function PressPage() {
                 </div>
 
                 <div className="p-6 pt-0">
-                  <a
-                    href="#"
-                    onClick={(e) => { e.preventDefault(); alert(`Reading full story: ${story.title}`); }}
+                  <Link
+                    href={`/press/${story.slug}`}
                     className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 dark:text-blue-400 hover:underline"
                   >
                     Read Full Story <ExternalLinkIcon className="w-4 h-4" />
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))}

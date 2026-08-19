@@ -10,7 +10,7 @@ interface ApiResponse<T> {
 export const pageApi = {
   getSettings: async (): Promise<SiteSetting[]> => {
     try {
-      const response = await api.get<ApiResponse<{ items: SiteSetting[] }>>('/api/site-settings');
+      const response = await api.get<ApiResponse<{ items: SiteSetting[] }>>('/api/site-settings?format=list');
       return response.data.data.items || [];
     } catch (error) {
       console.error('Error fetching site settings:', error);
