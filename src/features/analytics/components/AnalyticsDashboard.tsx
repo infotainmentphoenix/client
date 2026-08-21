@@ -92,9 +92,9 @@ export function AnalyticsDashboard() {
   const convRateTrend = convRatePrev30 === 0 && convRateLast30 > 0 ? '+100% from last month' : convRatePrev30 === 0 && convRateLast30 === 0 ? 'No change' : `${convRateDiff >= 0 ? '+' : ''}${convRateDiff}% from last month`;
 
   const bestCategory = inquiryTypes.reduce((prev, curr) => (prev.count > curr.count) ? prev : curr, inquiryTypes[0]);
-  const aiInsightText = totalInquiries > 0 
+  const aiInsightText = bestCategory && bestCategory.count > 0 
     ? `Your top inquiry category is "${bestCategory.name}" with ${bestCategory.count} leads. Consider tailoring your marketing to capitalize on this interest.`
-    : `You haven't received any inquiries yet. Try running targeted ad campaigns or optimizing your landing page SEO to attract your first leads.`;
+    : `You haven't received enough categorized inquiries to generate insights yet. Keep engaging with your leads to gather more data.`;
 
   if (isLoading) {
     return (
@@ -214,9 +214,6 @@ export function AnalyticsDashboard() {
             <p className="text-blue-100 text-sm leading-relaxed mb-4">
               {aiInsightText}
             </p>
-            <button className="text-sm font-semibold bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition-colors">
-              View Detailed Report
-            </button>
           </div>
           {}
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />

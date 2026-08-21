@@ -69,9 +69,6 @@ export default function CRMPage() {
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">CRM Dashboard</h1>
           <p className="text-gray-500 dark:text-gray-400 mt-1">Overview of all customer inquiries and leads.</p>
         </div>
-        <Link href="/admin/crm/inquiries" className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors shadow-lg shadow-blue-500/20">
-          Add Lead
-        </Link>
       </div>
 
       {/* Stats Skeleton / Cards */}

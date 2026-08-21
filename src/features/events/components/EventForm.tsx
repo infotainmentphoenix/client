@@ -887,19 +887,20 @@ export function EventForm({ eventId }: EventFormProps) {
       </div>
 
       {}
-      <div className="flex justify-end gap-4 sticky bottom-4 bg-background/80 backdrop-blur-md p-4 rounded-xl border border-border shadow-lg z-10 animate-fade-in">
+      <div className="sticky bottom-8 ml-auto w-fit p-2 bg-white/70 dark:bg-gray-900/70 backdrop-blur-2xl border border-gray-200/50 dark:border-white/10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] z-50 flex items-center justify-center gap-2 rounded-2xl transition-all hover:bg-white/90 dark:hover:bg-gray-900/90">
         <button 
           type="button" 
           disabled={isLoading}
           onClick={() => router.back()}
-          className="px-6 py-2.5 border border-border rounded-lg text-sm font-semibold hover:bg-foreground/5 transition-colors cursor-pointer disabled:opacity-50"
+          className="px-6 py-2.5 bg-transparent hover:bg-gray-100 dark:hover:bg-white/10 text-gray-700 dark:text-gray-300 rounded-xl text-sm font-semibold transition-colors cursor-pointer disabled:opacity-50"
         >
           Cancel
         </button>
+        <div className="w-px h-6 bg-gray-200 dark:bg-white/10 mx-1"></div>
         <button 
           type="submit" 
           disabled={isLoading}
-          className="px-6 py-2.5 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-blue-500/20"
+          className="px-8 py-2.5 bg-blue-600 text-white rounded-xl text-sm font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-blue-500/25"
         >
           {isLoading && (
             <svg className="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
@@ -907,7 +908,7 @@ export function EventForm({ eventId }: EventFormProps) {
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
             </svg>
           )}
-          {isLoading ? 'Saving Event...' : (isEditing ? 'Update Event' : 'Create Event')}
+          {isLoading ? 'Saving...' : (isEditing ? 'Update Event' : 'Create Event')}
         </button>
       </div>
     </form>

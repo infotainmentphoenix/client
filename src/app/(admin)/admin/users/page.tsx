@@ -450,8 +450,8 @@ export default function UsersPage() {
       {}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-          <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-            <div className="p-6 border-b border-gray-100 dark:border-white/10 flex justify-between items-center">
+          <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-2xl shadow-xl w-full max-w-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[90vh]">
+            <div className="p-6 border-b border-gray-100 dark:border-white/10 flex justify-between items-center shrink-0">
               <h3 className="text-xl font-bold">{editingUser ? 'Edit User' : 'Add New User'}</h3>
               <button 
                 onClick={() => setIsModalOpen(false)}
@@ -461,151 +461,153 @@ export default function UsersPage() {
               </button>
             </div>
             
-            <form onSubmit={handleSave} className="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
-              {fieldErrors.general && (
-                <div className="p-3 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-500/20 text-red-600 dark:text-red-400 text-sm rounded-lg">
-                  {fieldErrors.general}
-                </div>
-              )}
-              
-              <div className="space-y-1.5">
-                <label className="text-sm font-medium">Name</label>
-                <input 
-                  required
-                  type="text" 
-                  value={formData.name}
-                  onChange={e => {
-                    setFormData(prev => ({ ...prev, name: e.target.value }));
-                    setFieldErrors(prev => ({ ...prev, name: '' }));
-                  }}
-                  className={`w-full px-4 py-2 bg-gray-50 dark:bg-white/5 border ${fieldErrors.name ? 'border-red-500' : 'border-transparent dark:border-white/5'} focus:bg-white dark:focus:bg-black/50 focus:border-blue-500 rounded-lg text-sm outline-none text-gray-800 dark:text-gray-200 transition-all`}
-                />
-                {fieldErrors.name && (
-                  <p className="text-red-500 text-xs mt-1">{fieldErrors.name}</p>
-                )}
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-sm font-medium">Email</label>
-                <input 
-                  required
-                  type="email" 
-                  value={formData.email}
-                  onChange={e => {
-                    setFormData(prev => ({ ...prev, email: e.target.value }));
-                    setFieldErrors(prev => ({ ...prev, email: '' }));
-                  }}
-                  className={`w-full px-4 py-2 bg-gray-50 dark:bg-white/5 border ${fieldErrors.email ? 'border-red-500' : 'border-transparent dark:border-white/5'} focus:bg-white dark:focus:bg-black/50 focus:border-blue-500 rounded-lg text-sm outline-none text-gray-800 dark:text-gray-200 transition-all`}
-                />
-                {fieldErrors.email && (
-                  <p className="text-red-500 text-xs mt-1">{fieldErrors.email}</p>
-                )}
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-sm font-medium">Phone Number</label>
-                <input 
-                  type="text" 
-                  value={formData.phone || ''}
-                  onChange={e => {
-                    setFormData(prev => ({ ...prev, phone: e.target.value }));
-                    setFieldErrors(prev => ({ ...prev, phone: '' }));
-                  }}
-                  placeholder="e.g. 9876543210"
-                  className={`w-full px-4 py-2 bg-gray-50 dark:bg-white/5 border ${fieldErrors.phone ? 'border-red-500' : 'border-transparent dark:border-white/5'} focus:bg-white dark:focus:bg-black/50 focus:border-blue-500 rounded-lg text-sm outline-none text-gray-800 dark:text-gray-200 transition-all`}
-                />
-                {fieldErrors.phone && (
-                  <p className="text-red-500 text-xs mt-1">{fieldErrors.phone}</p>
-                )}
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-sm font-medium">{editingUser ? 'New Password (leave blank to keep current)' : 'Password'}</label>
-                <input 
-                  type="password" 
-                  required={!editingUser}
-                  value={formData.password}
-                  onChange={e => {
-                    setFormData(prev => ({ ...prev, password: e.target.value }));
-                    setFieldErrors(prev => ({ ...prev, password: '' }));
-                  }}
-                  className={`w-full px-4 py-2 bg-gray-50 dark:bg-white/5 border ${fieldErrors.password ? 'border-red-500' : 'border-transparent dark:border-white/5'} focus:bg-white dark:focus:bg-black/50 focus:border-blue-500 rounded-lg text-sm outline-none text-gray-800 dark:text-gray-200 transition-all`}
-                />
-                {fieldErrors.password && (
-                  <p className="text-red-500 text-xs mt-1">{fieldErrors.password}</p>
-                )}
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <label className="text-sm font-medium">Role</label>
-                  <select 
-                    value={formData.role}
-                    onChange={e => {
-                      setFormData(prev => ({ ...prev, role: e.target.value as UserRole }));
-                      setFieldErrors(prev => ({ ...prev, role: '' }));
-                    }}
-                    className={`w-full px-4 py-2 bg-gray-50 dark:bg-white/5 border ${fieldErrors.role ? 'border-red-500' : 'border-transparent dark:border-white/5'} focus:bg-white dark:focus:bg-black/50 focus:border-blue-500 rounded-lg text-sm outline-none text-gray-800 dark:text-gray-200 transition-all`}
-                  >
-                    <option value="CLIENT" className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">Client</option>
-                    <option value="TEAM_MEMBER" className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">Team Member</option>
-                    <option value="ADMIN" className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">Admin</option>
-                  </select>
-                  {fieldErrors.role && (
-                    <p className="text-red-500 text-xs mt-1">{fieldErrors.role}</p>
-                  )}
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-sm font-medium">Status</label>
-                  <select 
-                    value={formData.isActive ? 'true' : 'false'}
-                    onChange={e => {
-                      setFormData(prev => ({ ...prev, isActive: e.target.value === 'true' }));
-                      setFieldErrors(prev => ({ ...prev, isActive: '' }));
-                    }}
-                    className={`w-full px-4 py-2 bg-gray-50 dark:bg-white/5 border ${fieldErrors.isActive ? 'border-red-500' : 'border-transparent dark:border-white/5'} focus:bg-white dark:focus:bg-black/50 focus:border-blue-500 rounded-lg text-sm outline-none text-gray-800 dark:text-gray-200 transition-all`}
-                  >
-                    <option value="true" className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">Active</option>
-                    <option value="false" className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">Inactive</option>
-                  </select>
-                  {fieldErrors.isActive && (
-                    <p className="text-red-500 text-xs mt-1">{fieldErrors.isActive}</p>
-                  )}
-                </div>
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-sm font-medium">Profile Image</label>
-                <input 
-                  type="file" 
-                  accept="image/*"
-                  onChange={handleFileChange}
-                  className="w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-white/10 dark:file:text-white dark:hover:file:bg-white/20 transition-all cursor-pointer"
-                />
-                {previewUrl && (
-                  <div className="mt-3 flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full overflow-hidden border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-white/5">
-                      <img src={previewUrl} alt="Preview" className="w-full h-full object-cover" />
-                    </div>
-                    <button
-                      type="button"
-                      onClick={handleRemoveImage}
-                      className="px-2.5 py-1.5 text-xs font-medium text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 border border-red-200 dark:border-red-500/20 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/20 transition-all"
-                    >
-                      Remove Image
-                    </button>
+            <form onSubmit={handleSave} className="flex flex-col overflow-hidden">
+              <div className="p-6 overflow-y-auto custom-scrollbar">
+                {fieldErrors.general && (
+                  <div className="p-3 mb-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-500/20 text-red-600 dark:text-red-400 text-sm rounded-lg">
+                    {fieldErrors.general}
                   </div>
                 )}
-                {fieldErrors.image && (
-                  <p className="text-red-500 text-xs mt-1">{fieldErrors.image}</p>
-                )}
-              </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-medium">Name</label>
+                    <input 
+                      required
+                      type="text" 
+                      value={formData.name}
+                      onChange={e => {
+                        setFormData(prev => ({ ...prev, name: e.target.value }));
+                        setFieldErrors(prev => ({ ...prev, name: '' }));
+                      }}
+                      className={`w-full px-4 py-2 bg-gray-50 dark:bg-white/5 border ${fieldErrors.name ? 'border-red-500' : 'border-transparent dark:border-white/5'} focus:bg-white dark:focus:bg-black/50 focus:border-blue-500 rounded-lg text-sm outline-none text-gray-800 dark:text-gray-200 transition-all`}
+                    />
+                    {fieldErrors.name && (
+                      <p className="text-red-500 text-xs mt-1">{fieldErrors.name}</p>
+                    )}
+                  </div>
 
-              <div className="pt-4 flex justify-end gap-3 border-t border-gray-100 dark:border-white/10">
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-medium">Email</label>
+                    <input 
+                      required
+                      type="email" 
+                      value={formData.email}
+                      onChange={e => {
+                        setFormData(prev => ({ ...prev, email: e.target.value }));
+                        setFieldErrors(prev => ({ ...prev, email: '' }));
+                      }}
+                      className={`w-full px-4 py-2 bg-gray-50 dark:bg-white/5 border ${fieldErrors.email ? 'border-red-500' : 'border-transparent dark:border-white/5'} focus:bg-white dark:focus:bg-black/50 focus:border-blue-500 rounded-lg text-sm outline-none text-gray-800 dark:text-gray-200 transition-all`}
+                    />
+                    {fieldErrors.email && (
+                      <p className="text-red-500 text-xs mt-1">{fieldErrors.email}</p>
+                    )}
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-medium">Phone Number</label>
+                    <input 
+                      type="text" 
+                      value={formData.phone || ''}
+                      onChange={e => {
+                        setFormData(prev => ({ ...prev, phone: e.target.value }));
+                        setFieldErrors(prev => ({ ...prev, phone: '' }));
+                      }}
+                      placeholder="e.g. 9876543210"
+                      className={`w-full px-4 py-2 bg-gray-50 dark:bg-white/5 border ${fieldErrors.phone ? 'border-red-500' : 'border-transparent dark:border-white/5'} focus:bg-white dark:focus:bg-black/50 focus:border-blue-500 rounded-lg text-sm outline-none text-gray-800 dark:text-gray-200 transition-all`}
+                    />
+                    {fieldErrors.phone && (
+                      <p className="text-red-500 text-xs mt-1">{fieldErrors.phone}</p>
+                    )}
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-medium">{editingUser ? 'New Password (optional)' : 'Password'}</label>
+                    <input 
+                      type="password" 
+                      required={!editingUser}
+                      value={formData.password}
+                      onChange={e => {
+                        setFormData(prev => ({ ...prev, password: e.target.value }));
+                        setFieldErrors(prev => ({ ...prev, password: '' }));
+                      }}
+                      className={`w-full px-4 py-2 bg-gray-50 dark:bg-white/5 border ${fieldErrors.password ? 'border-red-500' : 'border-transparent dark:border-white/5'} focus:bg-white dark:focus:bg-black/50 focus:border-blue-500 rounded-lg text-sm outline-none text-gray-800 dark:text-gray-200 transition-all`}
+                    />
+                    {fieldErrors.password && (
+                      <p className="text-red-500 text-xs mt-1">{fieldErrors.password}</p>
+                    )}
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-medium">Role</label>
+                    <select 
+                      value={formData.role}
+                      onChange={e => {
+                        setFormData(prev => ({ ...prev, role: e.target.value as UserRole }));
+                        setFieldErrors(prev => ({ ...prev, role: '' }));
+                      }}
+                      className={`w-full px-4 py-2 bg-gray-50 dark:bg-white/5 border ${fieldErrors.role ? 'border-red-500' : 'border-transparent dark:border-white/5'} focus:bg-white dark:focus:bg-black/50 focus:border-blue-500 rounded-lg text-sm outline-none text-gray-800 dark:text-gray-200 transition-all`}
+                    >
+                      <option value="CLIENT" className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">Client</option>
+                      <option value="TEAM_MEMBER" className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">Team Member</option>
+                      <option value="ADMIN" className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">Admin</option>
+                    </select>
+                    {fieldErrors.role && (
+                      <p className="text-red-500 text-xs mt-1">{fieldErrors.role}</p>
+                    )}
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-medium">Status</label>
+                    <select 
+                      value={formData.isActive ? 'true' : 'false'}
+                      onChange={e => {
+                        setFormData(prev => ({ ...prev, isActive: e.target.value === 'true' }));
+                        setFieldErrors(prev => ({ ...prev, isActive: '' }));
+                      }}
+                      className={`w-full px-4 py-2 bg-gray-50 dark:bg-white/5 border ${fieldErrors.isActive ? 'border-red-500' : 'border-transparent dark:border-white/5'} focus:bg-white dark:focus:bg-black/50 focus:border-blue-500 rounded-lg text-sm outline-none text-gray-800 dark:text-gray-200 transition-all`}
+                    >
+                      <option value="true" className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">Active</option>
+                      <option value="false" className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">Inactive</option>
+                    </select>
+                    {fieldErrors.isActive && (
+                      <p className="text-red-500 text-xs mt-1">{fieldErrors.isActive}</p>
+                    )}
+                  </div>
+
+                  <div className="space-y-1.5 md:col-span-2">
+                    <label className="text-sm font-medium">Profile Image</label>
+                    <input 
+                      type="file" 
+                      accept="image/*"
+                      onChange={handleFileChange}
+                      className="w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-white/10 dark:file:text-white dark:hover:file:bg-white/20 transition-all cursor-pointer"
+                    />
+                    {previewUrl && (
+                      <div className="mt-3 flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-full overflow-hidden border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-white/5">
+                          <img src={previewUrl} alt="Preview" className="w-full h-full object-cover" />
+                        </div>
+                        <button
+                          type="button"
+                          onClick={handleRemoveImage}
+                          className="px-2.5 py-1.5 text-xs font-medium text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 border border-red-200 dark:border-red-500/20 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/20 transition-all"
+                        >
+                          Remove Image
+                        </button>
+                      </div>
+                    )}
+                    {fieldErrors.image && (
+                      <p className="text-red-500 text-xs mt-1">{fieldErrors.image}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className="p-6 pt-4 flex justify-end gap-3 border-t border-gray-100 dark:border-white/10 shrink-0 bg-white dark:bg-gray-900">
                 <button 
                   type="button" 
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 text-sm font-medium text-gray-500 hover:text-black dark:hover:text-white"
+                  className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white bg-gray-100 hover:bg-gray-200 dark:bg-white/5 dark:hover:bg-white/10 rounded-lg transition-colors"
                 >
                   Cancel
                 </button>

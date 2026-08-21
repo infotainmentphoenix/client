@@ -95,11 +95,11 @@ export default function AdminDashboardPage() {
         </div>
         
         <div className="flex items-center gap-3">
-          <Link href="/admin/artists/new" className="px-4 py-2 bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl text-sm font-medium hover:bg-gray-50 dark:hover:bg-white/10 transition-colors flex items-center gap-2">
+          <Link href="/admin/content/artists/new" className="px-4 py-2 bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl text-sm font-medium hover:bg-gray-50 dark:hover:bg-white/10 transition-colors flex items-center gap-2">
             <PlusIcon />
             Artist
           </Link>
-          <Link href="/admin/events/new" className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors shadow-lg shadow-blue-500/25 flex items-center gap-2">
+          <Link href="/admin/content/events/new" className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors shadow-lg shadow-blue-500/25 flex items-center gap-2">
             <PlusIcon />
             Event
           </Link>
@@ -230,7 +230,7 @@ export default function AdminDashboardPage() {
               </div>
             </Link>
             
-            <Link href="/admin/artists" className="flex items-center p-3 hover:bg-gray-50 dark:hover:bg-white/5 rounded-xl transition-colors group">
+            <Link href="/admin/content/artists" className="flex items-center p-3 hover:bg-gray-50 dark:hover:bg-white/5 rounded-xl transition-colors group">
               <div className="w-10 h-10 rounded-lg bg-purple-50 dark:bg-purple-500/10 flex items-center justify-center text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform">
                 <UsersIcon />
               </div>
@@ -240,7 +240,7 @@ export default function AdminDashboardPage() {
               </div>
             </Link>
 
-            <Link href="/admin/services" className="flex items-center p-3 hover:bg-gray-50 dark:hover:bg-white/5 rounded-xl transition-colors group">
+            <Link href="/admin/content/services" className="flex items-center p-3 hover:bg-gray-50 dark:hover:bg-white/5 rounded-xl transition-colors group">
               <div className="w-10 h-10 rounded-lg bg-amber-50 dark:bg-amber-500/10 flex items-center justify-center text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform">
                 <BriefcaseIcon />
               </div>
