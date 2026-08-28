@@ -181,11 +181,11 @@ export default function OurVisionPage() {
           <div className="relative z-10 text-center space-y-8">
             <span className="text-xs font-bold uppercase tracking-widest text-orange-600 dark:text-orange-400">About Phoenix Infotainment</span>
             <h3 className="text-3xl md:text-5xl font-black tracking-tight leading-tight text-gray-900 dark:text-white">
-              Redefining Celebrations Worldwide
+              Seamless. Effortless. Chaos-Free. Smart Luxury.
             </h3>
             
             <p className="text-gray-600 dark:text-gray-300 font-light leading-relaxed text-lg max-w-3xl mx-auto">
-              At Phoenix Infotainment, our vision is to be a globally recognized benchmark in event management and entertainment production. We aspire to transform creative concepts into immersive, high-energy realities that connect people, elevate brands, and celebrate life’s milestones with unmatched passion and precision.
+              We create elevated, luxurious experiences without unnecessary excess. Backed by years of industry expertise and long-standing production partnerships, we deliver premium events with seamless execution, thoughtful budgets, and exceptional value.
             </p>
 
             <div className="pt-6 flex flex-col sm:flex-row justify-center items-center gap-4">

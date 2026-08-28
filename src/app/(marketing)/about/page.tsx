@@ -59,8 +59,8 @@ export default function AboutUsPage() {
             <div className="lg:col-span-5 flex justify-center">
               <div className="relative w-full max-w-[360px] aspect-[4/5] rounded-2xl overflow-hidden border border-black/10 dark:border-white/15 shadow-2xl group">
                 <img 
-                  src="/images/Diya.jpeg" 
-                  alt="Preeti (Diya Makhija) - Founder & Creative Director" 
+                  src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/IMG_3545.JPG.jpeg" 
+                  alt="Phoenix Preeti - Founder & Creative Director" 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
@@ -71,7 +71,7 @@ export default function AboutUsPage() {
             <div className="lg:col-span-7 space-y-6">
               <div>
                 <span className="text-xs font-bold uppercase tracking-widest text-orange-600 dark:text-orange-400">Leadership Profile</span>
-                <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mt-1">Preeti (Diya Makhija)</h2>
+                <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mt-1">Phoenix Preeti</h2>
                 <p className="text-sm font-semibold tracking-wider text-rose-600 dark:text-rose-400 uppercase mt-0.5">
                   Founder & Creative Director | Actor | Entrepreneur
                 </p>
