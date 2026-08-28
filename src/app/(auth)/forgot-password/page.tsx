@@ -40,7 +40,19 @@ export default function ForgotPasswordPage() {
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-32 bg-amber-500/20 blur-3xl rounded-full" />
         )}
 
-        <div className="text-center mb-8 relative">
+        <div className="text-center mb-8 relative flex flex-col items-center">
+          <Link href="/" className="inline-block mb-6 transition-transform hover:scale-105">
+            <img 
+              src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20White.png" 
+              alt="Phoenix Infotainment Logo" 
+              className="h-12 md:h-14 w-auto object-contain hidden dark:block"
+            />
+            <img 
+              src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20Black.png" 
+              alt="Phoenix Infotainment Logo" 
+              className="h-12 md:h-14 w-auto object-contain block dark:hidden"
+            />
+          </Link>
           <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl text-white mb-5 shadow-lg transition-colors duration-500 ${isSuccess ? 'bg-gradient-to-tr from-amber-500 to-orange-500 shadow-amber-500/30' : 'bg-gradient-to-tr from-gray-700 to-gray-900 shadow-gray-900/30'}`}>
             {isSuccess ? <CheckCircleIcon className="w-6 h-6" /> : <MailIcon className="w-6 h-6" />}
           </div>

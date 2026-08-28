@@ -118,7 +118,19 @@ function ResetPasswordForm() {
     <div className="w-full">
       <div className="bg-white/70 dark:bg-[#0a0a0a]/60 backdrop-blur-2xl border border-gray-200/50 dark:border-white/10 p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
         
-        <div className="text-center mb-8">
+        <div className="text-center mb-8 flex flex-col items-center">
+          <Link href="/" className="inline-block mb-6 transition-transform hover:scale-105">
+            <img 
+              src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20White.png" 
+              alt="Phoenix Infotainment Logo" 
+              className="h-12 md:h-14 w-auto object-contain hidden dark:block"
+            />
+            <img 
+              src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20Black.png" 
+              alt="Phoenix Infotainment Logo" 
+              className="h-12 md:h-14 w-auto object-contain block dark:hidden"
+            />
+          </Link>
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-tr from-rose-500 to-pink-600 text-white mb-5 shadow-lg shadow-rose-500/30">
             <LockIcon className="w-6 h-6" />
           </div>

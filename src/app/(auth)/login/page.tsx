@@ -64,19 +64,26 @@ export default function LoginPage() {
       <div className="bg-white/80 dark:bg-[#0a0a0c]/80 backdrop-blur-2xl border border-gray-200/80 dark:border-white/10 p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.3)]">
         
         {}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 mb-4 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-semibold uppercase tracking-wider">
+        <div className="text-center mb-8 flex flex-col items-center">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 mb-6 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-semibold uppercase tracking-wider">
             <ShieldLockIcon className="w-3.5 h-3.5" />
             Admin Portal Access
           </div>
 
-          <div className="flex justify-center mb-3">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 text-white flex items-center justify-center shadow-lg shadow-blue-500/30">
-              <LockIcon className="w-6 h-6" />
-            </div>
-          </div>
+          <Link href="/" className="inline-block mb-4 transition-transform hover:scale-105">
+            <img 
+              src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20White.png" 
+              alt="Phoenix Infotainment Logo" 
+              className="h-16 md:h-20 w-auto object-contain hidden dark:block"
+            />
+            <img 
+              src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20Black.png" 
+              alt="Phoenix Infotainment Logo" 
+              className="h-16 md:h-20 w-auto object-contain block dark:hidden"
+            />
+          </Link>
 
-          <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mt-2">
             Welcome Back
           </h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">

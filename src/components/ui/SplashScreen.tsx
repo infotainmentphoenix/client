@@ -167,7 +167,7 @@ export function SplashScreen() {
             {showSplash && (
               <motion.div
                 key="splash"
-                className="fixed inset-0 z-[9999] bg-black overflow-hidden"
+                className="fixed inset-0 z-[9999] bg-white dark:bg-black overflow-hidden"
                 initial={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1.0, ease: "easeInOut" }}
@@ -203,7 +203,12 @@ export function SplashScreen() {
                     <img 
                       src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20White.png" 
                       alt="Phoenix" 
-                      className="w-48 sm:w-64 md:w-80 lg:w-96 drop-shadow-[0_0_40px_rgba(255,255,255,0.4)] mb-4" 
+                      className="hidden dark:block w-48 sm:w-64 md:w-80 lg:w-96 drop-shadow-[0_0_40px_rgba(255,255,255,0.4)] mb-4" 
+                    />
+                    <img 
+                      src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20Black.png" 
+                      alt="Phoenix" 
+                      className="block dark:hidden w-48 sm:w-64 md:w-80 lg:w-96 drop-shadow-[0_0_40px_rgba(0,0,0,0.4)] mb-4" 
                     />
                   </motion.div>
                 </div>

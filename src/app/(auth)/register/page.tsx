@@ -44,11 +44,21 @@ export default function RegisterPage() {
   return (
     <div className="w-full">
       <div className="bg-white/70 dark:bg-[#0a0a0a]/60 backdrop-blur-2xl border border-gray-200/50 dark:border-white/10 p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-tr from-green-500 to-emerald-600 text-white mb-5 shadow-lg shadow-green-500/30">
-            <UserIcon className="w-6 h-6" />
-          </div>
-          <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        <div className="text-center mb-8 flex flex-col items-center">
+          <Link href="/" className="inline-block mb-4 transition-transform hover:scale-105">
+            <img 
+              src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20White.png" 
+              alt="Phoenix Infotainment Logo" 
+              className="h-16 md:h-20 w-auto object-contain hidden dark:block"
+            />
+            <img 
+              src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20Black.png" 
+              alt="Phoenix Infotainment Logo" 
+              className="h-16 md:h-20 w-auto object-contain block dark:hidden"
+            />
+          </Link>
+
+          <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mt-2">
             Create an Account
           </h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">

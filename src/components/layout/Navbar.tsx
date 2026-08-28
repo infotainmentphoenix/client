@@ -59,16 +59,16 @@ export function Navbar() {
         `}
       >
         {}
-        <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center shrink-0 transition-transform hover:scale-105 duration-300 ml-2 md:ml-4">
+        <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center shrink-0 transition-transform hover:scale-105 duration-300 ml-2 md:ml-4 py-1.5 md:py-2">
           <img 
             src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20White.png" 
             alt="Phoenix Infotainment Logo (White)" 
-            className={`h-[40px] sm:h-[55px] md:h-[75px] w-auto object-contain ${(isTransparent && isDarkHeroPage) ? 'block' : 'hidden dark:block'}`}
+            className="h-[32px] sm:h-[40px] md:h-[48px] w-auto object-contain hidden dark:block"
           />
           <img 
             src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20Black.png" 
             alt="Phoenix Infotainment Logo (Black)" 
-            className={`h-[40px] sm:h-[55px] md:h-[75px] w-auto object-contain ${(isTransparent && isDarkHeroPage) ? 'hidden' : 'block dark:hidden'}`}
+            className="h-[32px] sm:h-[40px] md:h-[48px] w-auto object-contain block dark:hidden"
           />
         </Link>
 
