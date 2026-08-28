@@ -121,7 +121,7 @@ export default function EventsPage() {
           </div>
 
           {/* Category Pills */}
-          <div className="flex gap-2 overflow-x-auto no-scrollbar flex-1">
+          <div className="flex gap-2 overflow-x-auto no-scrollbar flex-1 min-w-0 w-full pb-1">
             <button
               onClick={() => setSelectedType(null)}
               className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${!selectedType ? 'bg-orange-600 text-white shadow-lg shadow-orange-600/30' : 'bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-white/10'}`}

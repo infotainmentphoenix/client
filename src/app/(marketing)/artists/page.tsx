@@ -99,7 +99,7 @@ export default function ArtistsPage() {
             />
           </div>
           {/* Category pills */}
-          <div className="flex gap-2 overflow-x-auto no-scrollbar flex-1">
+          <div className="flex gap-2 overflow-x-auto no-scrollbar flex-1 min-w-0 w-full pb-1">
             <button
               onClick={() => setSelectedCategory(null)}
               className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${!selectedCategory ? 'bg-gray-900 dark:bg-white text-white dark:text-black' : 'bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-white/10'}`}
