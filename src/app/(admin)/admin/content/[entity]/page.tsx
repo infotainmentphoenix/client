@@ -2,6 +2,18 @@ import { notFound } from 'next/navigation';
 import { getEntityConfig } from '@/config/cms';
 import Link from 'next/link';
 
+// Import custom List components
+import { ArtistList } from '@/features/artists/components/ArtistList';
+import { EventList } from '@/features/events/components/EventList';
+import { ServiceList } from '@/features/services/components/ServiceList';
+import { FaqList } from '@/features/faqs/components/FaqList';
+import { CarouselList } from '@/features/carousel/components/CarouselList';
+import { GalleryList } from '@/features/gallery/components/GalleryList';
+import { PageList } from '@/features/pages/components/PageList';
+import { PressList } from '@/features/press/components/PressList';
+import { TeamList } from '@/features/team/components/TeamList';
+import { TestimonialList } from '@/features/testimonials/components/TestimonialList';
+
 interface PageProps {
   params: Promise<{
     entity: string;
@@ -14,6 +26,32 @@ export default async function CMSListingPage({ params }: PageProps) {
 
   if (!config) {
     notFound();
+  }
+
+  // Render Custom UI if available
+  switch (entity) {
+    case 'artists':
+      return <ArtistList />;
+    case 'events':
+      return <EventList />;
+    case 'services':
+      return <ServiceList />;
+    case 'faqs':
+      return <FaqList />;
+    case 'carousels':
+      return <CarouselList />;
+    case 'gallery':
+      return <GalleryList />;
+    case 'pages':
+      return <PageList />;
+    case 'press':
+      return <PressList />;
+    case 'team':
+      return <TeamList />;
+    case 'testimonials':
+      return <TestimonialList />;
+    default:
+      break; // Fallback to generic mock UI
   }
 
   // In a real app, fetch the data using config.apiEndpoint

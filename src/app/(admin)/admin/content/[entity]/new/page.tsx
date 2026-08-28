@@ -1,6 +1,18 @@
 import { notFound } from 'next/navigation';
 import { getEntityConfig } from '@/config/cms';
 
+// Import custom Form components
+import { ArtistForm } from '@/features/artists/components/ArtistForm';
+import { EventForm } from '@/features/events/components/EventForm';
+import { ServiceForm } from '@/features/services/components/ServiceForm';
+import { FaqForm } from '@/features/faqs/components/FaqForm';
+import { CarouselForm } from '@/features/carousel/components/CarouselForm';
+import { GalleryForm } from '@/features/gallery/components/GalleryForm';
+import { PageForm } from '@/features/pages/components/PageForm';
+import { PressForm } from '@/features/press/components/PressForm';
+import { TeamForm } from '@/features/team/components/TeamForm';
+import { TestimonialForm } from '@/features/testimonials/components/TestimonialForm';
+
 interface PageProps {
   params: Promise<{
     entity: string;
@@ -13,6 +25,32 @@ export default async function CMSCreatePage({ params }: PageProps) {
 
   if (!config) {
     notFound();
+  }
+
+  // Render Custom UI if available
+  switch (entity) {
+    case 'artists':
+      return <ArtistForm />;
+    case 'events':
+      return <EventForm />;
+    case 'services':
+      return <ServiceForm />;
+    case 'faqs':
+      return <FaqForm />;
+    case 'carousels':
+      return <CarouselForm />;
+    case 'gallery':
+      return <GalleryForm />;
+    case 'pages':
+      return <PageForm />;
+    case 'press':
+      return <PressForm />;
+    case 'team':
+      return <TeamForm />;
+    case 'testimonials':
+      return <TestimonialForm />;
+    default:
+      break; // Fallback to generic mock UI
   }
 
   return (

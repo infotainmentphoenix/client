@@ -14,8 +14,6 @@ function ArrowUpRightIcon({ className }: { className?: string }) {
   );
 }
 
-
-
 export function PhoenixHero() {
   const [slides, setSlides] = useState<Partial<Carousel>[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -73,7 +71,7 @@ export function PhoenixHero() {
   };
 
   return (
-    <section className="relative w-full min-h-[100svh] flex flex-col justify-end md:justify-center overflow-hidden pb-12 md:pb-0 pt-24 md:pt-20 px-5 md:px-0">
+    <section className="relative w-full min-h-[100svh] flex flex-col justify-end md:justify-center overflow-hidden pb-28 md:pb-0 pt-24 md:pt-20 px-5 md:px-0">
       <div className="hidden md:block">
         <AuroraBackground />
       </div>
@@ -102,30 +100,36 @@ export function PhoenixHero() {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto md:px-12 lg:px-24 flex-1 flex flex-col justify-end md:justify-center w-full">
-        <div key={currentIndex} className="max-w-3xl md:border-l-4 md:border-orange-500 md:pl-8 lg:pl-12 py-2 animate-fadeIn transition-all duration-500">
+        <div key={currentIndex} className="max-w-3xl md:border-l-4 md:border-orange-500 md:pl-8 lg:pl-12 py-2 animate-fadeIn transition-all duration-500 flex flex-col justify-end min-h-[380px] md:min-h-[420px]">
           
-          <div className="inline-flex items-center gap-2.5 px-4 py-2 mb-6 rounded-full bg-white/10 border border-white/20 backdrop-blur-xl shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.8)]"></span>
-            </span>
-            <span className="text-white font-bold text-[10px] md:text-xs tracking-[0.2em] uppercase">
-              Phoenix Premium <span className="hidden md:inline">&bull; Slide {currentIndex + 1} of {slides.length || 1}</span>
-            </span>
+          <div>
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 mb-6 rounded-full bg-white/10 border border-white/20 backdrop-blur-xl shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.8)]"></span>
+              </span>
+              <span className="text-white font-bold text-[10px] md:text-xs tracking-[0.2em] uppercase">
+                Phoenix Premium <span className="hidden md:inline">&bull; Slide {currentIndex + 1} of {slides.length || 1}</span>
+              </span>
+            </div>
           </div>
           
-          <h1 className="text-[2.75rem] leading-[1.05] sm:text-5xl md:text-7xl lg:text-[5.5rem] font-black text-transparent bg-clip-text bg-gradient-to-br from-white via-gray-100 to-gray-400 mb-5 drop-shadow-2xl tracking-tight">
-            {activeSlide.title}
-          </h1>
+          <div className="min-h-[135px] sm:min-h-[120px] md:min-h-[180px] lg:min-h-[200px] flex items-start">
+            <h1 className="text-[2.75rem] leading-[1.05] sm:text-5xl md:text-7xl lg:text-[5.5rem] font-black text-transparent bg-clip-text bg-gradient-to-br from-white via-gray-100 to-gray-400 drop-shadow-2xl tracking-tight">
+              {activeSlide.title}
+            </h1>
+          </div>
           
-          <p className="text-gray-300 text-lg md:text-2xl mb-8 md:mb-12 font-medium md:font-light drop-shadow-md max-w-2xl leading-relaxed">
-            {activeSlide.subtitle}
-          </p>
+          <div className="min-h-[85px] md:min-h-[96px] flex items-start mt-2 md:mt-4 mb-6 md:mb-10">
+            <p className="text-gray-300 text-lg md:text-2xl font-medium md:font-light drop-shadow-md max-w-2xl leading-relaxed">
+              {activeSlide.subtitle}
+            </p>
+          </div>
           
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-stretch sm:items-center w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-stretch sm:items-center w-full sm:w-auto mt-auto">
             <Link 
               href={activeSlide.linkUrl || '/events'}
-              className="relative inline-flex items-center justify-center px-8 py-4 overflow-hidden font-bold text-white bg-white/10 border border-white/20 backdrop-blur-lg rounded-full group hover:bg-white/20 hover:border-white/40 transition-all duration-300 w-full sm:w-auto shadow-[0_0_40px_rgba(255,255,255,0.15)]"
+              className="relative inline-flex items-center justify-center px-8 py-4 overflow-hidden font-bold text-white bg-white/10 border border-white/20 backdrop-blur-lg rounded-full group hover:bg-white/20 hover:border-white/40 transition-all duration-300 w-full sm:w-auto shadow-[0_0_40px_rgba(255,255,255,0.15)] shrink-0"
             >
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-orange-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
               <span className="relative flex items-center tracking-wide text-sm md:text-base">
@@ -134,7 +138,7 @@ export function PhoenixHero() {
               </span>
             </Link>
             
-            <Link href="/about" className="inline-flex justify-center sm:justify-start items-center text-white/80 hover:text-white font-medium transition-colors group text-sm md:text-base py-2 sm:py-0">
+            <Link href="/about" className="inline-flex justify-center sm:justify-start items-center text-white/80 hover:text-white font-medium transition-colors group text-sm md:text-base py-2 sm:py-0 shrink-0">
               Watch Highlight Reel
               <div className="ml-3 w-12 h-12 rounded-full border border-white/30 flex items-center justify-center backdrop-blur-md group-hover:border-white/70 group-hover:bg-white/10 group-hover:scale-110 transition-all duration-300 shadow-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="ml-1 text-white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
