@@ -112,9 +112,17 @@ export function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4 tracking-wide">Explore</h4>
             <ul className="flex flex-col gap-4 text-sm font-medium text-gray-600 dark:text-gray-400">
-              {['About Us', 'Events', 'Artists', 'Gallery', 'Our Vision'].map((link) => (
-                <li key={link}><Link href={`/${link.toLowerCase().replace(' ', '-')}`} className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors inline-block hover:translate-x-1 duration-300">{link}</Link></li>
-              ))}
+              {['About Us', 'Events', 'Artists', 'Gallery', 'Our Vision'].map((link) => {
+                let href = `/${link.toLowerCase().replace(/ /g, '-')}`;
+                if (link === 'About Us') href = '/about';
+                return (
+                  <li key={link}>
+                    <Link href={href} className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors inline-block hover:translate-x-1 duration-300">
+                      {link}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
