@@ -162,6 +162,13 @@
   .animate-ripple {
     animation: ripple 0.6s cubic-bezier(0, 0.2, 0.8, 1) forwards;
   }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 }
 
 @keyframes shimmer {
