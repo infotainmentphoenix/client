@@ -93,35 +93,35 @@ export function PhoenixHero() {
         ))}
 
         {/* Gradient Overlays for perfect text readability on all devices */}
-        <div className="absolute inset-0 z-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-90 md:opacity-80"></div>
-        <div className="hidden md:block absolute inset-0 z-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent opacity-90"></div>
+        <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent opacity-100 md:opacity-90"></div>
+        <div className="absolute inset-0 z-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent opacity-80 md:opacity-90"></div>
         <div className="hidden md:block absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent mix-blend-screen"></div>
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto md:px-12 lg:px-24 flex-1 flex flex-col justify-end md:justify-center w-full">
+      <div className="relative z-10 container mx-auto px-6 md:px-12 lg:px-24 flex-1 flex flex-col justify-end md:justify-center w-full pb-10 md:pb-0">
         <div key={currentIndex} className="max-w-3xl md:border-l-4 md:border-orange-500 md:pl-8 lg:pl-12 py-2 animate-fadeIn transition-all duration-500 flex flex-col justify-end min-h-[380px] md:min-h-[420px]">
           
           <div>
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 mb-6 rounded-full bg-white/10 border border-white/20 backdrop-blur-xl shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 mb-6 rounded-full bg-black/40 md:bg-white/10 border border-white/20 backdrop-blur-xl shadow-lg">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.8)]"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,1)]"></span>
               </span>
-              <span className="text-white font-bold text-[10px] md:text-xs tracking-[0.2em] uppercase">
+              <span className="text-white font-bold text-[10px] md:text-xs tracking-[0.25em] uppercase">
                 Phoenix Premium <span className="hidden md:inline">&bull; Slide {currentIndex + 1} of {slides.length || 1}</span>
               </span>
             </div>
           </div>
           
-          <div className="min-h-[135px] sm:min-h-[120px] md:min-h-[180px] lg:min-h-[200px] flex items-start">
-            <h1 className="text-[2.75rem] leading-[1.05] sm:text-5xl md:text-7xl lg:text-[5.5rem] font-black text-transparent bg-clip-text bg-gradient-to-br from-white via-gray-100 to-gray-400 drop-shadow-2xl tracking-tight">
+          <div className="min-h-[120px] sm:min-h-[120px] md:min-h-[180px] lg:min-h-[200px] flex items-start">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-[5.5rem] leading-[1.1] md:leading-[1.05] font-black text-transparent bg-clip-text bg-gradient-to-br from-white via-gray-100 to-gray-400 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] tracking-tight">
               {activeSlide.title}
             </h1>
           </div>
           
-          <div className="min-h-[85px] md:min-h-[96px] flex items-start mt-2 md:mt-4 mb-6 md:mb-10">
-            <p className="text-gray-300 text-lg md:text-2xl font-medium md:font-light drop-shadow-md max-w-2xl leading-relaxed">
+          <div className="min-h-[80px] md:min-h-[96px] flex items-start mt-3 md:mt-4 mb-8 md:mb-10">
+            <p className="text-gray-200 text-[1.05rem] md:text-2xl font-light drop-shadow-md max-w-2xl leading-relaxed">
               {activeSlide.subtitle}
             </p>
           </div>
@@ -129,40 +129,44 @@ export function PhoenixHero() {
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-stretch sm:items-center w-full sm:w-auto mt-auto">
             <Link 
               href={activeSlide.linkUrl || '/events'}
-              className="relative inline-flex items-center justify-center px-8 py-4 overflow-hidden font-bold text-white bg-white/10 border border-white/20 backdrop-blur-lg rounded-full group hover:bg-white/20 hover:border-white/40 transition-all duration-300 w-full sm:w-auto shadow-[0_0_40px_rgba(255,255,255,0.15)] shrink-0"
+              className="relative inline-flex items-center justify-center px-8 py-4 overflow-hidden font-bold text-white bg-white/10 md:bg-white/10 border border-white/20 backdrop-blur-xl rounded-full group hover:bg-white/20 hover:border-white/40 transition-all duration-300 w-full sm:w-auto shadow-lg shrink-0"
             >
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-orange-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
-              <span className="relative flex items-center tracking-wide text-sm md:text-base">
+              <span className="relative flex items-center tracking-wide text-[15px] md:text-base">
                 {activeSlide.buttonText || 'Explore Events'}
                 <ArrowUpRightIcon className="ml-2 w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
               </span>
             </Link>
             
-            <Link href="/about" className="inline-flex justify-center sm:justify-start items-center text-white/80 hover:text-white font-medium transition-colors group text-sm md:text-base py-2 sm:py-0 shrink-0">
+            <Link href="/about" className="inline-flex justify-between sm:justify-start items-center text-white/90 hover:text-white font-medium transition-colors group text-[15px] md:text-base py-3 sm:py-0 px-6 sm:px-0 bg-white/5 sm:bg-transparent border border-white/10 sm:border-transparent rounded-full shrink-0">
               Watch Highlight Reel
-              <div className="ml-3 w-12 h-12 rounded-full border border-white/30 flex items-center justify-center backdrop-blur-md group-hover:border-white/70 group-hover:bg-white/10 group-hover:scale-110 transition-all duration-300 shadow-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="ml-1 text-white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <div className="ml-4 w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/30 flex items-center justify-center backdrop-blur-md group-hover:border-white/70 group-hover:bg-white/20 group-hover:scale-110 transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="ml-1 text-white md:w-4 md:h-4"><polygon points="5 3 19 12 5 21 5 3"/></svg>
               </div>
             </Link>
           </div>
+
+          {/* Mobile Pagination */}
+          {slides.length > 1 && (
+            <div className="mt-8 mb-4 flex md:hidden justify-center sm:justify-start">
+              <div className="inline-flex items-center gap-2.5 bg-black/40 backdrop-blur-xl px-5 py-2.5 rounded-full border border-white/15 shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+                {slides.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentIndex(idx)}
+                    aria-label={`Go to slide ${idx + 1}`}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      idx === currentIndex ? 'w-7 bg-gradient-to-r from-orange-400 to-orange-600 shadow-[0_0_10px_rgba(249,115,22,1)]' : 'w-2 bg-white/30 hover:bg-white/50'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Mobile Pagination */}
-      {slides.length > 1 && (
-        <div className="absolute top-24 right-5 z-20 flex md:hidden gap-1.5 bg-black/30 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
-          {slides.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setCurrentIndex(idx)}
-              aria-label={`Go to slide ${idx + 1}`}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                idx === currentIndex ? 'w-5 bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.8)]' : 'w-1.5 bg-white/40'
-              }`}
-            />
-          ))}
-        </div>
-      )}
+
 
       {/* Desktop Pagination (Arrows & Dots) */}
       {slides.length > 1 && (

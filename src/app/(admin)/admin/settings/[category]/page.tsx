@@ -3,8 +3,9 @@ import { getSettingsConfig } from '@/config/settings';
 
 // Import custom components that were placed in settings
 import { CarouselList } from '@/features/carousel/components/CarouselList';
-import { PressList } from '@/features/press/components/PressList';
 import { SettingsForm } from './SettingsForm';
+import { ClientLogosManager } from '@/features/site-settings/components/ClientLogosManager';
+import { SocialLinksManager } from '@/features/site-settings/components/SocialLinksManager';
 
 interface PageProps {
   params: Promise<{
@@ -20,7 +21,9 @@ export default async function SettingsCategoryPage({ params }: PageProps) {
     case 'carousels':
       return <CarouselList />;
     case 'client-logos':
-      return <PressList />;
+      return <ClientLogosManager />;
+    case 'social-links':
+      return <SocialLinksManager />;
   }
 
   const config = getSettingsConfig(category);

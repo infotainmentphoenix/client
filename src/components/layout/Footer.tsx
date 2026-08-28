@@ -58,26 +58,26 @@ export function Footer() {
       <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-full max-w-3xl h-80 bg-blue-500/5 dark:bg-blue-500/10 blur-[120px] rounded-full pointer-events-none"></div>
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6 mb-8">
+        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-12 lg:gap-8 mb-12">
           {/* Brand Column */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center mb-4">
+          <div className="lg:col-span-5 flex flex-col items-start text-left">
+            <div className="flex items-center mb-6">
               <img 
                 src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20White.png" 
                 alt="Phoenix Infotainment Logo (Dark Mode)" 
-                className="hidden dark:block h-[60px] sm:h-[90px] md:h-[120px] w-auto object-contain" 
+                className="hidden dark:block h-[50px] sm:h-[60px] md:h-[80px] w-auto object-contain" 
               />
               <img 
                 src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20Black.png" 
                 alt="Phoenix Infotainment Logo (Light Mode)" 
-                className="block dark:hidden h-[60px] sm:h-[90px] md:h-[120px] w-auto object-contain" 
+                className="block dark:hidden h-[50px] sm:h-[60px] md:h-[80px] w-auto object-contain" 
               />
             </div>
-            <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base mb-6 max-w-sm leading-relaxed font-light">
+            <p className="text-gray-600 dark:text-gray-400 text-[14px] sm:text-[15px] mb-8 max-w-sm md:max-w-md leading-relaxed font-light">
               Discover the life, energy & purpose of Phoenix Infotainment. Premium events, top artists, and unforgettable, legendary experiences.
             </p>
             {/* Social Icons */}
-            <div className="flex gap-4">
+            <div className="flex flex-wrap gap-3 mb-6">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
@@ -85,7 +85,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.name}
-                  className="w-10 h-10 rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white hover:border-blue-500 dark:hover:border-blue-400 hover:bg-blue-500/5 dark:hover:bg-blue-500/10 hover:-translate-y-1 transition-all duration-300 cursor-pointer shadow-sm dark:shadow-lg"
+                  className="w-10 h-10 rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-white hover:border-blue-500 hover:bg-blue-600 transition-all duration-300 cursor-pointer shadow-sm dark:shadow-[0_0_10px_rgba(255,255,255,0.05)]"
                 >
                   {social.icon}
                 </a>
@@ -93,12 +93,12 @@ export function Footer() {
             </div>
 
             {/* Digital Card Link */}
-            <div className="mt-5">
+            <div>
               <a 
                 href="https://digitalgurujiofficial.com/nfc/phoenix-infotainment-events/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 group"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 group bg-black/5 dark:bg-white/5 px-4 py-2 rounded-full border border-black/5 dark:border-white/5"
               >
                 <span>Digital Card</span>
                 <svg className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -108,61 +108,61 @@ export function Footer() {
             </div>
           </div>
 
-          {}
-          <div>
-            <h4 className="text-lg font-semibold mb-4 tracking-wide">Explore</h4>
-            <ul className="flex flex-col gap-4 text-sm font-medium text-gray-600 dark:text-gray-400">
-              {['About Us', 'Events', 'Artists', 'Gallery', 'Our Vision'].map((link) => {
-                let href = `/${link.toLowerCase().replace(/ /g, '-')}`;
-                if (link === 'About Us') href = '/about';
-                return (
-                  <li key={link}>
-                    <Link href={href} className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors inline-block hover:translate-x-1 duration-300">
-                      {link}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+          {/* Links Columns */}
+          <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-10 md:gap-8 w-full">
+            <div>
+              <h4 className="text-sm font-bold uppercase tracking-widest mb-5 text-gray-900 dark:text-white">Explore</h4>
+              <ul className="flex flex-col gap-4 text-sm font-medium text-gray-600 dark:text-gray-400">
+                {['About Us', 'Events', 'Artists', 'Gallery', 'Our Vision'].map((link) => {
+                  let href = `/${link.toLowerCase().replace(/ /g, '-')}`;
+                  if (link === 'About Us') href = '/about';
+                  return (
+                    <li key={link}>
+                      <Link href={href} className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors inline-block hover:translate-x-1 duration-300">
+                        {link}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
 
-          {}
-          <div>
-            <h4 className="text-lg font-semibold mb-4 tracking-wide">Support</h4>
-            <ul className="flex flex-col gap-4 text-sm font-medium text-gray-600 dark:text-gray-400">
-              {['Contact Us', 'FAQs', 'Privacy Policy'].map((link) => {
-                let href = `/${link.toLowerCase().replace(/ /g, '-')}`;
-                if (link === 'Contact Us') href = '/contact';
-                if (link === 'Privacy Policy') href = '/privacy';
-                return (
-                  <li key={link}>
-                    <Link href={href} className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors inline-block hover:translate-x-1 duration-300">
-                      {link}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+            <div>
+              <h4 className="text-sm font-bold uppercase tracking-widest mb-5 text-gray-900 dark:text-white">Support</h4>
+              <ul className="flex flex-col gap-4 text-sm font-medium text-gray-600 dark:text-gray-400">
+                {['Contact Us', 'FAQs', 'Privacy Policy'].map((link) => {
+                  let href = `/${link.toLowerCase().replace(/ /g, '-')}`;
+                  if (link === 'Contact Us') href = '/contact';
+                  if (link === 'Privacy Policy') href = '/privacy';
+                  return (
+                    <li key={link}>
+                      <Link href={href} className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors inline-block hover:translate-x-1 duration-300">
+                        {link}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
 
-          {}
-          <div>
-            <h4 className="text-lg font-semibold mb-4 tracking-wide">Contact Us</h4>
-            <div className="text-sm font-medium text-gray-600 dark:text-gray-400 flex flex-col gap-4">
-              <a href="mailto:events@phoenixinfotainment.com" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors block">events@phoenixinfotainment.com</a>
-              <a href="tel:+919822775922" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors block">+91 9822775922</a>
-              <p className="mt-4 text-gray-500 leading-relaxed font-light">
-                A R Avenue Opposite Country Club<br />
-                Veera Desai Road, Andheri West,<br />
-                Mumbai, 400053
-              </p>
-              <p className="text-gray-500 font-light mt-2">Mon - Fri: 09:00 - 18:00</p>
+            <div className="col-span-2 sm:col-span-1">
+              <h4 className="text-sm font-bold uppercase tracking-widest mb-5 text-gray-900 dark:text-white">Contact Us</h4>
+              <div className="text-sm font-medium text-gray-600 dark:text-gray-400 flex flex-col gap-4">
+                <a href="mailto:events@phoenixinfotainment.com" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors block break-words">events@phoenixinfotainment.com</a>
+                <a href="tel:+919822775922" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors block">+91 9822775922</a>
+                <p className="mt-2 text-gray-500 leading-relaxed font-light">
+                  A R Avenue Opposite Country Club<br />
+                  Veera Desai Road, Andheri West,<br />
+                  Mumbai, 400053
+                </p>
+                <p className="text-gray-500 font-light mt-1">Mon - Fri: 09:00 - 18:00</p>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-black/10 dark:border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center text-sm font-medium text-gray-500">
-          <div className="flex flex-col items-center md:items-start gap-1">
+        <div className="border-t border-black/10 dark:border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center text-xs sm:text-sm font-medium text-gray-500 gap-4">
+          <div className="flex flex-col items-center md:items-start gap-1.5 text-center md:text-left">
             <p>&copy; {new Date().getFullYear()} Phoenix Infotainment. All rights reserved.</p>
             <p className="text-xs">
               Designed and developed by{' '}
