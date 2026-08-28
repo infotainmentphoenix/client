@@ -14,14 +14,14 @@ export function ArtistCategoryList() {
     loadCategories();
   }, []);
 
-  const loadCategories = async () => {
+  async function loadCategories() {
     setIsLoading(true);
     const data = await artistApi.getCategories();
     setCategories(data);
     setIsLoading(false);
   };
 
-  const handleDelete = async (id: number) => {
+  async function handleDelete(id: number) {
     if (window.confirm('Are you sure you want to delete this category? Ensure no artists are currently using it.')) {
       await artistApi.deleteCategory(id);
       loadCategories();

@@ -29,7 +29,7 @@ export function ArtistCategoryForm({ categoryId }: ArtistCategoryFormProps) {
     }
   }, [categoryId]);
 
-  const loadCategory = async () => {
+  async function loadCategory() {
     setIsLoading(true);
     const data = await artistApi.getCategory(categoryId!);
     if (data) {
@@ -57,7 +57,7 @@ export function ArtistCategoryForm({ categoryId }: ArtistCategoryFormProps) {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setIsLoading(true);
 

@@ -84,15 +84,15 @@ export default function EventDetailPage() {
   return (
     <>
       {}
-      <section className="relative h-[45vh] md:h-[55vh] bg-gradient-to-br from-orange-900 via-rose-900 to-black overflow-hidden">
+      <section className="relative min-h-[60vh] md:min-h-[55vh] flex flex-col justify-end bg-gradient-to-br from-orange-900 via-rose-900 to-black overflow-hidden">
         {event.coverImage ? (
-          <img src={event.coverImage} alt={event.title} className="absolute inset-0 w-full h-full object-cover opacity-60" />
+          <img src={event.coverImage} alt={event.title} className="absolute inset-0 w-full h-full object-cover opacity-60 pointer-events-none" />
         ) : (
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(249,115,22,0.3),transparent_60%),radial-gradient(circle_at_70%_50%,rgba(244,63,94,0.2),transparent_60%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(249,115,22,0.3),transparent_60%),radial-gradient(circle_at_70%_50%,rgba(244,63,94,0.2),transparent_60%)] pointer-events-none" />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30" />
-        <div className="absolute bottom-0 left-0 right-0">
-          <div className="container mx-auto px-4 md:px-8 pb-10">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/30 pointer-events-none" />
+        <div className="relative z-10 w-full">
+          <div className="container mx-auto px-4 md:px-8 pb-10 pt-32">
             {event.eventType && (
               <span className="inline-block px-3 py-1 bg-orange-500 text-white text-xs font-bold rounded-full mb-4">
                 {eventTypeLabels[event.eventType] || event.eventType}

@@ -4,32 +4,24 @@ import { useState, useEffect, use } from 'react';
 import Link from 'next/link';
 import { pressApi } from '@/features/press/api';
 import { BlogPost } from '@/features/press/types';
+import { Icon42, Icon43, Icon44, Icon45, Icon46 } from '@/components/icons/MarketingIcons';
+
 
 // Icons
 const CalendarIcon = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <rect width="18" height="18" x="3" y="4" rx="2" />
-    <path d="M16 2v4M8 2v4M3 10h18" />
-  </svg>
+  <Icon42 className={className} />
 );
 
 const UserIcon = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-    <circle cx="12" cy="7" r="4" />
-  </svg>
+  <Icon43 className={className} />
 );
 
 const ArrowLeftIcon = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <path d="m12 19-7-7 7-7M19 12H5" />
-  </svg>
+  <Icon44 className={className} />
 );
 
 const ShareIcon = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13" />
-  </svg>
+  <Icon45 className={className} />
 );
 
 function formatDate(dateStr?: string | null) {
@@ -107,9 +99,7 @@ export default function PressReleaseDetailPage({ params }: PageProps) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center text-center px-4 bg-gray-50 dark:bg-black">
         <div className="w-16 h-16 bg-red-100 dark:bg-red-500/10 rounded-full flex items-center justify-center text-red-500 mb-6">
-          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-          </svg>
+          <Icon46 className="w-8 h-8" />
         </div>
         <h1 className="text-3xl font-black text-gray-900 dark:text-white mb-3">Press Release Not Found</h1>
         <p className="text-gray-500 dark:text-gray-400 mb-8 max-w-sm">The article you are searching for does not exist or has been deleted.</p>
@@ -124,7 +114,7 @@ export default function PressReleaseDetailPage({ params }: PageProps) {
     <div className="min-h-screen bg-gray-50 dark:bg-black text-gray-900 dark:text-white transition-colors duration-300">
       
       {/* Header Banner */}
-      <section className="relative h-[40vh] md:h-[50vh] bg-gradient-to-br from-indigo-900 via-purple-900 to-black overflow-hidden flex items-end">
+      <section className="relative min-h-[50vh] md:min-h-[50vh] bg-gradient-to-br from-indigo-900 via-purple-900 to-black overflow-hidden flex items-end">
         {post.featuredImage ? (
           <img 
             src={post.featuredImage} 
@@ -136,7 +126,7 @@ export default function PressReleaseDetailPage({ params }: PageProps) {
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30" />
         
-        <div className="container mx-auto px-4 md:px-8 pb-10 relative z-10 max-w-6xl">
+        <div className="container mx-auto px-4 md:px-8 pb-10 pt-32 relative z-10 max-w-6xl">
           <span className="inline-flex items-center px-3 py-1 bg-indigo-500 text-white text-xs font-bold rounded-full mb-4 uppercase tracking-wider">
             {post.youtubeUrl ? 'Video Feature' : 'Official Announcement'}
           </span>

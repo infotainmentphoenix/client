@@ -41,7 +41,7 @@ export function GalleryForm({ itemId }: GalleryFormProps) {
     }
   }, [itemId]);
 
-  const loadItem = async () => {
+  async function loadItem() {
     setIsLoading(true);
     try {
       const data = await galleryApi.getItem(itemId!, true);
@@ -133,7 +133,7 @@ export function GalleryForm({ itemId }: GalleryFormProps) {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setIsLoading(true);
     setError(null);

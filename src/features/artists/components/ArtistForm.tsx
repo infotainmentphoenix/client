@@ -53,7 +53,7 @@ export function ArtistForm({ artistId }: ArtistFormProps) {
     }
   }, [artistId]);
 
-  const loadCategories = async () => {
+  async function loadCategories() {
     const data = await artistApi.getCategories();
     setCategories(data);
     if (!isEditing && data.length > 0 && !formData.categoryId) {
@@ -61,7 +61,7 @@ export function ArtistForm({ artistId }: ArtistFormProps) {
     }
   };
 
-  const loadArtist = async () => {
+  async function loadArtist() {
     setIsLoading(true);
     const data = await artistApi.getArtist(artistId!);
     if (data) {
@@ -113,7 +113,7 @@ export function ArtistForm({ artistId }: ArtistFormProps) {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setIsLoading(true);
 

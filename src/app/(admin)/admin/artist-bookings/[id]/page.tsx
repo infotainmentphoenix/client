@@ -22,7 +22,7 @@ export default function AdminArtistBookingDetailPage({ params }: { params: Promi
     loadArtist();
   }, [resolvedParams.id]);
 
-  const loadArtist = async () => {
+  async function loadArtist() {
     setIsLoading(true);
     const data = await artistApi.getArtist(resolvedParams.id);
     if (data) {
@@ -40,7 +40,7 @@ export default function AdminArtistBookingDetailPage({ params }: { params: Promi
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!artist) return;
     

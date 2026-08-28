@@ -1,18 +1,14 @@
-'use client';
 
 import Link from 'next/link';
+import { Icon1, Icon2, Icon3, Icon4, Icon5 } from '@/components/icons/MarketingIcons';
+
 
 const CheckIcon = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <polyline points="20 6 9 17 4 12"></polyline>
-  </svg>
+  <Icon1 className={className} />
 );
 
 const ArrowUpRightIcon = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <line x1="7" y1="17" x2="17" y2="7"></line>
-    <polyline points="7 7 17 7 17 17"></polyline>
-  </svg>
+  <Icon2 className={className} />
 );
 
 export default function AboutUsPage() {
@@ -122,7 +118,7 @@ export default function AboutUsPage() {
           <div className="p-8 bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-2xl flex flex-col justify-between hover:border-orange-500/50 dark:hover:border-orange-500/50 transition-all duration-300 relative group shadow-lg dark:shadow-none">
             <div className="space-y-6">
               <div className="w-12 h-12 rounded-xl bg-orange-500/10 text-orange-600 dark:text-orange-400 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <Icon3 className="" />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Social Media & Digital</h3>
@@ -152,7 +148,7 @@ export default function AboutUsPage() {
           <div className="p-8 bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-2xl flex flex-col justify-between hover:border-rose-500/50 dark:hover:border-rose-500/50 transition-all duration-300 relative group shadow-lg dark:shadow-none">
             <div className="space-y-6">
               <div className="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                <Icon4 className="" />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Marketing & Strategy</h3>
@@ -182,7 +178,7 @@ export default function AboutUsPage() {
           <div className="p-8 bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-2xl flex flex-col justify-between hover:border-purple-500/50 dark:hover:border-purple-500/50 transition-all duration-300 relative group shadow-lg dark:shadow-none">
             <div className="space-y-6">
               <div className="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                <Icon5 className="" />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Production & Operations</h3>

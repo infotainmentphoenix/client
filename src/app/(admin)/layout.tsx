@@ -7,6 +7,10 @@ import { AdminAuthGuard } from '@/components/layout/admin-auth-guard';
 export const metadata: Metadata = {
   title: 'Dashboard | Phoenix Admin',
   description: 'Phoenix Infotainment Administration Portal',
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function AdminLayout({

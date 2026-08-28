@@ -14,14 +14,14 @@ export function ArtistBookingManager() {
     loadArtists();
   }, []);
 
-  const loadArtists = async () => {
+  async function loadArtists() {
     setIsLoading(true);
     const data = await artistApi.getArtists();
     setArtists(data);
     setIsLoading(false);
   };
 
-  const handleAvailabilityChange = async (id: number, availability: ArtistAvailability) => {
+  async function handleAvailabilityChange(id: number, availability: ArtistAvailability) {
     // Optimistic UI update
     setArtists(prev => prev.map(a => a.id === id ? { ...a, availability } : a));
     

@@ -12,7 +12,7 @@ export default function AnalyticsSlot() {
     loadInquiries();
   }, []);
 
-  const loadInquiries = async () => {
+  async function loadInquiries() {
     setIsLoading(true);
     const data = await inquiryApi.getInquiries();
     setInquiries(data);

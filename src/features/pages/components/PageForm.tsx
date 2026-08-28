@@ -26,7 +26,7 @@ export function PageForm({ settingId }: PageFormProps) {
     }
   }, [settingId]);
 
-  const loadSetting = async () => {
+  async function loadSetting() {
     setIsLoading(true);
     const data = await pageApi.getSetting(settingId!);
     if (data) {
@@ -40,7 +40,7 @@ export function PageForm({ settingId }: PageFormProps) {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setIsLoading(true);
 

@@ -27,7 +27,7 @@ export default function AdminMediaLibraryPage() {
     loadMedia();
   }, []);
 
-  const loadMedia = async () => {
+  async function loadMedia() {
     setIsLoading(true);
     const data = await mediaApi.getMedia();
     setMedia(data);
@@ -38,7 +38,7 @@ export default function AdminMediaLibraryPage() {
     fileInputRef.current?.click();
   };
 
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
       setIsUploading(true);
@@ -54,7 +54,7 @@ export default function AdminMediaLibraryPage() {
     }
   };
 
-  const handleDelete = async (id: number) => {
+  async function handleDelete(id: number) {
     if (window.confirm('Are you sure you want to delete this file?')) {
       await mediaApi.deleteMedia(id);
       setMedia(prev => prev.filter(m => m.id !== id));

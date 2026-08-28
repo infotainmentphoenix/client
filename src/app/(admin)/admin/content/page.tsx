@@ -181,7 +181,7 @@ export default function ContentDashboardPage() {
       {}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {CONTENT_MODULES.map((module) => {
-          let count = counts[module.id] || 0;
+          const count = counts[module.id] || 0;
 
           return (
             <Link key={module.id} href={module.href} className="group flex flex-col bg-card border border-border hover:border-transparent rounded-2xl p-6 transition-all shadow-sm hover:shadow-xl hover:-translate-y-1 relative overflow-hidden">

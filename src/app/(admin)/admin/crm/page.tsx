@@ -26,7 +26,7 @@ export default function CRMPage() {
     loadInquiries();
   }, []);
 
-  const loadInquiries = async () => {
+  async function loadInquiries() {
     setIsLoading(true);
     const data = await inquiryApi.getInquiries();
     setInquiries(data);

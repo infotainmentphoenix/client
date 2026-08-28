@@ -73,25 +73,30 @@ const ScrollingColumn = ({ images, direction }: { images: string[], direction: "
 
 // Crackers / Firework Particles Component
 const FireworkParticles = () => {
-  // Generate 50 random particles
-  const particles = Array.from({ length: 60 }).map((_, i) => {
-    const angle = (Math.random() * 360 * Math.PI) / 180;
-    const distance = 100 + Math.random() * 500; // Explode far out
-    const size = 2 + Math.random() * 6;
-    const duration = 0.8 + Math.random() * 1.5;
-    // Luxurious event colors: Gold, Silver, Electric Blue, Purple
-    const colors = ["#fbbf24", "#fcd34d", "#f8fafc", "#60a5fa", "#c084fc", "#e879f9"];
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    
-    return {
-      id: i,
-      x: Math.cos(angle) * distance,
-      y: Math.sin(angle) * distance,
-      size,
-      duration,
-      color
-    };
-  });
+  const [particles, setParticles] = useState<any[]>([]);
+
+  useEffect(() => {
+    // Generate 60 random particles on client side only to ensure purity
+    const generated = Array.from({ length: 60 }).map((_, i) => {
+      const angle = (Math.random() * 360 * Math.PI) / 180;
+      const distance = 100 + Math.random() * 500; // Explode far out
+      const size = 2 + Math.random() * 6;
+      const duration = 0.8 + Math.random() * 1.5;
+      // Luxurious event colors: Gold, Silver, Electric Blue, Purple
+      const colors = ["#fbbf24", "#fcd34d", "#f8fafc", "#60a5fa", "#c084fc", "#e879f9"];
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      
+      return {
+        id: i,
+        x: Math.cos(angle) * distance,
+        y: Math.sin(angle) * distance,
+        size,
+        duration,
+        color
+      };
+    });
+    setParticles(generated);
+  }, []);
 
   return (
     <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-[100]">
@@ -198,7 +203,7 @@ export function SplashScreen() {
                     <img 
                       src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20White.png" 
                       alt="Phoenix" 
-                      className="w-64 md:w-96 drop-shadow-[0_0_40px_rgba(255,255,255,0.4)] mb-4" 
+                      className="w-48 sm:w-64 md:w-80 lg:w-96 drop-shadow-[0_0_40px_rgba(255,255,255,0.4)] mb-4" 
                     />
                   </motion.div>
                 </div>

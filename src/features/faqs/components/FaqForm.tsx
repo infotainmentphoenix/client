@@ -32,7 +32,7 @@ export function FaqForm({ faqId }: FaqFormProps) {
     }
   }, [faqId]);
 
-  const loadCategories = async () => {
+  async function loadCategories() {
     const data = await faqApi.getCategories(true);
     setCategories(data);
     if (!isEditing && data.length > 0 && !formData.categoryId) {
@@ -40,7 +40,7 @@ export function FaqForm({ faqId }: FaqFormProps) {
     }
   };
 
-  const loadFaq = async () => {
+  async function loadFaq() {
     setIsLoading(true);
     const data = await faqApi.getFaq(faqId!);
     if (data) {
@@ -66,7 +66,7 @@ export function FaqForm({ faqId }: FaqFormProps) {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setIsLoading(true);
 

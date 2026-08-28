@@ -14,14 +14,14 @@ export function FaqList() {
     loadFaqs();
   }, []);
 
-  const loadFaqs = async () => {
+  async function loadFaqs() {
     setIsLoading(true);
     const data = await faqApi.getFaqs(undefined, true);
     setFaqs(data);
     setIsLoading(false);
   };
 
-  const handleDelete = async (id: number) => {
+  async function handleDelete(id: number) {
     if (window.confirm('Are you sure you want to delete this FAQ?')) {
       await faqApi.deleteFaq(id);
       loadFaqs();

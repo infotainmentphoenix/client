@@ -26,7 +26,7 @@ export function CarouselList() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
 
-  const fetchCarousels = async () => {
+  async function fetchCarousels() {
     setLoading(true);
     const data = await carouselApi.getCarousels({ search });
     setCarousels(data);
@@ -37,7 +37,7 @@ export function CarouselList() {
     fetchCarousels();
   }, [search]);
 
-  const handleDelete = async (id: number) => {
+  async function handleDelete(id: number) {
     if (window.confirm('Are you sure you want to delete this carousel slide?')) {
       const success = await carouselApi.deleteCarousel(id);
       if (success) {

@@ -81,7 +81,7 @@ export function EventForm({ eventId }: EventFormProps) {
     init();
   }, [eventId]);
 
-  const loadEvent = async () => {
+  async function loadEvent() {
     const data = await eventApi.getEvent(eventId!);
     if (data) {
       setFormData({
@@ -227,7 +227,7 @@ export function EventForm({ eventId }: EventFormProps) {
     setExistingGallery(prev => prev.filter(img => img.id !== id));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setIsLoading(true);
     setError(null);

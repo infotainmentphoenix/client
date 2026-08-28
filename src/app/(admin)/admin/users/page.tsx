@@ -57,7 +57,7 @@ export default function UsersPage() {
     loadUsers();
   }, []);
 
-  const loadUsers = async () => {
+  async function loadUsers() {
     setIsLoading(true);
     try {
       const data = await userApi.getUsers();
@@ -94,7 +94,7 @@ export default function UsersPage() {
     setIsModalOpen(true);
   };
 
-  const handleSave = async (e: React.FormEvent) => {
+  async function handleSave(e: React.FormEvent) {
     e.preventDefault();
     setIsSaving(true);
     setFieldErrors({});
@@ -164,7 +164,7 @@ export default function UsersPage() {
     }
   };
 
-  const handleDelete = async (id: number) => {
+  async function handleDelete(id: number) {
     if (!window.confirm("Delete this user permanently?")) return;
     try {
       await userApi.deleteUser(id);

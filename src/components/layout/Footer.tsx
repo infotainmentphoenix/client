@@ -65,12 +65,12 @@ export function Footer() {
               <img 
                 src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20White.png" 
                 alt="Phoenix Infotainment Logo (Dark Mode)" 
-                className="hidden dark:block h-[90px] sm:h-[120px] w-auto object-contain" 
+                className="hidden dark:block h-[60px] sm:h-[90px] md:h-[120px] w-auto object-contain" 
               />
               <img 
                 src="https://ik.imagekit.io/n5xsoq8qf/infotainmentphoenixLogo/Phoenix%20Black.png" 
                 alt="Phoenix Infotainment Logo (Light Mode)" 
-                className="block dark:hidden h-[90px] sm:h-[120px] w-auto object-contain" 
+                className="block dark:hidden h-[60px] sm:h-[90px] md:h-[120px] w-auto object-contain" 
               />
             </div>
             <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base mb-6 max-w-sm leading-relaxed font-light">

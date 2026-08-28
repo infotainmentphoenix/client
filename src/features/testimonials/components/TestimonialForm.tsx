@@ -22,15 +22,7 @@ export function TestimonialForm({ eventId }: TestimonialFormProps) {
     clientQuote: '',
   });
 
-  useEffect(() => {
-    if (isEditing) {
-      loadTestimonial();
-    } else {
-      loadAvailableEvents();
-    }
-  }, [eventId]);
-
-  const loadTestimonial = async () => {
+  async function loadTestimonial() {
     setIsLoading(true);
     const data = await testimonialApi.getTestimonial(eventId!);
     if (data) {
@@ -44,12 +36,20 @@ export function TestimonialForm({ eventId }: TestimonialFormProps) {
     setIsLoading(false);
   };
 
-  const loadAvailableEvents = async () => {
+  async function loadAvailableEvents() {
     setIsLoading(true);
     const events = await testimonialApi.getAvailableEvents();
     setAvailableEvents(events);
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    if (isEditing) {
+      loadTestimonial();
+    } else {
+      loadAvailableEvents();
+    }
+  }, [eventId]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -67,7 +67,7 @@ export function TestimonialForm({ eventId }: TestimonialFormProps) {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!selectedEventId) {
       alert('Please select an event to attach this testimonial to.');

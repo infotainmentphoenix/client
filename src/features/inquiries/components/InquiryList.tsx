@@ -15,21 +15,21 @@ export function InquiryList() {
     loadInquiries();
   }, []);
 
-  const loadInquiries = async () => {
+  async function loadInquiries() {
     setIsLoading(true);
     const data = await inquiryApi.getInquiries();
     setInquiries(data);
     setIsLoading(false);
   };
 
-  const handleStatusChange = async (id: number, newStatus: InquiryStatus) => {
+  async function handleStatusChange(id: number, newStatus: InquiryStatus) {
     const success = await inquiryApi.updateStatus(id, newStatus);
     if (success) {
       setInquiries(inquiries.map(inq => inq.id === id ? { ...inq, status: newStatus } : inq));
     }
   };
 
-  const handleDelete = async (id: number) => {
+  async function handleDelete(id: number) {
     if (window.confirm('Are you sure you want to delete this inquiry?')) {
       await inquiryApi.deleteInquiry(id);
       loadInquiries();

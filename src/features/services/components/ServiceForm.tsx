@@ -53,7 +53,7 @@ export function ServiceForm({ serviceId }: ServiceFormProps) {
     }
   }, [serviceId]);
 
-  const loadService = async () => {
+  async function loadService() {
     setIsLoading(true);
     try {
       const data = await serviceApi.getService(serviceId!, true);
@@ -207,7 +207,7 @@ export function ServiceForm({ serviceId }: ServiceFormProps) {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setIsLoading(true);
     setError(null);

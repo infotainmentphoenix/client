@@ -14,14 +14,14 @@ export function TeamList() {
     loadMembers();
   }, []);
 
-  const loadMembers = async () => {
+  async function loadMembers() {
     setIsLoading(true);
     const data = await teamApi.getMembers(true);
     setMembers(data);
     setIsLoading(false);
   };
 
-  const handleDelete = async (id: number) => {
+  async function handleDelete(id: number) {
     if (window.confirm('Are you sure you want to remove this team member?')) {
       await teamApi.deleteMember(id);
       loadMembers();

@@ -14,14 +14,14 @@ export function PageList() {
     loadSettings();
   }, []);
 
-  const loadSettings = async () => {
+  async function loadSettings() {
     setIsLoading(true);
     const data = await pageApi.getSettings();
     setSettings(data);
     setIsLoading(false);
   };
 
-  const handleDelete = async (id: number) => {
+  async function handleDelete(id: number) {
     if (window.confirm('Are you sure you want to delete this setting block?')) {
       await pageApi.deleteSetting(id);
       loadSettings();

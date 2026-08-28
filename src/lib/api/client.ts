@@ -66,11 +66,11 @@ const refreshAccessToken = async (): Promise<string | null> => {
   return refreshPromise;
 };
 
-const handleResponse = async <T>(
+const handleResponse = async <T = any>(
   response: Response,
   retry: () => Promise<Response>,
   url: string,
-): Promise<{ data: T }> => {
+): Promise<any> => {
   let json: any = null;
   try {
     const text = await response.text();
@@ -105,7 +105,7 @@ const handleResponse = async <T>(
 };
 
 export const api = {
-  get: async <T>(url: string): Promise<{ data: T }> => {
+  get: async <T = any>(url: string): Promise<any> => {
     const doFetch = () =>
       fetch(`${BASE_URL}${url}`, {
         method: 'GET',
@@ -114,7 +114,7 @@ export const api = {
       });
     return handleResponse<T>(await doFetch(), doFetch, url);
   },
-  post: async <T>(url: string, body: any): Promise<{ data: T }> => {
+  post: async <T = any>(url: string, body: any): Promise<any> => {
     const isFormData = typeof FormData !== 'undefined' && body instanceof FormData;
     const doFetch = () =>
       fetch(`${BASE_URL}${url}`, {
@@ -125,7 +125,7 @@ export const api = {
       });
     return handleResponse<T>(await doFetch(), doFetch, url);
   },
-  patch: async <T>(url: string, body: any): Promise<{ data: T }> => {
+  patch: async <T = any>(url: string, body: any): Promise<any> => {
     const isFormData = typeof FormData !== 'undefined' && body instanceof FormData;
     const doFetch = () =>
       fetch(`${BASE_URL}${url}`, {
@@ -136,7 +136,7 @@ export const api = {
       });
     return handleResponse<T>(await doFetch(), doFetch, url);
   },
-  put: async <T>(url: string, body: any): Promise<{ data: T }> => {
+  put: async <T = any>(url: string, body: any): Promise<any> => {
     const isFormData = typeof FormData !== 'undefined' && body instanceof FormData;
     const doFetch = () =>
       fetch(`${BASE_URL}${url}`, {
@@ -147,7 +147,7 @@ export const api = {
       });
     return handleResponse<T>(await doFetch(), doFetch, url);
   },
-  delete: async <T>(url: string): Promise<{ data: T }> => {
+  delete: async <T = any>(url: string): Promise<any> => {
     const doFetch = () =>
       fetch(`${BASE_URL}${url}`, {
         method: 'DELETE',

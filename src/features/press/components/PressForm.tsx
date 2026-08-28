@@ -42,7 +42,7 @@ export function PressForm({ logoId: postId }: PressFormProps) {
     }
   }, [postId]);
 
-  const loadPost = async () => {
+  async function loadPost() {
     setIsLoading(true);
     try {
       const data = await pressApi.getBlogPostById(postId!);
@@ -170,7 +170,7 @@ export function PressForm({ logoId: postId }: PressFormProps) {
   };
 
   // Submit Handler
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!validateForm()) return;
     

@@ -14,14 +14,14 @@ export function FaqCategoryList() {
     loadCategories();
   }, []);
 
-  const loadCategories = async () => {
+  async function loadCategories() {
     setIsLoading(true);
     const data = await faqApi.getCategories(true);
     setCategories(data);
     setIsLoading(false);
   };
 
-  const handleDelete = async (id: number) => {
+  async function handleDelete(id: number) {
     if (window.confirm('Are you sure you want to delete this category? Ensure no FAQs are currently using it.')) {
       await faqApi.deleteCategory(id);
       loadCategories();

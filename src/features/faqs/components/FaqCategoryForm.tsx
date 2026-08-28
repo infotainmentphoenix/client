@@ -27,7 +27,7 @@ export function FaqCategoryForm({ categoryId }: FaqCategoryFormProps) {
     }
   }, [categoryId]);
 
-  const loadCategory = async () => {
+  async function loadCategory() {
     setIsLoading(true);
     const data = await faqApi.getCategory(categoryId!, true);
     if (data) {
@@ -55,7 +55,7 @@ export function FaqCategoryForm({ categoryId }: FaqCategoryFormProps) {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setIsLoading(true);
 

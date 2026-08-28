@@ -13,7 +13,7 @@ export default function RecentInquiriesSlot() {
     loadInquiries();
   }, []);
 
-  const loadInquiries = async () => {
+  async function loadInquiries() {
     setIsLoading(true);
     const data = await inquiryApi.getInquiries();
     setInquiries(data);

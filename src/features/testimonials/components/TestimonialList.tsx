@@ -10,18 +10,18 @@ export function TestimonialList() {
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState('');
 
-  useEffect(() => {
-    loadTestimonials();
-  }, []);
-
-  const loadTestimonials = async () => {
+  async function loadTestimonials() {
     setIsLoading(true);
     const data = await testimonialApi.getTestimonials(true);
     setTestimonials(data);
     setIsLoading(false);
   };
 
-  const handleDelete = async (eventId?: number) => {
+  useEffect(() => {
+    loadTestimonials();
+  }, []);
+
+  async function handleDelete(eventId?: number) {
     if (!eventId) return;
     if (window.confirm('Are you sure you want to remove this testimonial? (This will not delete the event)')) {
       await testimonialApi.deleteTestimonial(eventId);
@@ -106,7 +106,7 @@ export function TestimonialList() {
                   </td>
                   <td className="px-6 py-4">
                     <div className="max-w-[300px] truncate italic text-gray-600 dark:text-gray-400">
-                      "{testimonial.clientQuote}"
+                      &quot;{testimonial.clientQuote}&quot;
                     </div>
                   </td>
                   <td className="px-6 py-4 text-right">

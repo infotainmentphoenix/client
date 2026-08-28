@@ -64,7 +64,7 @@ export default function ServiceDetailPage() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-black text-gray-900 dark:text-white transition-colors duration-300">
       {}
-      <section className="relative h-[50vh] md:h-[60vh] bg-gradient-to-br from-gray-950 via-orange-950 to-black overflow-hidden">
+      <section className="relative min-h-[60vh] md:min-h-[60vh] flex flex-col justify-end bg-gradient-to-br from-gray-950 via-orange-950 to-black overflow-hidden">
         {service.coverImage ? (
           <img
             src={service.coverImage}
@@ -76,8 +76,8 @@ export default function ServiceDetailPage() {
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/20" />
 
-        <div className="absolute bottom-0 left-0 right-0">
-          <div className="container mx-auto px-4 md:px-8 pb-12">
+        <div className="relative z-10 w-full">
+          <div className="container mx-auto px-4 md:px-8 pb-12 pt-32">
             <span className="inline-block px-3.5 py-1 bg-orange-500/20 backdrop-blur text-orange-400 border border-orange-500/30 text-xs font-bold rounded-full mb-4">
               Service Overview
             </span>

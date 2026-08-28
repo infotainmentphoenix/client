@@ -13,14 +13,14 @@ export function GalleryList() {
     loadItems();
   }, []);
 
-  const loadItems = async () => {
+  async function loadItems() {
     setIsLoading(true);
     const data = await galleryApi.getItems(true);
     setItems(data);
     setIsLoading(false);
   };
 
-  const handleDelete = async (id: number) => {
+  async function handleDelete(id: number) {
     if (window.confirm('Are you sure you want to delete this gallery item?')) {
       await galleryApi.deleteItem(id);
       loadItems();

@@ -14,14 +14,14 @@ export function EventList() {
     loadEvents();
   }, []);
 
-  const loadEvents = async () => {
+  async function loadEvents() {
     setIsLoading(true);
     const data = await eventApi.getEvents();
     setEvents(data);
     setIsLoading(false);
   };
 
-  const handleDelete = async (id: number) => {
+  async function handleDelete(id: number) {
     if (window.confirm('Are you sure you want to delete this event?')) {
       await eventApi.deleteEvent(id);
       loadEvents();

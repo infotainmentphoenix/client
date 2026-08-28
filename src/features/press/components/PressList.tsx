@@ -58,7 +58,7 @@ export function PressList() {
   };
 
   // Delete post
-  const handleDelete = async (id: number) => {
+  async function handleDelete(id: number) {
     if (window.confirm('Are you sure you want to delete this press post? This action cannot be undone.')) {
       try {
         const success = await pressApi.deleteBlogPost(id);

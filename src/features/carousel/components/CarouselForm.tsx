@@ -34,9 +34,9 @@ export function CarouselForm({ id }: { id?: string | number }) {
 
   useEffect(() => {
     if (isEditing && id) {
-      const loadCarousel = async () => {
+      async function loadCarousel() {
         setIsFetching(true);
-        const data = await carouselApi.getCarouselById(id);
+        const data = await carouselApi.getCarouselById(id!);
         if (data) {
           setTitle(data.title || '');
           setSubtitle(data.subtitle || '');
@@ -62,7 +62,7 @@ export function CarouselForm({ id }: { id?: string | number }) {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
 

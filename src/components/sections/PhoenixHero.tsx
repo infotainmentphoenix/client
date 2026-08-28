@@ -109,7 +109,7 @@ export function PhoenixHero() {
             </span>
           </div>
           
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white via-gray-200 to-gray-500 leading-[1.1] mb-6 drop-shadow-2xl tracking-tighter">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white via-gray-200 to-gray-500 leading-[1.1] mb-6 drop-shadow-2xl tracking-tighter">
             {activeSlide.title}
           </h1>
           
@@ -120,7 +120,7 @@ export function PhoenixHero() {
           <div className="flex flex-wrap gap-6 items-center">
             <Link 
               href={activeSlide.linkUrl || '/events'}
-              className="relative inline-flex items-center justify-center px-8 py-4 overflow-hidden font-medium text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-full group animate-pulse-glow hover:scale-105 transition-all duration-300"
+              className="relative inline-flex items-center justify-center px-6 py-3 md:px-8 md:py-4 overflow-hidden font-medium text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-full group animate-pulse-glow hover:scale-105 transition-all duration-300 w-full sm:w-auto"
             >
               <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-64 group-hover:h-56"></span>
               <span className="relative flex items-center group-hover:text-blue-600 transition-colors duration-300">
@@ -141,7 +141,7 @@ export function PhoenixHero() {
 
       {}
       {slides.length > 1 && (
-        <div className="absolute bottom-10 right-10 z-20 flex items-center gap-3">
+        <div className="absolute bottom-24 right-6 md:bottom-12 md:right-10 z-20 flex items-center gap-2 md:gap-3">
           <button
             onClick={prevSlide}
             aria-label="Previous Slide"
@@ -172,7 +172,7 @@ export function PhoenixHero() {
       )}
       
       {}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce text-gray-500 dark:text-white/50 pointer-events-none">
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center animate-bounce text-gray-500 dark:text-white/50 pointer-events-none">
         <span className="text-[10px] tracking-widest uppercase mb-2">Scroll</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
       </div>

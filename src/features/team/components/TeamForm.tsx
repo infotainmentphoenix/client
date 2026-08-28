@@ -34,7 +34,7 @@ export function TeamForm({ memberId }: TeamFormProps) {
     }
   }, [memberId]);
 
-  const loadMember = async () => {
+  async function loadMember() {
     setIsLoading(true);
     const data = await teamApi.getMember(memberId!, true);
     if (data) {
@@ -63,7 +63,7 @@ export function TeamForm({ memberId }: TeamFormProps) {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setIsLoading(true);
     setError(null);

@@ -14,14 +14,14 @@ export function ServiceList() {
     loadServices();
   }, []);
 
-  const loadServices = async () => {
+  async function loadServices() {
     setIsLoading(true);
     const data = await serviceApi.getServices(true);
     setServices(data);
     setIsLoading(false);
   };
 
-  const handleDelete = async (id: number) => {
+  async function handleDelete(id: number) {
     if (window.confirm('Are you sure you want to delete this service?')) {
       await serviceApi.deleteService(id);
       loadServices();

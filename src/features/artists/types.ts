@@ -45,6 +45,4 @@ export interface Artist {
   category?: ArtistCategory;
 }
 
-export interface ArtistFormData extends Omit<Artist, 'id' | 'createdAt' | 'updatedAt' | 'category' | 'slug'> {
-  
-}
+export type ArtistFormData = Omit<Artist, 'id' | 'createdAt' | 'updatedAt' | 'category' | 'slug'>;

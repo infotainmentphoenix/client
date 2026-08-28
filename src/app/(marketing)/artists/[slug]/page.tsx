@@ -83,7 +83,7 @@ export default function ArtistDetailPage() {
   return (
     <>
       {}
-      <section className="relative h-[40vh] md:h-[50vh] bg-gradient-to-br from-purple-900 via-indigo-900 to-black overflow-hidden">
+      <section className="relative min-h-[50vh] md:min-h-[50vh] flex flex-col justify-end bg-gradient-to-br from-purple-900 via-indigo-900 to-black overflow-hidden">
         {artist.coverImage ? (
           <img src={artist.coverImage} alt={artist.name} className="absolute inset-0 w-full h-full object-cover opacity-50" />
         ) : (
@@ -91,8 +91,8 @@ export default function ArtistDetailPage() {
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
 
-        <div className="absolute bottom-0 left-0 right-0">
-          <div className="container mx-auto px-4 md:px-8 pb-8 flex items-end gap-6">
+        <div className="relative z-10 w-full">
+          <div className="container mx-auto px-4 md:px-8 pb-8 pt-32 flex flex-col md:flex-row items-center md:items-end text-center md:text-left gap-6">
             {}
             <div className="w-28 h-28 md:w-36 md:h-36 rounded-2xl border-4 border-white dark:border-gray-900 shadow-2xl overflow-hidden bg-purple-200 dark:bg-purple-900 shrink-0 -mb-2">
               {artist.profileImage ? (

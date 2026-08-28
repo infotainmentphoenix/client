@@ -14,14 +14,14 @@ export function ArtistList() {
     loadArtists();
   }, []);
 
-  const loadArtists = async () => {
+  async function loadArtists() {
     setIsLoading(true);
     const data = await artistApi.getArtists();
     setArtists(data);
     setIsLoading(false);
   };
 
-  const handleDelete = async (id: number) => {
+  async function handleDelete(id: number) {
     if (window.confirm('Are you sure you want to delete this artist?')) {
       await artistApi.deleteArtist(id);
       loadArtists();

@@ -32,7 +32,7 @@ export function InquiryDetail({ inquiryId }: InquiryDetailProps) {
     }
   }, [inquiry?.id, inquiry?.leadScore]);
 
-  const loadInquiry = async () => {
+  async function loadInquiry() {
     setIsLoading(true);
     const data = await inquiryApi.getInquiry(inquiryId);
     setInquiry(data);
@@ -51,7 +51,7 @@ export function InquiryDetail({ inquiryId }: InquiryDetailProps) {
     }
   };
 
-  const handleStatusChange = async (status: InquiryStatus) => {
+  async function handleStatusChange(status: InquiryStatus) {
     if (!inquiry) return;
     const success = await inquiryApi.updateInquiry(inquiry.id, { status });
     if (success) {
@@ -59,7 +59,7 @@ export function InquiryDetail({ inquiryId }: InquiryDetailProps) {
     }
   };
 
-  const handlePriorityChange = async (priority: InquiryPriority) => {
+  async function handlePriorityChange(priority: InquiryPriority) {
     if (!inquiry) return;
     const success = await inquiryApi.updateInquiry(inquiry.id, { priority });
     if (success) {
@@ -67,7 +67,7 @@ export function InquiryDetail({ inquiryId }: InquiryDetailProps) {
     }
   };
 
-  const handleActivitySubmit = async (e: React.FormEvent) => {
+  async function handleActivitySubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!inquiry) return;
     

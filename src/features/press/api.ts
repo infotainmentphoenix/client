@@ -38,7 +38,7 @@ export const pressApi = {
       const response = await api.get<ApiResponse<PaginatedBlogsResponse>>('/api/blogs?status=PUBLISHED&limit=100');
       const items = response.data?.data?.items || [];
       if (items.length > 0) {
-        return items.map(post => ({
+        return items.map((post: any) => ({
           id: post.id,
           title: post.title,
           slug: post.slug,

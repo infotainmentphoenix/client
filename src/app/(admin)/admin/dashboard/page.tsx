@@ -36,7 +36,7 @@ export default function AdminDashboardPage() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchDashboardData = async () => {
+    async function fetchDashboardData() {
       setIsLoading(true);
       try {
         const [inquiries, artists, services, events] = await Promise.all([
